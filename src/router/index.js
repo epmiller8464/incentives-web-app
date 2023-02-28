@@ -1,6 +1,6 @@
 import {createRouter, createWebHashHistory} from "vue-router";
-import GetStarted from "../views/survey/GetStarted.vue";
-import SurveyQuestion from '@/views/survey/SurveyQuestion.vue'
+import GetStarted from "../views/GetStarted.vue";
+import SurveyQuestion from '@/components/Question/Question.vue'
 
 /*React Pages*/
 
@@ -8,10 +8,10 @@ const routes = [
   {
     path: "/",
     name: "/",
-    redirect: "/survey/get-started",
+    redirect: "/get-started",
   },
   {
-    path: "/survey/get-started",
+    path: "/get-started",
     name: "GetStarted",
     component: GetStarted,
   },
