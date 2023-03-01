@@ -1,6 +1,6 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 import GetStarted from "../views/GetStarted.vue";
-import SurveyQuestion from '@/components/Question/Question.vue'
+import Survey from '@/views/Survey.vue'
 
 /*React Pages*/
 
@@ -18,7 +18,7 @@ const routes = [
   {
     path: "/survey/:index",
     name: "Survey",
-    component: SurveyQuestion,
+    component: Survey,
   }
   // {
   //   path: "/error",
