@@ -9,7 +9,7 @@
       <router-link :to="{name:'GetStarted'}">
         <button type="button" class="btn btn-outline-danger btn-lg px-4 me-sm-3">Previous</button>
       </router-link>
-      <router-link :to="{name:'Survey',params:{index:2}}">
+      <router-link :to="{name:'Survey',params:{index:(Number(this.$route.params.index)+1)}}" replace="replace">
         <button type="button" class="btn btn-outline-primary btn-lg px-4">Next</button>
       </router-link>
 

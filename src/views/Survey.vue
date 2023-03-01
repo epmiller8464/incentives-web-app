@@ -1,10 +1,10 @@
 <template>
-  <div class="px-4 pt-5 my-5 text-center">
+  <div class="px-4 pt-5 my-5 text-center" v-if="this.currentQuestion" v-bind="this.currentQuestion">
     <Question
-        :question-id='0'
-        :question-info='"Informational text...."'
-        :question-text='"Question Text"'
-        :question-type='"free-form"'></Question>
+        :question-id='this.currentQuestion.id'
+        :question-info='this.currentQuestion.info'
+        :question-text='this.currentQuestion.text'
+        :question-type='this.currentQuestion.id.type'></Question>
   </div>
 </template>
 
@@ -17,14 +17,14 @@ const questions = [
   {
     id: 0,
     name: 'SystemType',
-    text: 'What type of system are you considering buying?',
+    text: 'What type of system are you considering buying?!!!',
     type: QuestionTypes.MULTIPLE_SELECT,
     info: '',
     options: [...SystemTypes],
     config: {},
     canBypass: false,
     isComplete: false,
-    answer:{}
+    answer: {},
   },
   {
     id: 1,
@@ -36,7 +36,7 @@ const questions = [
     config: {},
     canBypass: false,
     isComplete: false,
-    answer:{}
+    answer: {},
   },
   {
     id: 2,
@@ -48,7 +48,7 @@ const questions = [
     config: {},
     canBypass: false,
     isComplete: false,
-    answer:{}
+    answer: {},
   },
   {
     id: 3,
@@ -60,7 +60,7 @@ const questions = [
     config: { min: 0, max: 40 },
     canBypass: true,
     isComplete: false,
-    answer:{}
+    answer: {},
   },
   {
     id: 4,
@@ -79,7 +79,7 @@ const questions = [
     config: {},
     canBypass: false,
     isComplete: false,
-    answer:{}
+    answer: {},
   },
   {
     id: 5,
@@ -116,7 +116,7 @@ const questions = [
     config: {},
     canBypass: false,
     isComplete: false,
-    answer:{}
+    answer: {},
   },
   {
     id: 6,
@@ -153,7 +153,7 @@ const questions = [
     config: {},
     canBypass: false,
     isComplete: false,
-    answer:{}
+    answer: {},
   },
   {
     id: 7,
@@ -190,7 +190,7 @@ const questions = [
     config: { min: 0, max: 30000 },
     canBypass: false,
     isComplete: false,
-    answer:{}
+    answer: {},
   },
   {
     id: 8,
@@ -202,14 +202,24 @@ const questions = [
     config: {},
     canBypass: false,
     isComplete: false,
-    answer:{}
+    answer: {},
   },
 ]
+
+const Survey = {
+  surveyId: 'survey@v1.0.0',
+  version: 1,
+  userId: '',
+  questions: [...questions],
+}
 
 export default {
   name: 'Survey',
   components: { Question },
-  props: {},
+  props: {
+    surveyId: { type: String, default: 'test-survey' },
+    userId: { type: String, default: 'testUser123' },
+  },
   data () {
     return {
       currentQuestionId: 0,
@@ -217,11 +227,34 @@ export default {
       nextQuestionId: 0,
       surveyStarted: false,
       surveyComplete: false,
+      currentQuestion: {
+        id: 0,
+        name: 'SystemType',
+        text: 'What type of system are you considering buying?',
+        type: QuestionTypes.MULTIPLE_SELECT,
+        info: '',
+        options: [...SystemTypes],
+        config: {},
+        canBypass: false,
+        isComplete: false,
+        answer: {},
+      },
     }
   },
-  // computed:{},
+  computed: {
+
+  },
+  methods: {
+    loadQuestionByIndex () {
+      const qid = this.$route.params.index
+      const question = Survey.questions[qid]
+      console.log(question)
+      this.currentQuestion = question
+      return question
+    },
+  },
   mounted () {
-    console.log(this.$route.params.index)
+    this.loadQuestionByIndex()
   },
 
 }
