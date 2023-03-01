@@ -12,7 +12,6 @@
       <router-link :to="{name:'Survey',params:{index:(Number(this.$route.params.index)+1)}}" replace="replace">
         <button type="button" class="btn btn-outline-primary btn-lg px-4">Next</button>
       </router-link>
-
     </div>
   </div>
 </template>
@@ -25,6 +24,7 @@ const questionTypes = {
   FREE_FORM_TEXT: 'free_form_text',
   RANKING: 'ranking',
 }
+
 export default {
   name: 'Question',
   props: {

@@ -1,18 +1,16 @@
 <template>
   <div class="px-4 pt-5 my-5 text-center" v-if="this.currentQuestion" v-bind="this.currentQuestion">
     <Question
-        :question-id='this.currentQuestion.id'
-        :question-info='this.currentQuestion.info'
-        :question-text='this.currentQuestion.text'
-        :question-type='this.currentQuestion.id.type'></Question>
+        :question-id='this.loadQuestion.id'
+        :question-info='this.loadQuestion.info'
+        :question-text='this.loadQuestion.text'
+        :question-type='this.loadQuestion.id.type'></Question>
   </div>
 </template>
 
 <script>
-
 import Question from '@/components/Question/Question.vue'
 import { QuestionTypes, SystemTypes, Utilities } from '@/lib/question-util'
-
 const questions = [
   {
     id: 0,
@@ -205,7 +203,6 @@ const questions = [
     answer: {},
   },
 ]
-
 const Survey = {
   surveyId: 'survey@v1.0.0',
   version: 1,
@@ -242,7 +239,13 @@ export default {
     }
   },
   computed: {
-
+    loadQuestion () {
+      const qid = this.$route.params.index
+      const question = Survey.questions[qid]
+      console.log(question)
+      this.currentQuestion = question
+      return question
+    },
   },
   methods: {
     loadQuestionByIndex () {
@@ -254,6 +257,7 @@ export default {
     },
   },
   mounted () {
+    console.log('new page')
     this.loadQuestionByIndex()
   },
 
