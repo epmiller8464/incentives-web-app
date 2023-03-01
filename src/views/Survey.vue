@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 pt-5 my-5 text-center" v-if="this.currentQuestion" v-bind="this.currentQuestion">
+  <div class="px-4 pt-5 my-5" v-if="this.currentQuestion" v-bind="this.currentQuestion">
     <Question
         :question-id='this.loadQuestion.id'
         :question-info='this.loadQuestion.info'
