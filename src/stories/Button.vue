@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import './button.css';
-import { reactive, computed } from 'vue';
+import './button.css'
+import { reactive, computed } from 'vue'
 
 export default {
   name: 'my-button',
@@ -21,7 +21,7 @@ export default {
     size: {
       type: String,
       validator: function (value) {
-        return ['small', 'medium', 'large'].indexOf(value) !== -1;
+        return ['small', 'medium', 'large'].indexOf(value) !== -1
       },
     },
     backgroundColor: {
@@ -31,8 +31,8 @@ export default {
 
   emits: ['click'],
 
-  setup(props, { emit }) {
-    props = reactive(props);
+  setup (props, { emit }) {
+    props = reactive(props)
     return {
       classes: computed(() => ({
         'storybook-button': true,
@@ -43,10 +43,10 @@ export default {
       style: computed(() => ({
         backgroundColor: props.backgroundColor,
       })),
-      onClick() {
-        emit('click');
-      }
+      onClick () {
+        emit('click')
+      },
     }
   },
-};
+}
 </script>
