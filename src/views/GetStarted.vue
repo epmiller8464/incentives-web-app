@@ -12,19 +12,21 @@
 import '../scss/styles.scss'
 import { mapStores } from 'pinia'
 import { useSessionStore } from '@/stores/session'
+import { useSurveyStore } from '@/stores/survey'
 import { generateExternalUUID } from '@/lib/utils'
 
 let store
 export default {
   name: 'GetStarted',
   computed: {
-    ...mapStores(useSessionStore),
+    ...mapStores(useSessionStore, useSurveyStore),
   },
   methods: {
     onGetStarted (event) {
       console.log('get started click')
       //TODO: if a current session exists ask the user if they want to start a new one.
       this.sessionStore.startNewSession(generateExternalUUID())
+      this.surveyStore.loadCurrentSurvey()
       this.$router.push({ name: 'Survey', params: { index: 0 } })
     },
   },
