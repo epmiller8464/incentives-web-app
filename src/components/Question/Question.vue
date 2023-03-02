@@ -1,16 +1,51 @@
 <template>
-  <div class="px-4 pt-5 my-5">
-    <h2 class="display-6 fw-bold">{{ questionText }}</h2>
-    <p class="text-start fst-italic my-4">{{ questionInfo }}</p>
-    <!--0. SystemType -->
-    <!--1. UtilityProvider -->
-    <!--2. ExistingSystem -->
-    <!--3. SystemAge -->
-    <!--4. CustomerIncome -->
-    <!--5. CustomerPriority -->
-    <!--6. CustomerAddress -->
-    <!--7. CustomerHomeSqFt -->
-    <!--8. CustomerContactInfo -->
+  <div class="question-container">
+    <div class="row">
+      <h2 class="display-6 text-center fw-bold">{{ questionText }}</h2>
+      <p class="fst-italic text-center">{{ questionInfo }}</p>
+    </div>
+    <div class="row mb-3">
+      <div class="question-input">
+        <QuestionResponse>
+          <!--0. SystemType -->
+          <slot v-if="this.questionId === 0">
+            <NewSystemType></NewSystemType>
+          </slot>
+          <!--1. UtilityProvider -->
+          <slot v-else-if="this.questionId === 1">
+            <SelectUtility></SelectUtility>
+          </slot>
+          <!--2. ExistingSystem -->
+          <slot v-else-if="this.questionId === 2">
+            <ExistingSystemType></ExistingSystemType>
+          </slot>
+          <!--3. SystemAge -->
+          <slot v-else-if="this.questionId === 3">
+            <ExistingSystemAge></ExistingSystemAge>
+          </slot>
+          <slot v-else-if="this.questionId === 4">
+            <!--4. CustomerIncome -->
+            <CustomerIncome></CustomerIncome>
+          </slot>
+          <slot v-else-if="this.questionId === 5">
+            <!--5. CustomerPriority -->
+            <CustomerPriority></CustomerPriority>
+          </slot>
+          <slot v-else-if="this.questionId === 6">
+            <!--6. CustomerAddress -->
+            <CustomerAddress></CustomerAddress>
+          </slot>
+          <slot v-else-if="this.questionId === 7">
+            <!--7. CustomerHomeSqFt -->
+            <CustomerHomeSqFt></CustomerHomeSqFt>
+          </slot>
+          <slot v-else>
+            <!--8. CustomerContactInfo -->
+            <ContactInfo></ContactInfo>
+          </slot>
+        </QuestionResponse>
+      </div>
+    </div>
 
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
       <router-link :to="{name:'GetStarted'}">
@@ -24,14 +59,21 @@
 </template>
 
 <script>
-const _incomeOptions = [
-  { option: '$0 (or less)', value: 0 },
-  //TODO: capture the income level as free form for this question
-  { option: '$0 - $30,000', value: 1, rebate_eligible: false, show_free_form: true },
-  { option: '$30,000 - $80,000', value: 2 },
-  { option: '$80,000 - $150,000', value: 3 },
-  { option: '$150,000+', value: 4 },
-]
+
+import {
+  CustomerAddress,
+  ContactInfo,
+  CustomerHomeSqFt,
+  CustomerIncome,
+  CustomerPriority,
+  SelectUtility,
+  ExistingSystemAge,
+  ExistingSystemType,
+  NewSystemType,
+} from '@/components/Question/QuestionInputs'
+import ExistingSystemInput from '@/components/Question/QuestionInputs/ExistingSystemTypeInput.vue'
+import QuestionResponse from '@/components/Question/QuestionResponse.vue'
+
 const questionTypes = {
   MULTIPLE_CHOICE: 'multiple-choice',
   MULTIPLE_SELECT: 'multiple-select',
@@ -47,7 +89,19 @@ export default {
     questionType: { type: String, default: 'free_form' },
     questionId: { type: Number, default: 0 },
   },
-  components: {},
+  components: {
+    QuestionResponse,
+    ExistingSystemInput,
+    CustomerAddress,
+    ContactInfo,
+    CustomerHomeSqFt,
+    CustomerIncome,
+    CustomerPriority,
+    SelectUtility,
+    ExistingSystemAge,
+    ExistingSystemType,
+    NewSystemType,
+  },
   data () {
     return {
       questionResponse: {},
@@ -58,8 +112,16 @@ export default {
       return _incomeOptions
     },
   },
-
   mounted () {
+  },
+  methods: {
+    loadQuestionInput () {
+      return '<ContactInfo></ContactInfo>'
+    },
+  },
+  setup (props, { emit }) {
+    console.log(`Question Setup`)
+    console.log(props)
   },
 }
 </script>

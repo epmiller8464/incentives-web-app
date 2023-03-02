@@ -1,7 +1,7 @@
 <template>
-  <div id="contact-info" class="row border-bottom">
-    <fieldset class="row mb-3">
-      <div class="row g-3">
+  <div id="contact-info" class="row g-3 px-5 mb-3">
+    <fieldset class="row px-5">
+      <div class="row g-3 mx-auto">
         <div class="col">
           <input type="text" class="form-control" placeholder="First name" aria-label="First name">
         </div>

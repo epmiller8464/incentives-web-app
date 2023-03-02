@@ -1,16 +1,21 @@
 <template>
-  <div class="px-4 pt-5 my-5" v-if="this.currentQuestion" v-bind="this.currentQuestion">
+  <div id="survey" class="" v-if="this.currentQuestion" v-bind="this.currentQuestion">
     <Question
         :question-id='this.loadQuestion.id'
         :question-info='this.loadQuestion.info'
         :question-text='this.loadQuestion.text'
-        :question-type='this.loadQuestion.id.type'></Question>
+        :question-type='this.loadQuestion.id.type'>
+      <slot>
+      </slot>
+    </Question>
   </div>
 </template>
 
 <script>
 import Question from '@/components/Question/Question.vue'
+import {ContactInfo} from '@/components/Question/QuestionInputs'
 import { QuestionTypes, SystemTypes, Utilities } from '@/lib/question-util'
+import ContactInfoInput from '@/components/Question/QuestionInputs/ContactInfoInput.vue'
 const questions = [
   {
     id: 0,
@@ -212,7 +217,7 @@ const Survey = {
 
 export default {
   name: 'Survey',
-  components: { Question },
+  components: { ContactInfo, Question },
   props: {
     surveyId: { type: String, default: 'test-survey' },
     userId: { type: String, default: 'testUser123' },

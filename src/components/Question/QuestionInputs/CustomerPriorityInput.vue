@@ -1,5 +1,5 @@
 <template>
-  <div id="customer-priority" class="row border-bottom">
+  <div id="customer-priority" class="row">
     <p>Coming soon ranking</p>
   </div>
 </template>
