@@ -1,20 +1,12 @@
 import { createApp } from 'vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createPinia } from 'pinia'
 import App from './App.vue'
-import HelloWorld from '@/components/HelloWorld.vue'
+import router from '@/router'
 
 import './scss/styles.scss'
-// Import all of Bootstrap's JS
-import * as bootstrap from 'bootstrap'
 
-const routes = [
-  { path: '/', component: HelloWorld },
-]
+import * as bootstrap from '~bootstrap'
 
-const router = createRouter({
-  history: createWebHashHistory(),
-  routes,
-})
 const app = createApp(App)
-  .use(router)
-  .mount('#app')
+
+app.use(createPinia()).use(router).mount('#app')
