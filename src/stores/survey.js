@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useSurveyStore = defineStore('survey', {
   state: () => ({
+    sessionId:null,
     survey: {
       questions: [, , ],
       previousQuestionId:null,

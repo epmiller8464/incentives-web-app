@@ -3,19 +3,32 @@
     <h1>Learn what rebates & incentives you are eligible for.</h1>
     <p class="text-start fst-italic my-4">"Up to $XXXX incentives & rebates available today"</p>
     <div class="text-center">
-      <router-link :to="{name:'Survey',params:{index:0}}">
-        <button class="btn btn-outline-primary text-center">Get Started</button>
-      </router-link>
+      <button @click="onGetStarted" class="btn btn-outline-primary text-center">Get Started</button>
     </div>
   </div>
 </template>
 
 <script>
 import '../scss/styles.scss'
+import { mapStores } from 'pinia'
+import { useSessionStore } from '@/stores/session'
+import { generateExternalUUID } from '@/lib/utils'
 
+let store
 export default {
   name: 'GetStarted',
-  methods: {},
+  computed: {
+    ...mapStores(useSessionStore),
+  },
+  methods: {
+    onGetStarted (event) {
+      console.log('get started click')
+      //TODO: if a current session exists ask the user if they want to start a new one.
+      this.sessionStore.startNewSession(generateExternalUUID())
+      this.$router.push({ name: 'Survey', params: { index: 0 } })
+    },
+  },
+  setup () {},
 }
 </script>
 

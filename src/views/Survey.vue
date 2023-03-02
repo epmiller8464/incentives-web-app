@@ -13,9 +13,10 @@
 
 <script>
 import Question from '@/components/Question/Question.vue'
-import {ContactInfo} from '@/components/Question/QuestionInputs'
+import { ContactInfo } from '@/components/Question/QuestionInputs'
 import { QuestionTypes, SystemTypes, Utilities } from '@/lib/question-util'
 import ContactInfoInput from '@/components/Question/QuestionInputs/ContactInfoInput.vue'
+
 const questions = [
   {
     id: 0,
@@ -265,7 +266,9 @@ export default {
     console.log('new page')
     this.loadQuestionByIndex()
   },
+  setup (props, { emit }) {
 
+  },
 }
 </script>
 
