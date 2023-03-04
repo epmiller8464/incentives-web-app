@@ -1,8 +1,12 @@
 <template>
   <div id="customer-income" class="row mb-3">
     <div class="col-md-6 mx-auto question-answer-inputs">
-      <div class="form-check" v-for="(option) in this.incomeOptions" v-bind="option">
-        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option.value">
+      <div class="form-check" v-for="(option) in incomeOptions" ref="">
+        <input
+            class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
+            @change="onUpdate"
+            v-model="this.responseModel"
+            :value="option.value">
         <label class="form-check-label" for="gridRadios1">
           {{ option.option }}
         </label>
@@ -12,10 +16,18 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+
 export default {
   name: 'CustomerIncomeInput',
+  props: {
+    inputModel: String,
+  },
+  emits: ['update:modelUpdate', 'update:resetInputModel'],
   data () {
-    return {}
+    return {
+      responseModel: this.inputModel,
+    }
   },
   computed: {
     incomeOptions () {
@@ -27,6 +39,28 @@ export default {
         { option: '$80,000 - $150,000', value: 3 },
         { option: '$150,000+', value: 4 },
       ]
+    },
+  },
+  mounted () {
+    console.log('CustomerIncomeInput:onMount', this.inputModel)
+  },
+  unmounted () {
+    console.log('CustomerIncomeInput:unmounted')
+    this.$emit('update:resetInputModel')
+  },
+  methods: {
+    onUpdate (event) {
+      console.log('CustomerIncomeInput:onUpdate')
+      console.log('onUpdate', event.target.value,this.responseModel)
+      this.$emit('update:modelUpdate', this.responseModel)
+    },
+    setup (props) {
+
+      // let incomeOptionsRefs = ref()
+
+      return {
+        // incomeOptions,
+      }
     },
   },
 }

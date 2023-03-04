@@ -23,6 +23,23 @@
 <script>
 export default {
   name: 'ContactInfoInput',
+  props: {
+    inputModel: Object,
+  },
+  emits: ['update:modelUpdate', 'update:resetInputModel'],
+  mounted () {
+    console.log('ContactInfoInput:onMount', this.inputModel)
+  },
+  unmounted () {
+    console.log('ContactInfoInput:unmounted')
+    this.$emit('update:resetInputModel')
+  },
+  methods: {
+    onUpdate (event) {
+      console.log('ContactInfoInput:onUpdate')
+      console.log('onUpdate', event.target.value)
+    },
+  },
 }
 </script>
 
