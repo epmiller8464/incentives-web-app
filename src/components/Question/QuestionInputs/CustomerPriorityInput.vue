@@ -117,10 +117,10 @@ export default {
   methods: {
     shuffleList () {
       // if (this.list1.length === this.rawList.length) {
-      // if (this.list2.length === 0) {
-        shuffleArray(this.list1)
-      //   this.list1 = this.rawList.map((item, index) => { return { ...item, id: index + 1 }})
-      // }
+      if (this.list2.length === 0) {
+        shuffleArray(this.rawList)
+        this.list1 = this.rawList.map((item, index) => { return { ...item, id: index + 1 }})
+      }
       // }
       return this.list1
     },
