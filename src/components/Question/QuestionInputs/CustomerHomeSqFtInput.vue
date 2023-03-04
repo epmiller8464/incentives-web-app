@@ -3,7 +3,9 @@
     <fieldset class="row mb-3">
       <div class="col-md-6 mx-auto">
         <label for="customRange3" class="form-label"></label>
-        <input type="number" class="form-control" id="customRange1" min="1" max="30000" placeholder="Home Square Feet. 2000 sqft">
+        <input type="text" class="form-control" id="customRange1" placeholder="Home Square Feet. 3500 sqft"
+               @input="onUpdate"
+               v-model="this.responseModel">
       </div>
 
     </fieldset>
@@ -14,20 +16,28 @@
 export default {
   name: 'CustomerHomeSqFtInput',
   props: {
-    inputModel: Object,
+    inputModel: String,
   },
-  emits: ['update:modelUpdate','update:resetInputModel'],
+  emits: ['update:modelUpdate', 'update:resetInputModel'],
+  data () {
+    return {
+      responseModel: this.inputModel,
+    }
+  },
   mounted () {
-    console.log('CustomerIncomeInput:onMount', this.inputModel)
+    console.log('CustomerHomeSqFtInput:onMount', this.inputModel)
   },
   unmounted () {
-    console.log('CustomerIncomeInput:unmounted')
-    this.$emit('update:resetInputModel')
+    console.log('CustomerHomeSqFtInput:unmounted')
+    // this.$emit('update:resetInputModel')
   },
   methods: {
     onUpdate (event) {
-      console.log('CustomerIncomeInput:onUpdate')
-      console.log('onUpdate', event.target.value)
+      console.log('CustomerHomeSqFtInput:onUpdate')
+      console.log('onUpdate', )
+      this.responseModel = event.target.value
+      this.$emit('update:modelUpdate', this.responseModel)
+
     },
   }
 }
