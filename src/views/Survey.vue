@@ -1,10 +1,10 @@
 <template>
   <div id="survey" class="" v-if="this.currentQuestion" v-bind="this.currentQuestion">
     <Question
-        :question-id='this.loadQuestion.id'
-        :question-info='this.loadQuestion.info'
-        :question-text='this.loadQuestion.text'
-        :question-type='this.loadQuestion.id.type'>
+        :question-id='this.currentQuestion.id'
+        :question-info='this.currentQuestion.info'
+        :question-text='this.currentQuestion.text'
+        :question-type='this.currentQuestion.type'>
       <slot>
       </slot>
     </Question>
@@ -12,260 +12,69 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import { mapStores } from 'pinia'
+import { useSessionStore } from '@/stores/session'
+import { useSurveyStore } from '@/stores/survey'
 import Question from '@/components/Question/Question.vue'
-import {ContactInfo} from '@/components/Question/QuestionInputs'
-import { QuestionTypes, SystemTypes, Utilities } from '@/lib/question-util'
-import ContactInfoInput from '@/components/Question/QuestionInputs/ContactInfoInput.vue'
-const questions = [
-  {
-    id: 0,
-    name: 'SystemType',
-    text: 'What type of system are you considering buying?!!!',
-    type: QuestionTypes.MULTIPLE_SELECT,
-    info: '',
-    options: [...SystemTypes],
-    config: {},
-    canBypass: false,
-    isComplete: false,
-    answer: {},
-  },
-  {
-    id: 1,
-    name: 'UtilityProvider',
-    text: 'Who provides your home with power?',
-    type: QuestionTypes.MULTIPLE_SELECT,
-    info: 'This would be who you pay for electricity and natural gas / fuel (if you have it). Utilities commonly have incentives program programs. This information will allow the system to check your local utility.',
-    options: [...Utilities],
-    config: {},
-    canBypass: false,
-    isComplete: false,
-    answer: {},
-  },
-  {
-    id: 2,
-    name: 'ExistingSystem',
-    text: 'What do you have today?',
-    type: QuestionTypes.MULTIPLE_SELECT,
-    info: '',
-    options: [],
-    config: {},
-    canBypass: false,
-    isComplete: false,
-    answer: {},
-  },
-  {
-    id: 3,
-    name: 'SystemAge',
-    text: 'How many years old is your existing system?',
-    type: QuestionTypes.RANGE,
-    info: 'Not sure? No worries. We can proceed without it for now. \n',
-    options: [],
-    config: { min: 0, max: 40 },
-    canBypass: true,
-    isComplete: false,
-    answer: {},
-  },
-  {
-    id: 4,
-    name: 'CustomerIncome',
-    text: 'What do you estimate your taxable income (after deductions) to be this year?',
-    type: QuestionTypes.SINGLE_SELECT,
-    info: 'Eligibility for some federal incentives (e.g., Energy Efficient Home Improvement Tax Credit) is informed by taxable income. Taxable income is roughly your total income (e.g., W2 wages, earnings from investment) less deductions.',
-    options: [
-      { option: '$0 (or less)', value: 0 },
-      //TODO: capture the income level as free form for this question
-      { option: '$0 - $30,000', value: 1, rebate_eligible: false, show_free_form: true },
-      { option: '$30,000 - $80,000', value: 2 },
-      { option: '$80,000 - $150,000', value: 3 },
-      { option: '$150,000+', value: 4 },
-    ],
-    config: {},
-    canBypass: false,
-    isComplete: false,
-    answer: {},
-  },
-  {
-    id: 5,
-    name: 'CustomerPriority',
-    text: 'What are the relative prioritization of these factors?',
-    type: QuestionTypes.RANKING,
-    info: 'Please place these item in order of most important to least important.',
-    options: [
-      {
-        id: 'cost',
-        option: 'Lower upfront cost',
-      },
-      {
-        id: 'energy',
-        option: 'Reduce monthly energy/utility bills',
-      },
-      {
-        id: 'emissions',
-        option: 'Reduce carbon emissions from my house',
-      },
-      {
-        id: 'comfort',
-        option: 'Improve comfort inside my house',
-      },
-      {
-        id: 'Quietness',
-        option: 'quietness',
-      },
-      {
-        id: 'Speed',
-        option: 'speed of replacement',
-      },
-    ],
-    config: {},
-    canBypass: false,
-    isComplete: false,
-    answer: {},
-  },
-  {
-    id: 6,
-    name: 'CustomerAddress',
-    text: 'What are the relative prioritization of these factors?',
-    type: QuestionTypes.CUSTOM,
-    info: 'Please place these item in order of most important to least important.',
-    options: [
-      {
-        id: 'cost',
-        option: 'Lower upfront cost',
-      },
-      {
-        id: 'energy',
-        option: 'Reduce monthly energy/utility bills',
-      },
-      {
-        id: 'emissions',
-        option: 'Reduce carbon emissions from my house',
-      },
-      {
-        id: 'comfort',
-        option: 'Improve comfort inside my house',
-      },
-      {
-        id: 'Quietness',
-        option: 'quietness',
-      },
-      {
-        id: 'Speed',
-        option: 'speed of replacement',
-      },
-    ],
-    config: {},
-    canBypass: false,
-    isComplete: false,
-    answer: {},
-  },
-  {
-    id: 7,
-    name: 'CustomerHomeSqFt',
-    text: 'What is the square footage of your home?',
-    type: QuestionTypes.FREE_FORM_TEXT,
-    info: 'This will allow us to understand roughly how big of a system you will need.',
-    options: [
-      {
-        id: 'cost',
-        option: 'Lower upfront cost',
-      },
-      {
-        id: 'energy',
-        option: 'Reduce monthly energy/utility bills',
-      },
-      {
-        id: 'emissions',
-        option: 'Reduce carbon emissions from my house',
-      },
-      {
-        id: 'comfort',
-        option: 'Improve comfort inside my house',
-      },
-      {
-        id: 'Quietness',
-        option: 'quietness',
-      },
-      {
-        id: 'Speed',
-        option: 'speed of replacement',
-      },
-    ],
-    config: { min: 0, max: 30000 },
-    canBypass: false,
-    isComplete: false,
-    answer: {},
-  },
-  {
-    id: 8,
-    name: 'CustomerContactInfo',
-    text: 'What’s the best way to share eligible rebates with you?',
-    type: QuestionTypes.FREE_FORM_TEXT,
-    info: 'This will allow us to understand roughly how big of a system you will need.',
-    options: [],
-    config: {},
-    canBypass: false,
-    isComplete: false,
-    answer: {},
-  },
-]
-const Survey = {
-  surveyId: 'survey@v1.0.0',
-  version: 1,
-  userId: '',
-  questions: [...questions],
-}
+import { ContactInfo } from '@/components/Question/QuestionInputs'
+import { INCENTIVE_SURVEY_QUESTIONS } from '@/constants/incentive-questions'
 
 export default {
   name: 'Survey',
   components: { ContactInfo, Question },
-  props: {
-    surveyId: { type: String, default: 'test-survey' },
-    userId: { type: String, default: 'testUser123' },
-  },
   data () {
     return {
-      currentQuestionId: 0,
-      previousQuestionId: 0,
-      nextQuestionId: 0,
+      // currentQuestionId: 0,
       surveyStarted: false,
       surveyComplete: false,
-      currentQuestion: {
-        id: 0,
-        name: 'SystemType',
-        text: 'What type of system are you considering buying?',
-        type: QuestionTypes.MULTIPLE_SELECT,
-        info: '',
-        options: [...SystemTypes],
-        config: {},
-        canBypass: false,
-        isComplete: false,
-        answer: {},
-      },
+      questionsMap: new Map(),
     }
   },
   computed: {
-    loadQuestion () {
-      const qid = this.$route.params.index
-      const question = Survey.questions[qid]
-      console.log(question)
-      this.currentQuestion = question
-      return question
+    currentQuestion () {
+      return this.questionsMap.get(this.currentQuestionId)
     },
+    currentQuestionId () {
+      return Number(this.$route.params.index)
+    },
+
+    ...mapStores(useSessionStore, useSurveyStore),
   },
   methods: {
+    sortedQuestions () {
+      return INCENTIVE_SURVEY_QUESTIONS.sort(q => q.id)
+    },
     loadQuestionByIndex () {
-      const qid = this.$route.params.index
-      const question = Survey.questions[qid]
-      console.log(question)
-      this.currentQuestion = question
-      return question
+      console.log('loadQuestionByIndex')
+      const qid = this.currentQuestionId
+      this.question = this.questionsMap.get(qid)
+      // console.log(qid)
+      // console.log(this.question)
+      return this.question
+      // this.question = this.questions[qid]
     },
   },
   mounted () {
-    console.log('new page')
     this.loadQuestionByIndex()
   },
+  setup (props, { emit }) {
+    // 1. setup new survey
+    // 2. persist new survey
+    // 3. load survey questions
+    let question = ref({})
+    let questionsMap = ref({})
+    // let questionAnswerMap = ref()
 
+    questionsMap = new Map(INCENTIVE_SURVEY_QUESTIONS.map((q) => [q.id, q]))
+
+
+    // console.log(question)
+    return {
+      question,
+      questionsMap,
+    }
+  },
 }
 </script>
 

@@ -20,11 +20,6 @@ const routes = [
     name: "Survey",
     component: Survey,
   }
-  // {
-  //   path: "/error",
-  //   name: "ErrorPage",
-    // component: ErrorHandler,
-  // },
 ];
 /*React Pages*/
 // import ReactDashboard from '@/react-admin/views/dashboard/ReactDashboard.vue'
