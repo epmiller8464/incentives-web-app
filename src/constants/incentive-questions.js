@@ -81,27 +81,33 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
     info: 'Please place these item in order of most important to least important.',
     options: [
       {
-        id: 'cost',
+        id: 1,
+        type: 'cost',
         option: 'Lower upfront cost',
       },
       {
-        id: 'energy',
+        id: 2,
+        type: 'energy',
         option: 'Reduce monthly energy/utility bills',
       },
       {
-        id: 'emissions',
+        id: 3,
+        type: 'emissions',
         option: 'Reduce carbon emissions from my house',
       },
       {
-        id: 'comfort',
+        id: 4,
+        type: 'comfort',
         option: 'Improve comfort inside my house',
       },
       {
-        id: 'Quietness',
+        id: 5,
+        type: 'Quietness',
         option: 'quietness',
       },
       {
-        id: 'Speed',
+        id: 6,
+        type: 'Speed',
         option: 'speed of replacement',
       },
     ],
