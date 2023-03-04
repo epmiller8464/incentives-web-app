@@ -89,9 +89,9 @@ export default {
           name: 'Speed of replacement',
         },
       ],
-      list1: [],
+      list1: this.inputModel.originalList || [],
       list2: this.inputModel.priorityList || [],
-      responseModel: { priorityList: [] },
+      responseModel: { priorityList: [], originalList: [] },
     }
   },
   computed: {
@@ -116,14 +116,19 @@ export default {
   },
   methods: {
     shuffleList () {
-      shuffleArray(this.rawList)
-      this.list1 = this.rawList.map((item, index) => { return { ...item, id: index + 1 }})
+      // if (this.list1.length === this.rawList.length) {
+      if (this.list2.length === 0) {
+        shuffleArray(this.rawList)
+        this.list1 = this.rawList.map((item, index) => { return { ...item, id: index + 1 }})
+      }
+      // }
       return this.list1
     },
     log: function (evt) {
       console.log(evt)
       console.log(this.list2)
       this.responseModel.priorityList = this.list2
+      this.responseModel.originalList = this.list1
       this.$emit('update:modelUpdate', this.responseModel)
     },
     onUpdate (event) {

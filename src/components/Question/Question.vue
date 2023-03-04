@@ -196,7 +196,11 @@ export default {
     },
     onNextClick () {
       //TODO: handle the end of questions logic to display case
-      this.$router.push({ name: 'Survey', params: { index: (Number(this.$route.params.index) + 1) } })
+      if ((Number(this.$route.params.index) + 1) > 8) {
+        this.$router.push({ name: 'DoingSomeMath'})
+      } else {
+        this.$router.push({ name: 'Survey', params: { index: (Number(this.$route.params.index) + 1) } })
+      }
     },
     onInputModelUpdate (event) {
       console.log('onInputModelUpdate')

@@ -1,6 +1,7 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 import GetStarted from "../views/GetStarted.vue";
 import Survey from '@/views/Survey.vue'
+import DoingSomeMath from '@/views/DoingSomeMath.vue'
 
 /*React Pages*/
 
@@ -19,6 +20,11 @@ const routes = [
     path: "/survey/:index",
     name: "Survey",
     component: Survey,
+  },
+  {
+    path: "/results/",
+    name: "DoingSomeMath",
+    component: DoingSomeMath,
   }
 ];
 /*React Pages*/
