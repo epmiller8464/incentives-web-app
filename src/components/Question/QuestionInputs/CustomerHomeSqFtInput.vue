@@ -39,7 +39,7 @@ export default {
       this.$emit('update:modelUpdate', this.responseModel)
 
     },
-  },
+  }
 }
 </script>
 
