@@ -13,6 +13,23 @@
 <script>
 export default {
   name: 'CustomerHomeSqFtInput',
+  props: {
+    inputModel: Object,
+  },
+  emits: ['update:modelUpdate','update:resetInputModel'],
+  mounted () {
+    console.log('CustomerIncomeInput:onMount', this.inputModel)
+  },
+  unmounted () {
+    console.log('CustomerIncomeInput:unmounted')
+    this.$emit('update:resetInputModel')
+  },
+  methods: {
+    onUpdate (event) {
+      console.log('CustomerIncomeInput:onUpdate')
+      console.log('onUpdate', event.target.value)
+    },
+  }
 }
 </script>
 

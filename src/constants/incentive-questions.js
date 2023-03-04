@@ -113,7 +113,7 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
   {
     id: 6,
     name: 'CustomerAddress',
-    text: 'What are the relative prioritization of these factors?',
+    text: 'What is your home’s address?',
     type: QuestionTypes.CUSTOM,
     info: 'Please place these item in order of most important to least important.',
     options: [

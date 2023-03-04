@@ -52,11 +52,14 @@ export default {
     return {
       checkedSystemTypes: this.inputModel.checkedSystemTypes || [],
       heatPumpOrOther: this.inputModel.heatPumpOrOther || '',
-      responseModel: this.inputModel,
+      responseModel: {...this.inputModel},
     }
   },
   mounted () {
     console.log('NewSystemTypeInput:onMount', this.inputModel)
+  },
+  unmounted () {
+    this.$emit('update:resetInputModel')
   },
   methods: {
     onUpdate (event) {
@@ -71,7 +74,7 @@ export default {
       this.$emit('update:modelUpdate', this.responseModel)
     },
   },
-  emits: ['update:modelUpdate'],
+  emits: ['update:modelUpdate', 'update:resetInputModel'],
 }
 </script>
 

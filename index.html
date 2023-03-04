@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      function initApi () {console.log('api loaded')}
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAwDxyzgVUxWKNjTuCops7nlHuMpH9As4&libraries=places&callback=initApi">
+    </script>
     <title>Incentives App</title>
 </head>
 <body data-bs-theme="light">
 <div id="app">
 </div>
 <script type="module" src="/src/main.js"></script>
+
 </body>
 </html>

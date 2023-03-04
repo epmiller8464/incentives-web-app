@@ -25,7 +25,6 @@ export default {
   components: { ContactInfo, Question },
   data () {
     return {
-      // currentQuestionId: 0,
       surveyStarted: false,
       surveyComplete: false,
       questionsMap: new Map(),
@@ -58,6 +57,9 @@ export default {
   mounted () {
     this.loadQuestionByIndex()
   },
+  updated () {console.log('survey:updated')},
+  beforeUnmount () {console.log('survey:beforeUnmount')},
+  unmount () {console.log('survey:unmount')},
   setup (props, { emit }) {
     // 1. setup new survey
     // 2. persist new survey
@@ -67,7 +69,6 @@ export default {
     // let questionAnswerMap = ref()
 
     questionsMap = new Map(INCENTIVE_SURVEY_QUESTIONS.map((q) => [q.id, q]))
-
 
     // console.log(question)
     return {
