@@ -18,9 +18,9 @@
             title="Semi-Efficient"
             subtitle="Qualifies for all eligible rebates"
             cost="$X,XXX + 2-5K"
-            cost-savings="$2,635 savings"
+            cost-savings="$635 savings"
             instant-savings="$635 instant saving from Austin Energy"
-            annual-savings="$2,000 Federal Tax Credit"
+            annual-savings=""
             energy-savings="5% Lower bills"
             tree-count="2"
         ></ProductIncentiveCard>
@@ -30,14 +30,13 @@
             title="Basic"
             subtitle="Does not qualify for any rebates"
             cost="$X"
-            cost-savings="$2,635 savings"
+            cost-savings="$0 savings"
             instant-savings="$635 instant saving from Austin Energy"
             annual-savings="$2,000 Federal Tax Credit"
-            energy-savings="10% Lower bills"
+            energy-savings="Does not lower bill"
             tree-count="0"
         ></ProductIncentiveCard>
       </div>
-
     </div>
   </div>
 </template>
@@ -50,22 +49,14 @@ export default {
   components: { ProductIncentiveCard },
   data () {
     return {
-
       productOffering: {},
-
     }
   },
   computed: {
-    productOfferings () {},
   },
 }
 </script>
 
 <style scoped>
-
-/*.product-image {*/
-/*  width: 250px;*/
-/*}*/
-
 
 </style>

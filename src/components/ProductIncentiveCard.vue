@@ -1,5 +1,5 @@
 <template>
-  <div class="card" style="width: 350px;">
+  <div class="card" style="width: 350px;min-height: 651px;">
     <div class="card-header text-center">
       <p class="card-title h5">{{ titleTxt }}</p>
     </div>
@@ -36,8 +36,8 @@
           </p>
         </div>
       </div>
-      <p class="text-center text-success">
-              <span>
+      <p class="text-center text-success" >
+              <span v-if="energySavingsTxt">
                  <i class="bi bi-caret-up txt-icon text-start"></i>
                 <em class="text-success">
                   <strong>{{ energySavingsTxt }}</strong>
