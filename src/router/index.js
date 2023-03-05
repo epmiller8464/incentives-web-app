@@ -2,6 +2,7 @@ import {createRouter, createWebHashHistory} from "vue-router";
 import GetStarted from "../views/GetStarted.vue";
 import Survey from '@/views/Survey.vue'
 import DoingSomeMath from '@/views/DoingSomeMath.vue'
+import DisplayCase from '@/views/DisplayCase.vue'
 
 /*React Pages*/
 
@@ -25,6 +26,11 @@ const routes = [
     path: "/results/",
     name: "DoingSomeMath",
     component: DoingSomeMath,
+  },
+  {
+    path: "/results/product-incentives",
+    name: "DisplayCase",
+    component: DisplayCase,
   }
 ];
 /*React Pages*/
