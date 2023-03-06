@@ -2,7 +2,7 @@
   <div id="customer-priority" class="row">
     <div class="row mx-auto" v-if="rawList.length">
       <div class="col">
-        <h3>Comfort Options</h3>
+        <h3>Options</h3>
         <draggable
             class="list-group"
             v-model="list1"
@@ -22,7 +22,7 @@
       </div>
 
       <div class="col">
-        <h3>Comfort Priority</h3>
+        <h3>Priority</h3>
         <draggable
             class="list-group"
             :list="list2"

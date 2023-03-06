@@ -3,13 +3,23 @@
     <div class="col-md-6 mx-auto question-answer-inputs">
       <div class="form-check" v-for="(option) in incomeOptions" ref="">
         <input
-            class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
+            class="form-check-input" type="radio" name="incomeRadios" :id="optionId(option)"
             @change="onUpdate"
-            v-model="this.responseModel"
+            v-model="selectedIncome"
             :value="option.value">
-        <label class="form-check-label" for="gridRadios1">
+        <label class="form-check-label" :for="optionId(option)">
           {{ option.option }}
         </label>
+        <div v-if="option.show_free_form" :class="{'collapse':toggleOtherInput}" id="incomeCollapse">
+          <input
+              type="number"
+              id="otherIncomeText"
+              class="form-control"
+              placeholder="$25,000" aria-label="$25,000"
+              :value="otherIncomeValue"
+              @input="onOtherIncomeInput"
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -21,15 +31,23 @@ import { ref } from 'vue'
 export default {
   name: 'CustomerIncomeInput',
   props: {
-    inputModel: String,
+    inputModel: Object,
   },
   emits: ['update:modelUpdate', 'update:resetInputModel'],
   data () {
     return {
-      responseModel: this.inputModel,
+      otherIncomeValue: this.inputModel.otherIncomeValue || '',
+      selectedIncome: this.inputModel.incomeLevel || '',
+      responseModel: {
+        incomeLevel: this.inputModel.incomeLevel,
+        otherIncomeValue: this.inputModel.otherIncomeValue,
+      },
     }
   },
   computed: {
+    toggleOtherInput () {
+      return this.selectedIncome !== '1'
+    },
     incomeOptions () {
       return [
         { option: '$0 (or less)', value: 0 },
@@ -49,18 +67,19 @@ export default {
     this.$emit('update:resetInputModel')
   },
   methods: {
+    optionId ({ value }) {
+      return `incomeOption${value}`
+    },
     onUpdate (event) {
       console.log('CustomerIncomeInput:onUpdate')
-      console.log('onUpdate', event.target.value,this.responseModel)
+      this.responseModel.incomeLevel = this.selectedIncome = event.target.value
+      this.responseModel.otherIncomeValue = this.otherIncomeValue = this.selectedIncome !== '1' ? '':this.responseModel.otherIncomeValue
       this.$emit('update:modelUpdate', this.responseModel)
     },
-    setup (props) {
-
-      // let incomeOptionsRefs = ref()
-
-      return {
-        // incomeOptions,
-      }
+    onOtherIncomeInput (event) {
+      console.log('CustomerIncomeInput:onUpdate')
+      this.responseModel.otherIncomeValue = this.otherIncomeValue = event.target.value
+      this.$emit('update:modelUpdate', this.responseModel)
     },
   },
 }
