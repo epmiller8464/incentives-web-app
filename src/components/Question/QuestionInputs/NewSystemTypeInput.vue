@@ -1,7 +1,7 @@
 <template>
   <div id="system-type">
     <fieldset class="row mb-3">
-      <div class="col-md-6 mx-auto question-answer-inputs">
+      <div class="col question-answer-inputs">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="flexCheckDefault"
                  @change="onUpdate"
@@ -36,6 +36,16 @@
           <label class="form-check-label" for="gridRadios2">
             Other
           </label>
+          <div>
+            <input type="text"
+                   id="otherInputText"
+                   class="form-control"
+                   :class="{'invisible':!toggleOtherInput}"
+                   placeholder="" aria-label=""
+                   :value="otherText"
+                   @input="onOtherTextInput"
+            >
+          </div>
         </div>
       </div>
     </fieldset>
@@ -52,8 +62,14 @@ export default {
     return {
       checkedSystemTypes: this.inputModel.checkedSystemTypes || [],
       heatPumpOrOther: this.inputModel.heatPumpOrOther || '',
-      responseModel: {...this.inputModel},
+      otherText: this.inputModel.otherText,
+      responseModel: { ...this.inputModel },
     }
+  },
+  computed: {
+    toggleOtherInput () {
+      return this.heatPumpOrOther === 'other'
+    },
   },
   mounted () {
     console.log('NewSystemTypeInput:onMount', this.inputModel)
@@ -73,6 +89,10 @@ export default {
       this.responseModel.checkedSystemTypes = this.checkedSystemTypes = []
       this.$emit('update:modelUpdate', this.responseModel)
     },
+    onOtherTextInput(event){
+      this.responseModel.otherText = this.otherText = event.target.value
+      this.$emit('update:modelUpdate', this.responseModel)
+    }
   },
   emits: ['update:modelUpdate', 'update:resetInputModel'],
 }
