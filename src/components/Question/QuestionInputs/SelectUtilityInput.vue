@@ -6,14 +6,13 @@
                 v-model="energyProvider"
                 @change="onUpdate"
         >
-          <option value="" disabled>
+          <option value="" selected>
             Choose your energy provider
           </option>
           <option
               v-for="opt in this.energyProviderOptions"
               :value="opt"
-              data-selected="this.energyProvider.id === opt.id"
-          >
+              data-selected="this.energyProvider.id === opt.id">
             {{ opt.name }}
           </option>
         </select>
@@ -23,7 +22,7 @@
                 v-model="gasProvider"
                 @change="onUpdate"
         >
-          <option value="" disabled>
+          <option value="" selected>
             Choose your gas provider
           </option>
           <option :value="{id:1,name:'Texas Gas',type:'gas'}">Texas Gas</option>
