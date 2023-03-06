@@ -9,11 +9,12 @@
           <option value="" disabled>
             Choose your energy provider
           </option>
-          <option :value="{id:1,name:'Austin Energy',type:'electric'}">
-            Austin Energy
-          </option>
-          <option :value="{id:2,name:'Center Point',type:'electric'}">
-            Center Point
+          <option
+              v-for="opt in this.energyProviderOptions"
+              :value="opt"
+              data-selected="this.energyProvider.id === opt.id"
+          >
+            {{ opt.name }}
           </option>
         </select>
       </div>
@@ -22,10 +23,11 @@
                 v-model="gasProvider"
                 @change="onUpdate"
         >
-          <option value="" disabled selected>
+          <option value="" disabled>
             Choose your gas provider
           </option>
-          <option :value="{id:2,name:'Texas Gas',type:'gas'}">Texas Gas</option>
+          <option :value="{id:1,name:'Texas Gas',type:'gas'}">Texas Gas</option>
+          <option :value="{id:2,name:' Gas',type:'gas'}">Gas</option>
         </select>
       </div>
     </div>
@@ -39,15 +41,25 @@ export default {
   props: {
     inputModel: Object,
   },
-  emits: ['update:modelUpdate','update:resetInputModel'],
+  emits: ['update:modelUpdate', 'update:resetInputModel'],
   data () {
     return {
       defaultEnergyOption: { id: -1, name: 'Choose your energy provider' },
       defaultGasOption: { id: -1, name: 'Choose your gas provider' },
-      energyProvider: '',
-      gasProvider: '',
-      responseModel: {...this.inputModel},
+      energyProvider: this.inputModel.energyProvider || '',
+      gasProvider: this.inputModel.gasProvider || '',
+      responseModel: { ...this.inputModel },
     }
+  },
+  computed: {
+    energyProviderOptions () {
+      let options = [
+        { id: 1, name: 'Austin Energy', type: 'electric' },
+        { id: 2, name: 'Center Point', type: 'electric' },
+      ]
+      return options
+    },
+    gasProviderOptions () {},
   },
   mounted () {
     console.log('SelectUtilityInput:onMount', this.inputModel)
