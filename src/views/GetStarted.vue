@@ -1,9 +1,51 @@
 <template>
   <div id="cta" class="container">
-    <h1>Learn what rebates & incentives you are eligible for.</h1>
-    <p class="text-start fst-italic my-4">"Up to $XXXX incentives & rebates available today"</p>
+    <div class="position-static" style="opacity: 0.3;">
+      <div class="row">
+        <div class="col">
+          <DisplayCard
+              title="Energy Efficient"
+              subtitle="Qualifies for all eligible rebates"
+              cost="$X,XXX + 4-10K"
+              cost-savings="$2,635 savings"
+              instant-savings="$635 instant saving from Austin Energy"
+              annual-savings="$2,000 Federal Tax Credit"
+              energy-savings="10% Lower bills"
+              tree-count="3"
+          ></DisplayCard>
+        </div>
+        <div class="col">
+          <DisplayCard
+              title="Energy Efficient"
+              subtitle="Qualifies for all eligible rebates"
+              cost="$X,XXX + 4-10K"
+              cost-savings="$2,635 savings"
+              instant-savings="$635 instant saving from Austin Energy"
+              annual-savings="$2,000 Federal Tax Credit"
+              energy-savings="10% Lower bills"
+              tree-count="3"
+          ></DisplayCard>
+        </div>
+        <div class="col">
+          <DisplayCard
+              title="Energy Efficient"
+              subtitle="Qualifies for all eligible rebates"
+              cost="$X,XXX + 4-10K"
+              cost-savings="$2,635 savings"
+              instant-savings="$635 instant saving from Austin Energy"
+              annual-savings="$2,000 Federal Tax Credit"
+              energy-savings="10% Lower bills"
+              tree-count="3"
+          ></DisplayCard>
+        </div>
+      </div>
+    </div>
     <div class="text-center">
-      <button @click="onGetStarted" class="btn btn-outline-primary text-center">Get Started</button>
+      <h1>Learn what rebates & incentives you are eligible for.</h1>
+      <p class=" fst-italic my-4">"Up to $XXXX incentives & rebates available today"</p>
+      <div class="text-center">
+        <button @click="onGetStarted" class="btn btn-outline-primary text-center">Get Started</button>
+      </div>
     </div>
   </div>
 </template>
@@ -14,10 +56,12 @@ import { mapStores } from 'pinia'
 import { useSessionStore } from '@/stores/session'
 import { useSurveyStore } from '@/stores/survey'
 import { generateExternalUUID } from '@/lib/utils'
+import DisplayCard from '@/components/DisplayCard.vue'
 
 let store
 export default {
   name: 'GetStarted',
+  components: { DisplayCard },
   computed: {
     ...mapStores(useSessionStore, useSurveyStore),
   },

@@ -4,7 +4,7 @@
     <div class="progress" role="progressbar" aria-label="Example 20px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 2px">
       <div class="progress-bar" :style="{width:progress}"></div>
     </div>
-    <router-link :to="{name:'DisplayCase'}">Next</router-link>
+<!--    <router-link :to="{name:'DisplayCase'}">Next</router-link>-->
   </div>
 </template>
 
@@ -43,9 +43,9 @@ export default {
     async incrementProgressBar () {
       while (this.currentProgress < 100) {
         this.currentProgress += 5
-        await sleep(100)
+        await sleep(200)
       }
-      // this.$router.push({name:'DisplayCase'})
+      this.$router.push({name:'DisplayCase'})
     },
   },
   setup () {},

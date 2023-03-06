@@ -6,6 +6,7 @@
     <div class="card-body">
       <p class="text-center">{{ subtitleTxt }}</p>
       <img src="../assets/images/goodman-hvac.webp" class="card-img product-image" alt="...">
+
       <p class="text-center my-3">
         <em>
           <strong>{{ estimatedCost }}</strong>

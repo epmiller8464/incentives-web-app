@@ -12,6 +12,7 @@
             energy-savings="10% Lower bills"
             tree-count="3"
         ></ProductIncentiveCard>
+
       </div>
       <div class="col">
         <ProductIncentiveCard
@@ -20,7 +21,7 @@
             cost="$X,XXX + 2-5K"
             cost-savings="$635 savings"
             instant-savings="$635 instant saving from Austin Energy"
-            annual-savings=""
+            annual-savings="$0 Federal Tax Credit"
             energy-savings="5% Lower bills"
             tree-count="2"
         ></ProductIncentiveCard>
@@ -31,8 +32,8 @@
             subtitle="Does not qualify for any rebates"
             cost="$X"
             cost-savings="$0 savings"
-            instant-savings="$635 instant saving from Austin Energy"
-            annual-savings="$2,000 Federal Tax Credit"
+            instant-savings="$0 instant saving from Austin Energy"
+            annual-savings="$0 Federal Tax Credit"
             energy-savings="Does not lower bill"
             tree-count="0"
         ></ProductIncentiveCard>
@@ -46,14 +47,15 @@ import ProductIncentiveCard from '@/components/ProductIncentiveCard.vue'
 
 export default {
   name: 'DisplayCase',
+  props: {
+  },
   components: { ProductIncentiveCard },
   data () {
     return {
       productOffering: {},
     }
   },
-  computed: {
-  },
+  computed: {},
 }
 </script>
 
