@@ -1,12 +1,17 @@
 <template>
   <div id="system-age" class="row">
     <div class="col-md-6 mx-auto">
-      <input type="text"
-             class="form-control" id="customRange1" min="1" max="40"
+      <input type="number"
+             id="customRange1" min="1" max="40"
+             class="form-control"
+             :class="[this.isValid? '':'is-invalid']"
              placeholder="Existing System Age" aria-label="Existing System Age"
              @input="onUpdate"
              :value="responseModel"
       >
+      <div class="invalid-feedback">
+        Range should be 1 - 40
+      </div>
     </div>
   </div>
 </template>
@@ -17,10 +22,11 @@ export default {
   props: {
     inputModel: String,
   },
-  emits: ['update:modelUpdate','update:resetInputModel'],
+  emits: ['update:modelUpdate', 'update:resetInputModel'],
   data () {
     return {
-      responseModel: this.inputModel
+      isValid: true,
+      responseModel: this.inputModel,
     }
   },
   mounted () {
@@ -31,12 +37,23 @@ export default {
     this.$emit('update:resetInputModel')
   },
   methods: {
+    validateInput (value) {
+      const n = Number(value)
+      return n > 0 && n <= 40
+    },
     onUpdate (event) {
       console.log('ExistingSystemAgeInput:onUpdate')
       this.responseModel = event.target.value
-      this.$emit('update:modelUpdate', this.responseModel)
+      this.isValid = event.target.value.length === 0 || this.validateInput(event.target.value)
+      let val
+      if (this.isValid) {
+        val = this.responseModel
+      } else {
+        val = ''
+      }
+      this.$emit('update:modelUpdate', val)
     },
-  }
+  },
 }
 </script>
 
