@@ -1,5 +1,5 @@
 <template>
-  <div class="card" style="width: 300px;">
+  <div class="card">
     <div class="card-header text-center">
       <p class="card-title h5 placeholder">{{ titleTxt }}</p>
     </div>
