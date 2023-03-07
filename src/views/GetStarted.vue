@@ -1,32 +1,8 @@
 <template>
   <div id="cta" class="container">
-    <div class="position-static" style="opacity: 0.3;">
-      <div class="row">
-        <div class="col">
-          <DisplayCard
-              title="Energy Efficient"
-              subtitle="Qualifies for all eligible rebates"
-              cost="$X,XXX + 4-10K"
-              cost-savings="$2,635 savings"
-              instant-savings="$635 instant saving from Austin Energy"
-              annual-savings="$2,000 Federal Tax Credit"
-              energy-savings="10% Lower bills"
-              tree-count="3"
-          ></DisplayCard>
-        </div>
-        <div class="col">
-          <DisplayCard
-              title="Energy Efficient"
-              subtitle="Qualifies for all eligible rebates"
-              cost="$X,XXX + 4-10K"
-              cost-savings="$2,635 savings"
-              instant-savings="$635 instant saving from Austin Energy"
-              annual-savings="$2,000 Federal Tax Credit"
-              energy-savings="10% Lower bills"
-              tree-count="3"
-          ></DisplayCard>
-        </div>
-        <div class="col">
+    <div style="opacity: 0.3;">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-1">
+        <div class="col-md col-md-6 col-lg-6 mx-auto">
           <DisplayCard
               title="Energy Efficient"
               subtitle="Qualifies for all eligible rebates"
@@ -48,6 +24,11 @@
       </div>
     </div>
   </div>
+  <!--  <div class="container-sm">100% wide until small breakpoint</div>-->
+  <!--  <div class="container-md">100% wide until medium breakpoint</div>-->
+  <!--  <div class="container-lg">100% wide until large breakpoint</div>-->
+  <!--  <div class="container-xl">100% wide until extra large breakpoint</div>-->
+  <!--  <div class="container-xxl">100% wide until extra extra large breakpoint</div>-->
 </template>
 
 <script>
@@ -80,4 +61,15 @@ export default {
 
 <style scoped>
 
+/*@media (min-width: 992px) {*/
+
+/*}*/
+
+
+/*@media (min-width: 1200px) {*/
+/*}*/
+
+
+/*@media (min-width: 1400px) {*/
+/*}*/
 </style>

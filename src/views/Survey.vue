@@ -1,13 +1,13 @@
 <template>
-  <div id="survey" class="" v-if="this.currentQuestion" v-bind="this.currentQuestion">
-    <Question
-        :question-id='this.currentQuestion.id'
-        :question-info='this.currentQuestion.info'
-        :question-text='this.currentQuestion.text'
-        :question-type='this.currentQuestion.type'>
-      <slot>
-      </slot>
-    </Question>
+  <div id="survey" v-if="this.currentQuestion" v-bind="this.currentQuestion">
+      <Question
+          :question-id='this.currentQuestion.id'
+          :question-info='this.currentQuestion.info'
+          :question-text='this.currentQuestion.text'
+          :question-type='this.currentQuestion.type'>
+        <slot>
+        </slot>
+      </Question>
   </div>
 </template>
 

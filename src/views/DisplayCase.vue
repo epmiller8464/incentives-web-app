@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid pt-5">
+  <div class="container">
     <div class="row">
       <div class="col">
         <ProductIncentiveCard
@@ -38,7 +38,11 @@
             tree-count="0"
         ></ProductIncentiveCard>
       </div>
+      <div class="d-flex">
+        <router-link :to="{name:'GetStarted'}">Reset</router-link>
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -47,8 +51,7 @@ import ProductIncentiveCard from '@/components/ProductIncentiveCard.vue'
 
 export default {
   name: 'DisplayCase',
-  props: {
-  },
+  props: {},
   components: { ProductIncentiveCard },
   data () {
     return {

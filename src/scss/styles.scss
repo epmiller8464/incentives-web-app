@@ -1,49 +1,98 @@
 @import "~bootstrap/scss/bootstrap";
 @import '../assets/base.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  //padding: 2rem;
-  font-weight: normal;
-}
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+body {
+  display: flex;
 }
 
 #cta {
-  margin-top: 10vh;
 }
 
-.question-container {
-  margin: 25vh 0 0 0;
-  max-width: 50vw;
-}
-
-.question-text {
+#question-container {
 }
 
 .question-input {
-  padding: 0 10vh 0 0 !important;
 }
 
-#system-type.row {
-  //max-width: 50vw;
+// X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+@media (min-width: 320px) {
+  //.nav-button{
+  //  width: 50%;
+  //}
+  #question-container {
+    min-width: 320px;
+    padding: 0 2rem;
+  }
+  .question-input {
+    min-width: 320px;
+  }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  #question-container {
+    min-width: 576px;
+  }
+  .question-input {
+    min-width: 576px;
+  }
+  .nav-button{
+    width: 50px;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  #question-container {
+    min-width: 769px;
+  }
+  .question-input {
+    min-width: 768px;
   }
 
-  #app {
-    display: flex;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  .nav-button{
+    width: 125px;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  #cta {
+    min-width: 992px;
+  }
+  #question-container {
+    min-width: 992px;
+  }
+
+  .question-input {
+    min-width: 992px;
+  }
+}
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  #cta {
+    min-width: 1200px;
+  }
+  #question-container {
+    min-width: 1200px;
+  }
+  .question-input {
+    min-width: 792px;
+  }
+}
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) {
+  #cta {
+    min-width: 1400px;
+  }
+  #question-container {
+    min-width: 1400px;
+  }
+  .question-input {
+    min-width: 992px;
   }
 }
