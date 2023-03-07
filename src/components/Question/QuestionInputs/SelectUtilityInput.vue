@@ -2,14 +2,11 @@
   <div id="select-utility" class="container-fluid">
     <div class="d-flex-row mb-2">
       <div class="col-6 mx-auto">
-        <label for="energySelect" class="form-label">
-          Choose your energy provider
-        </label>
         <select id="energySelect" class="form-select" aria-label="Choose your utility provider"
                 v-model="energyProvider"
                 @change="onUpdate"
         >
-          <option value="" selected>
+          <option value="" disabled>
             Choose your energy provider
           </option>
           <option
@@ -21,16 +18,16 @@
         </select>
       </div>
     </div>
-    <div class="row">
+    <div class="d-flex-row">
       <div class="col-6 mx-auto">
-        <label for="gasSelect" class="form-label">
-          Choose your gas provider
-        </label>
+        <!--        <label for="gasSelect" class="form-label">-->
+        <!--          Choose your gas provider-->
+        <!--        </label>-->
         <select id="gasSelect" class="form-select" aria-label="Default select example"
                 v-model="gasProvider"
                 @change="onUpdate"
         >
-          <option value="" selected>
+          <option value="" disabled>
             Choose your gas provider
           </option>
           <option :value="{id:1,name:'Texas Gas',type:'gas'}">Texas Gas</option>
@@ -54,8 +51,8 @@ export default {
     return {
       defaultEnergyOption: { id: -1, name: 'Choose your energy provider' },
       defaultGasOption: { id: -1, name: 'Choose your gas provider' },
-      energyProvider: this.inputModel.energyProvider || '',
-      gasProvider: this.inputModel.gasProvider || '',
+      energyProvider: this.inputModel.energyProvider.name ? this.inputModel.energyProvider : '',
+      gasProvider: this.inputModel.gasProvider.name ? this.inputModel.gasProvider : '',
       responseModel: { ...this.inputModel },
     }
   },
