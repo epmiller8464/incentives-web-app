@@ -4,8 +4,7 @@
       <div class="col-6 mx-auto">
         <select id="energySelect" class="form-select" aria-label="Choose your utility provider"
                 v-model="energyProvider"
-                @change="onUpdate"
-        >
+                @change="onUpdate">
           <option value="" disabled>
             Choose your energy provider
           </option>
