@@ -6,21 +6,67 @@ body {
   display: flex;
 }
 
-#cta{}
+#cta {
+}
+
+#question-container {
+}
+
+.question-input {
+}
+
 // X-Small devices (portrait phones, less than 576px)
 // No media query for `xs` since this is the default in Bootstrap
+@media (min-width: 320px) {
+  //.nav-button{
+  //  width: 50%;
+  //}
+  #question-container {
+    min-width: 320px;
+    padding: 0 2rem;
+  }
+  .question-input {
+    min-width: 320px;
+  }
+}
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
+  #question-container {
+    min-width: 576px;
+  }
+  .question-input {
+    min-width: 576px;
+  }
+  .nav-button{
+    width: 50px;
+  }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+  #question-container {
+    min-width: 769px;
+  }
+  .question-input {
+    min-width: 768px;
+  }
+
+  .nav-button{
+    width: 125px;
+  }
 }
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   #cta {
+    min-width: 992px;
+  }
+  #question-container {
+    min-width: 992px;
+  }
+
+  .question-input {
     min-width: 992px;
   }
 }
@@ -30,11 +76,23 @@ body {
   #cta {
     min-width: 1200px;
   }
+  #question-container {
+    min-width: 1200px;
+  }
+  .question-input {
+    min-width: 792px;
+  }
 }
 
 // XX-Large devices (larger desktops, 1400px and up)
 @media (min-width: 1400px) {
   #cta {
     min-width: 1400px;
+  }
+  #question-container {
+    min-width: 1400px;
+  }
+  .question-input {
+    min-width: 992px;
   }
 }

@@ -1,42 +1,29 @@
 <template>
-  <div id="select-utility" class="container-fluid">
-    <div class="d-flex-row mb-2">
-      <div class="col-6 mx-auto">
-        <select id="energySelect" class="form-select" aria-label="Choose your utility provider"
-                v-model="energyProvider"
-                @change="onUpdate">
-          <option value="" disabled>
-            Choose your energy provider
-          </option>
-          <option
-              v-for="opt in this.energyProviderOptions"
-              :value="opt"
-              data-selected="this.energyProvider.id === opt.id">
-            {{ opt.name }}
-          </option>
-        </select>
-      </div>
-    </div>
-    <div class="d-flex-row">
-      <div class="col-6 mx-auto">
-        <!--        <label for="gasSelect" class="form-label">-->
-        <!--          Choose your gas provider-->
-        <!--        </label>-->
-        <select id="gasSelect" class="form-select" aria-label="Default select example"
-                v-model="gasProvider"
-                @change="onUpdate"
-        >
-          <option value="" disabled>
-            Choose your gas provider
-          </option>
-          <option :value="{id:1,name:'Texas Gas',type:'gas'}">Texas Gas</option>
-          <option :value="{id:2,name:' Gas',type:'gas'}">Gas</option>
-        </select>
-      </div>
-    </div>
-
+  <div id="select-utility" class="col-sm col-md col-lg col-md-5 col-lg-3 mx-auto">
+    <select id="energySelect" class="form-select form-select" aria-label="Choose your utility provider"
+            v-model="energyProvider"
+            @change="onUpdate">
+      <option value="" disabled>
+        Choose your energy provider
+      </option>
+      <option
+          v-for="opt in this.energyProviderOptions"
+          :value="opt"
+          data-selected="this.energyProvider.id === opt.id">
+        {{ opt.name }}
+      </option>
+    </select>
+    <select id="gasSelect" class="form-select" aria-label="Default select example"
+            v-model="gasProvider"
+            @change="onUpdate"
+    >
+      <option value="" disabled>
+        Choose your gas provider
+      </option>
+      <option :value="{id:1,name:'Texas Gas',type:'gas'}">Texas Gas</option>
+      <option :value="{id:2,name:' Gas',type:'gas'}">Gas</option>
+    </select>
   </div>
-
 </template>
 
 <script>

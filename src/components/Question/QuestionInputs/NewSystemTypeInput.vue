@@ -1,7 +1,7 @@
 <template>
   <div id="system-type">
-    <fieldset class="row mb-3">
-      <div class="col question-answer-inputs">
+    <div class="col-sm col-md col-lg col-md-4 col-lg mx-auto">
+      <fieldset>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="flexCheckDefault"
                  @change="onUpdate"
@@ -46,12 +46,12 @@
                    @input="onOtherTextInput"
             >
             <div :class="{'invisible':!toggleOtherInput}">
-              <em class="text-muted">Please contact your contractor for more information on what you qualify for.</em>
+              <em>Please contact your contractor for more information on what you qualify for.</em>
             </div>
           </div>
         </div>
-      </div>
-    </fieldset>
+      </fieldset>
+    </div>
   </div>
 </template>
 
@@ -92,10 +92,10 @@ export default {
       this.responseModel.checkedSystemTypes = this.checkedSystemTypes = []
       this.$emit('update:modelUpdate', this.responseModel)
     },
-    onOtherTextInput(event){
+    onOtherTextInput (event) {
       this.responseModel.otherText = this.otherText = event.target.value
       this.$emit('update:modelUpdate', this.responseModel)
-    }
+    },
   },
   emits: ['update:modelUpdate', 'update:resetInputModel'],
 }
@@ -104,5 +104,9 @@ export default {
 <style scoped>
 .question-answer-inputs {
   padding-left: 10vw;
+}
+
+.invisible {
+  display: none;
 }
 </style>

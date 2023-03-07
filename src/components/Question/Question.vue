@@ -1,11 +1,13 @@
 <template>
-  <div class="question-container">
-    <div class="row">
-      <h2 class="display-6 text-center fw-bold">{{ questionText }}</h2>
-      <p class="fst-italic text-center">{{ questionInfo }}</p>
+  <div id="question-container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-1">
+      <div class="col-md col-md-6 col-lg-6 mx-auto">
+        <h2 class="display-6 text-center fw-bold">{{ questionText }}</h2>
+        <p class="fst-italic text-center">{{ questionInfo }}</p>
+      </div>
     </div>
-    <div class="row mb-3">
-      <div class="question-input">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2">
+      <div class="question-input mx-auto">
         <!--0. SystemType -->
         <slot v-if="this.questionId === 0">
           <NewSystemType
@@ -79,12 +81,11 @@
         </slot>
       </div>
     </div>
-
-    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-      <button @click="onPreviousClick" type="button" class="btn btn-outline-danger btn-lg px-4 me-sm-3">
+    <div class="d-grid gap-3 d-md-flex justify-content-md-center mt-3">
+      <button @click="onPreviousClick" type="button" class="btn btn-outline-danger nav-button">
         Previous
       </button>
-      <button @click="onNextClick" type="button" class="btn btn-outline-primary btn-lg px-4">
+      <button @click="onNextClick" type="button" class="btn btn-outline-primary nav-button">
         Next
       </button>
     </div>
@@ -197,7 +198,7 @@ export default {
     onNextClick () {
       //TODO: handle the end of questions logic to display case
       if ((Number(this.$route.params.index) + 1) > 8) {
-        this.$router.push({ name: 'DoingSomeMath'})
+        this.$router.push({ name: 'DoingSomeMath' })
       } else {
         this.$router.push({ name: 'Survey', params: { index: (Number(this.$route.params.index) + 1) } })
       }
@@ -265,5 +266,6 @@ export default {
 </script>
 
 <style scoped>
+
 
 </style>

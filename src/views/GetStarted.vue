@@ -3,7 +3,6 @@
     <div style="opacity: 0.3;">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-1">
         <div class="col-md col-md-6 col-lg-6 mx-auto">
-          <!--        <div class="col mx-auto">-->
           <DisplayCard
               title="Energy Efficient"
               subtitle="Qualifies for all eligible rebates"
