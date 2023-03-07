@@ -1,19 +1,20 @@
 <template>
-  <div id="customer-priority" class="row">
-    <div class="row mx-auto" v-if="rawList.length">
+  <div id="customer-priority" class="d-flex-stretch align-content-center">
+    <div class="row ps-5 ms-5" v-if="rawList.length">
       <div class="col">
-        <h3>Comfort Options</h3>
+        <h3>Priority</h3>
         <draggable
             class="list-group"
-            v-model="list1"
+            v-model="list2"
             group="priority"
-            @change="log"
             itemKey="name"
+            @change="onLeftChange"
         >
           <template #item="{ element, index }">
             <div class="list-group-item">
-            <span>
-                +
+              <span>
+              {{ index + 1 }}.
+
               </span>
               {{ element.name }}
             </div>
@@ -22,17 +23,17 @@
       </div>
 
       <div class="col">
-        <h3>Comfort Priority</h3>
+        <h3>Options</h3>
         <draggable
             class="list-group"
-            :list="list2"
+            :list="list1"
             group="priority"
-            @change="log"
+            @change="onRightChange"
             itemKey="name"
         >
           <template #item="{ element, index }">
             <div class="list-group-item">
-              <span>{{ index + 1 }}.</span>
+              <span>&nbsp;</span>
               {{ element.name }}
             </div>
           </template>
@@ -46,10 +47,11 @@
 import draggable from 'vuedraggable'
 
 import { shuffleArray } from '@/lib/utils'
+import _ from 'lodash'
 
 export default {
   name: 'CustomerPriorityInput',
-  order: 1,
+  order: 6,
   components: { draggable },
   props: {
     inputModel: Object,
@@ -66,12 +68,12 @@ export default {
         {
           id: 2,
           type: 'energy',
-          name: 'Reduce monthly energy/utility bills',
+          name: 'Reduce monthly utility bills',
         },
         {
           id: 3,
           type: 'emissions',
-          name: 'Reduce carbon emissions from my house',
+          name: 'Reduce carbon emissions',
         },
         {
           id: 4,
@@ -89,8 +91,9 @@ export default {
           name: 'Speed of replacement',
         },
       ],
-      list1: this.inputModel.originalList || [],
-      list2: this.inputModel.priorityList || [],
+      list1: [],
+      list2: this.inputModel.priorityList || [{}, {}, {}, {}, {}, {}],
+      list3: [{}, {}, {}, {}, {}, {}],
       responseModel: { priorityList: [], originalList: [] },
     }
   },
@@ -116,24 +119,58 @@ export default {
   },
   methods: {
     shuffleList () {
-      // if (this.list1.length === this.rawList.length) {
-      if (this.list2.length === 0) {
-        shuffleArray(this.rawList)
-        this.list1 = this.rawList.map((item, index) => { return { ...item, id: index + 1 }})
-      }
-      // }
-      return this.list1
+      // shuffleArray(this.rawList)
+      this.list1 = this.rawList.map((item, index) => { return { ...item, id: index + 1 }})
+      this.list1 = _.differenceWith(this.rawList, this.list2, _.isEqual)
+      shuffleArray(this.list1)
+      const diff = this.rawList.length - this.list1.length
+      console.log(diff)
+      console.log()
+      const f = Array.of(diff)
+      const s = _.repeat('*', diff).split('')
+      // console.log()
+      this.list1.push(..._.fill(s, { type: 'temp' }))
     },
-    log: function (evt) {
-      console.log(evt)
-      console.log(this.list2)
+    onLeftChange (event) {
+      console.log('onLeftChange', event)
+      const isAdd = Object.keys(event).includes('added')
+      const isRemove = Object.keys(event).includes('removed')
+
+      if (isRemove) {
+        this.list2.push({ type: 'temp' })
+        console.log(_.findIndex(this.list2, (i) => {return i.type === 'temp'}))
+      }
+      if (isAdd) {
+        const i = _.findIndex(this.list2, (i) => {
+          return _.isEqual(i, {}) || i.type === 'temp'
+        })
+        _.pullAt(this.list2, [i])
+      }
+      this.responseModel.priorityList = this.list2
+      this.responseModel.originalList = this.list1
+      this.$emit('update:modelUpdate', this.responseModel)
+    },
+    onRightChange: function (event) {
+      console.log('onRightChange', event)
+      const isAdd = Object.keys(event).includes('added')
+      const isRemove = Object.keys(event).includes('removed')
+
+      if (isRemove) {
+        this.list1.push({ type: 'temp' })
+        console.log(_.findIndex(this.list1, (i) => {return i.type === 'temp'}))
+      }
+      if (isAdd) {
+        const i = _.findIndex(this.list1, (i) => {return i.type === 'temp'})
+        _.pullAt(this.list1, [i])
+      }
+      // // console.log(this.list2)
       this.responseModel.priorityList = this.list2
       this.responseModel.originalList = this.list1
       this.$emit('update:modelUpdate', this.responseModel)
     },
     onUpdate (event) {
-      console.log('CustomerPriorityInput:onUpdate')
-      console.log('onUpdate', event.target.value)
+      // console.log('CustomerPriorityInput:onUpdate')
+      // console.log('onUpdate', event.target.value)
     },
   },
 }

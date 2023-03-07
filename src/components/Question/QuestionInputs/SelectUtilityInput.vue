@@ -1,8 +1,11 @@
 <template>
-  <div id="select-utility" class="row">
-    <div class="col-md-6 mx-auto">
-      <div class="input-group mb-3">
-        <select class="form-select" aria-label="Choose your utility provider"
+  <div id="select-utility" class="container-fluid">
+    <div class="d-flex-row mb-2">
+      <div class="col-6 mx-auto">
+        <label for="energySelect" class="form-label">
+          Choose your energy provider
+        </label>
+        <select id="energySelect" class="form-select" aria-label="Choose your utility provider"
                 v-model="energyProvider"
                 @change="onUpdate"
         >
@@ -17,8 +20,13 @@
           </option>
         </select>
       </div>
-      <div class="input-group mb-3">
-        <select class="form-select" aria-label="Default select example"
+    </div>
+    <div class="row">
+      <div class="col-6 mx-auto">
+        <label for="gasSelect" class="form-label">
+          Choose your gas provider
+        </label>
+        <select id="gasSelect" class="form-select" aria-label="Default select example"
                 v-model="gasProvider"
                 @change="onUpdate"
         >
@@ -30,6 +38,7 @@
         </select>
       </div>
     </div>
+
   </div>
 
 </template>

@@ -45,6 +45,9 @@
                    :value="otherText"
                    @input="onOtherTextInput"
             >
+            <div :class="{'invisible':!toggleOtherInput}">
+              <em class="text-muted">Please contact your contractor for more information on what you qualify for.</em>
+            </div>
           </div>
         </div>
       </div>
