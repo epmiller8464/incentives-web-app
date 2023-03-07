@@ -1,6 +1,6 @@
 <template>
   <div id="system-age" class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-6 mx-auto">
       <input type="number"
              id="customRange1" min="1" max="40"
              class="form-control"
