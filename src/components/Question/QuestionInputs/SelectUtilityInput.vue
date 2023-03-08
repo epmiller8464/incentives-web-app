@@ -1,5 +1,5 @@
 <template>
-  <div id="select-utility" class="col-sm col-md col-lg col-md-5 col-lg-3 mx-auto">
+  <div id="select-utility" class="col-md-6 mx-auto">
     <select id="energySelect" class="form-select form-select" aria-label="Choose your utility provider"
             v-model="energyProvider"
             @change="onUpdate">
@@ -20,13 +20,20 @@
       <option value="" disabled>
         Choose your gas provider
       </option>
-      <option :value="{id:1,name:'Texas Gas',type:'gas'}">Texas Gas</option>
-      <option :value="{id:2,name:' Gas',type:'gas'}">Gas</option>
+      <option
+          v-for="opt in this.gasProviderOptions"
+          :value="opt"
+          data-selected="this.gasProvider.id === opt.id">
+        {{ opt.name }}
+      </option>
     </select>
   </div>
 </template>
 
 <script>
+
+import {ELECTRICITY_PROVIDERS,GAS_PROVIDERS } from '@/constants/component-options'
+
 export default {
   name: 'SelectUtilityInput',
   props: {
@@ -45,12 +52,18 @@ export default {
   computed: {
     energyProviderOptions () {
       let options = [
-        { id: 1, name: 'Austin Energy', type: 'electric' },
+        { id: 1, name: 'Austin Energy', type: 'electricity' },
         { id: 2, name: 'Center Point', type: 'electric' },
       ]
-      return options
+      return [...ELECTRICITY_PROVIDERS]
     },
-    gasProviderOptions () {},
+    gasProviderOptions () {
+      return [...GAS_PROVIDERS]
+      // return [
+      //   { id: 1, name: 'Texas Gas', type: 'natural_gas' },
+      //   { id: 2, name: 'Gas', type: 'gas' },
+      // ]
+    },
   },
   mounted () {
     console.log('SelectUtilityInput:onMount', this.inputModel)

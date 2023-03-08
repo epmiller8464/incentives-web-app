@@ -1,4 +1,5 @@
 <template>
+
   <div id="cta" class="container">
     <div style="opacity: 0.3;">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-1">
@@ -13,6 +14,18 @@
               energy-savings="10% Lower bills"
               tree-count="3"
           ></DisplayCard>
+          <ul>
+            <li>
+              load contractor in in session
+            </li>
+            <li>
+              clean up responsiveness
+              zacs takeaways
+            </li>
+            <li>
+              use products and incentives zac provides to model alg output for display
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -49,8 +62,9 @@ export default {
   methods: {
     onGetStarted (event) {
       console.log('get started click')
+      const contractorId = 'dd4e55e4-bdd3-11ed-9a5f-3aebb006c675'
       //TODO: if a current session exists ask the user if they want to start a new one.
-      this.sessionStore.startNewSession(generateExternalUUID())
+      this.sessionStore.startNewSession(generateExternalUUID(), contractorId)
       this.surveyStore.loadCurrentSurvey()
       this.$router.push({ name: 'Survey', params: { index: 0 } })
     },

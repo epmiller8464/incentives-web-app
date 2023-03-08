@@ -1,10 +1,10 @@
 <template>
-  <div id="system-age" class="row">
-    <div class="col-6 mx-auto">
+  <div id="system-age">
+    <div class="">
       <input type="number"
              id="customRange1" min="1" max="40"
              class="form-control"
-             :class="[this.isValid? '':'is-invalid']"
+
              placeholder="Existing System Age" aria-label="Existing System Age"
              @input="onUpdate"
              :value="responseModel"

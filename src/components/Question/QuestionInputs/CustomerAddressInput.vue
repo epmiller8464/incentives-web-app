@@ -1,48 +1,44 @@
 <template>
-  <div id="customer-address" class="row g-3 px-5">
-
-    <div class="question-answer-inputs">
-      <div class="col-12 border-bottom mb-3">
-        <label for="addressAutoComplete" class="form-label ">Search for address</label>
-        <!--        >-->
-        <vue-google-autocomplete
-            ref="address"
-            id="addressAutoComplete"
-            classname="form-control mb-3"
-            placeholder="Please type your address"
-            v-on:placechanged="getAddressData"
-            country="us"
-        >
-        </vue-google-autocomplete>
-      </div>
-      <div class="col-12">
-        <label for="inputAddress1" class="form-label">Address 2</label>
-        <input type="text" class="form-control" id="inputAddress1" placeholder="123 Main Street"
-               v-model="address1"
-        >
-      </div>
-      <div class="col-12">
-        <label for="inputAddress2" class="form-label">Address 2</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"
-               v-model="address2"
-               @change="onAddress2"
-        >
-      </div>
-      <div class="col-md-6">
-        <label for="inputCity" class="form-label">City</label>
-        <input type="text" class="form-control" id="inputCity"
-               v-model="city">
-      </div>
-      <div class="col-md-4">
-        <label for="inputState" class="form-label">State</label>
-        <input type="text" class="form-control" id="inputState"
-               v-model="state">
-      </div>
-      <div class="col-md-2">
-        <label for="inputZip" class="form-label">Zip</label>
-        <input type="text" class="form-control" id="inputZip" v-model="postalCode">
-      </div>
-
+  <div id="customer-address" class="row mb-3">
+    <div class="col border-bottom mb-3">
+      <label for="addressAutoComplete" class="form-label ">Search for address</label>
+      <!--        >-->
+      <vue-google-autocomplete
+          ref="address"
+          id="addressAutoComplete"
+          classname="form-control mb-3"
+          placeholder="Please type your address"
+          v-on:placechanged="getAddressData"
+          country="us"
+      >
+      </vue-google-autocomplete>
+    </div>
+    <div class="col-12">
+      <label for="inputAddress1" class="form-label">Address 2</label>
+      <input type="text" class="form-control" id="inputAddress1" placeholder="123 Main Street"
+             v-model="address1"
+      >
+    </div>
+    <div class="col-12">
+      <label for="inputAddress2" class="form-label">Address 2</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"
+             v-model="address2"
+             @change="onAddress2"
+      >
+    </div>
+    <div class="col-md-6">
+      <label for="inputCity" class="form-label">City</label>
+      <input type="text" class="form-control" id="inputCity"
+             v-model="city">
+    </div>
+    <div class="col-md-4">
+      <label for="inputState" class="form-label">State</label>
+      <input type="text" class="form-control" id="inputState"
+             v-model="state">
+    </div>
+    <div class="col-md-2">
+      <label for="inputZip" class="form-label">Zip</label>
+      <input type="text" class="form-control" id="inputZip" v-model="postalCode">
     </div>
   </div>
 </template>

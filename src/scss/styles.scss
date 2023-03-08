@@ -21,6 +21,9 @@ body {
   //.nav-button{
   //  width: 50%;
   //}
+  div {
+    //font-size: 0.7rem;
+  }
   #question-container {
     min-width: 320px;
     padding: 0 2rem;
@@ -38,7 +41,7 @@ body {
   .question-input {
     min-width: 576px;
   }
-  .nav-button{
+  .nav-button {
     width: 50px;
   }
 }
@@ -52,7 +55,7 @@ body {
     min-width: 768px;
   }
 
-  .nav-button{
+  .nav-button {
     width: 125px;
   }
 }
@@ -80,7 +83,7 @@ body {
     min-width: 1200px;
   }
   .question-input {
-    min-width: 792px;
+    min-width: 500px;
   }
 }
 

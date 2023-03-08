@@ -6,9 +6,9 @@
             class="form-check-input" type="radio" name="incomeRadios" :id="optionId(option)"
             @change="onUpdate"
             v-model="selectedIncome"
-            :value="option.value">
+            :value="option.incomeLevel">
         <label class="form-check-label" :for="optionId(option)">
-          {{ option.option }}
+          {{ option.incomeLevelRange }}
         </label>
         <div v-if="option.show_free_form" :class="{'collapse':toggleOtherInput}" id="incomeCollapse">
           <input
@@ -27,7 +27,7 @@
 
 <script>
 import { ref } from 'vue'
-
+import { INCOME_LEVEL_OPTIONS } from '@/constants/component-options'
 export default {
   name: 'CustomerIncomeInput',
   props: {
@@ -46,17 +46,40 @@ export default {
   },
   computed: {
     toggleOtherInput () {
-      return this.selectedIncome !== '1'
+      return this.selectedIncome !== '2'
     },
     incomeOptions () {
-      return [
-        { option: '$0 (or less)', value: 0 },
-        //TODO: capture the income level as free form for this question
-        { option: '$0 - $30,000', value: 1, rebate_eligible: false, show_free_form: true },
-        { option: '$30,000 - $80,000', value: 2 },
-        { option: '$80,000 - $150,000', value: 3 },
-        { option: '$150,000+', value: 4 },
-      ]
+      return [...INCOME_LEVEL_OPTIONS]
+      // return [
+      //   {
+      //     option: '$0 (or less)',
+      //     value: 0,
+      //     income_eligibility_flag: 'none',
+      //   },
+      //   //TODO: capture the income level as free form for this question
+      //   {
+      //     option: '$0 - $30,000',
+      //     value: 1,
+      //     rebate_eligible: false,
+      //     show_free_form: true,
+      //     income_eligibility_flag: 'partial',
+      //   },
+      //   {
+      //     option: '$30,000 - $80,000',
+      //     value: 2,
+      //     income_eligibility_flag: 'full',
+      //   },
+      //   {
+      //     option: '$80,000 - $150,000',
+      //     value: 3,
+      //     income_eligibility_flag: 'full',
+      //   },
+      //   {
+      //     option: '$150,000+',
+      //     value: 4,
+      //     income_eligibility_flag: 'full',
+      //   },
+      // ]
     },
   },
   mounted () {
@@ -67,13 +90,15 @@ export default {
     this.$emit('update:resetInputModel')
   },
   methods: {
-    optionId ({ value }) {
-      return `incomeOption${value}`
+    optionId ({ incomeLevel }) {
+      return `incomeOption${incomeLevel}`
     },
     onUpdate (event) {
       console.log('CustomerIncomeInput:onUpdate')
       this.responseModel.incomeLevel = this.selectedIncome = event.target.value
-      this.responseModel.otherIncomeValue = this.otherIncomeValue = this.selectedIncome !== '1' ? '':this.responseModel.otherIncomeValue
+      this.responseModel.otherIncomeValue = this.otherIncomeValue = this.selectedIncome !== '1'
+          ? ''
+          : this.responseModel.otherIncomeValue
       this.$emit('update:modelUpdate', this.responseModel)
     },
     onOtherIncomeInput (event) {
