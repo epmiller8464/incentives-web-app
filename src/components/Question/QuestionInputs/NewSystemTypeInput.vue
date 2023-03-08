@@ -1,56 +1,57 @@
 <template>
-  <div id="system-type">
-    <div class="col-sm col-md col-lg col-md-4 col-lg mx-auto">
-      <fieldset>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="flexCheckDefault"
-                 @change="onUpdate"
-                 v-model="checkedSystemTypes" value="central-ac">
-          <label class="form-check-label" for="flexCheckDefault">
-            Central AC
-          </label>
-        </div>
-        <div class="form-check">
-          <input
-              class="form-check-input" type="checkbox" id="flexCheckChecked"
-              @change="onUpdate"
-              v-model="checkedSystemTypes" value="furnace">
-          <label class="form-check-label" for="flexCheckChecked">
-            Furnace
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
-                 @change="onRadioUpdate"
-                 v-model="heatPumpOrOther"
-                 value="heat-pump">
-          <label class="form-check-label" for="gridRadios1">
-            Heat Pump
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
-                 @change="onRadioUpdate"
-                 v-model="heatPumpOrOther"
-                 value="other">
-          <label class="form-check-label" for="gridRadios2">
-            Other
-          </label>
-          <div>
-            <input type="text"
-                   id="otherInputText"
-                   class="form-control"
-                   :class="{'invisible':!toggleOtherInput}"
-                   placeholder="" aria-label=""
-                   :value="otherText"
-                   @input="onOtherTextInput"
-            >
-            <div :class="{'invisible':!toggleOtherInput}">
-              <em>Please contact your contractor for more information on what you qualify for.</em>
-            </div>
+  <div id="system-type" class="col-md-6 question-input mx-auto">
+    <fieldset class="">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="flexCheckDefault"
+               @change="onUpdate"
+               v-model="checkedSystemTypes" value="central_ac">
+        <label class="form-check-label" for="flexCheckDefault">
+          Central AC
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+            class="form-check-input" type="checkbox" id="flexCheckChecked"
+            @change="onUpdate"
+            v-model="checkedSystemTypes" value="furnace">
+        <label class="form-check-label" for="flexCheckChecked">
+          Furnace
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
+               @change="onRadioUpdate"
+               v-model="heatPumpOrOther"
+               value="ashp">
+        <label class="form-check-label" for="gridRadios1">
+          Heat Pump
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
+               @change="onRadioUpdate"
+               v-model="heatPumpOrOther"
+               value="other">
+        <label class="form-check-label" for="gridRadios2">
+          Other
+        </label>
+        <div>
+          <input type="text"
+                 id="otherInputText"
+                 class="form-control"
+                 :class="{'invisible':!toggleOtherInput}"
+                 placeholder="" aria-label=""
+                 :value="otherText"
+                 @input="onOtherTextInput"
+          >
+          <div :class="{'invisible':!toggleOtherInput}">
+            <em>Please contact your contractor for more information on what you qualify for.</em>
           </div>
         </div>
-      </fieldset>
+      </div>
+    </fieldset>
+
+    <div class="col-sm col-md col-lg col-md-4 col-lg mx-auto">
     </div>
   </div>
 </template>

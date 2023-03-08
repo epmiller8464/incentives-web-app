@@ -1,33 +1,34 @@
 <template>
-  <div id="contact-info" class="row g-3 px-5 mb-3">
-    <fieldset class="row px-5">
-      <div class="row g-3">
-        <div class="col ps-0">
-          <input type="text"
-                 placeholder="First name" aria-label="First name"
-                 class="form-control"
-                 :class="[this.fnIsValid? '':'is-invalid']"
-                 v-model="firstName"
-                 @input="onFirstNameChange"
-          >
-          <div class="invalid-feedback">
-            Invalid first name.
-          </div>
-        </div>
-        <div class="col">
-          <input type="text"
-                 placeholder="Last name" aria-label="Last name"
-                 class="form-control"
-                 :class="[this.lnIsValid? '':'is-invalid']"
-                 v-model="lastName"
-                 @input="onLastNameChange"
-          >
-          <div class="invalid-feedback">
-            Invalid last name.
-          </div>
+  <div id="contact-info">
+
+    <fieldset class="row">
+      <div class="col-md-6">
+        <input type="text"
+               placeholder="First name" aria-label="First name"
+               class="form-control"
+               :class="[this.fnIsValid? '':'is-invalid']"
+               v-model="firstName"
+               @input="onFirstNameChange"
+        >
+        <div class="invalid-feedback">
+          Invalid first name.
         </div>
       </div>
-      <div class="row g-3">
+      <div class="col-md-6">
+        <input type="text"
+               placeholder="Last name" aria-label="Last name"
+               class="form-control"
+               :class="[this.lnIsValid? '':'is-invalid']"
+               v-model="lastName"
+               @input="onLastNameChange"
+        >
+        <div class="invalid-feedback">
+          Invalid last name.
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="row">
+      <div class="col-md-6">
         <input type="email"
                placeholder="Email" aria-label="Email"
                class="form-control"
@@ -39,7 +40,7 @@
           Invalid email.
         </div>
       </div>
-      <div class="row g-3">
+      <div class="col-md-6">
         <input type="text"
                placeholder="Phone Number" aria-label="Phone Number"
                class="form-control"

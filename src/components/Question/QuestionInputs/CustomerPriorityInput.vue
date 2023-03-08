@@ -1,44 +1,41 @@
 <template>
-  <div id="customer-priority" class="d-flex-stretch align-content-center">
-    <div class="row ps-5 ms-5" v-if="rawList.length">
-      <div class="col">
-        <h3>Priority</h3>
-        <draggable
-            class="list-group"
-            v-model="list2"
-            group="priority"
-            itemKey="name"
-            @change="onLeftChange"
-        >
-          <template #item="{ element, index }">
-            <div class="list-group-item">
+  <div id="customer-priority" class="row mb-3" v-if="rawList.length">
+    <div class="col-md-6 mx-auto question-answer-inputs">
+      <h3>Priority</h3>
+      <draggable
+          class="list-group"
+          v-model="list2"
+          group="priority"
+          itemKey="name"
+          @change="onLeftChange"
+      >
+        <template #item="{ element, index }">
+          <div class="list-group-item">
               <span>
               {{ index + 1 }}.
 
               </span>
-              {{ element.name }}
-            </div>
-          </template>
-        </draggable>
-      </div>
-
-      <div class="col">
-        <h3>Options</h3>
-        <draggable
-            class="list-group"
-            :list="list1"
-            group="priority"
-            @change="onRightChange"
-            itemKey="name"
-        >
-          <template #item="{ element, index }">
-            <div class="list-group-item">
-              <span>&nbsp;</span>
-              {{ element.name }}
-            </div>
-          </template>
-        </draggable>
-      </div>
+            {{ element.name }}
+          </div>
+        </template>
+      </draggable>
+    </div>
+    <div class="col-md-6 mx-auto question-answer-inputs">
+      <h3>Options</h3>
+      <draggable
+          class="list-group"
+          :list="list1"
+          group="priority"
+          @change="onRightChange"
+          itemKey="name"
+      >
+        <template #item="{ element, index }">
+          <div class="list-group-item">
+            <span>&nbsp;</span>
+            {{ element.name }}
+          </div>
+        </template>
+      </draggable>
     </div>
   </div>
 </template>

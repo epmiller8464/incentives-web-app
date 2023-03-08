@@ -1,20 +1,18 @@
 <template>
-  <div id="customer-home-sqft" class="row">
-    <fieldset class="row mb-3">
-      <div class="col-md-6 mx-auto">
-        <label for="customRange3" class="form-label"></label>
-        <input id="customRange1"
-               type="number"
-               placeholder="Home Square Feet. 3500 sqft"
-               v-model="this.responseModel"
-               class="form-control"
-               :class="[this.isValid? '':'is-invalid']"
-               @input="onUpdate">
-        <div class="invalid-feedback">
-          Value should be less than 10,000
-        </div>
+  <div id="customer-income" class="row mb-3">
+    <div class="col-md-6 mx-auto">
+      <label for="customRange3" class="form-label"></label>
+      <input id="customRange1"
+             type="number"
+             placeholder="Home Square Feet. 3500 sqft"
+             v-model="this.responseModel"
+             class="form-control"
+             :class="[this.isValid? '':'is-invalid']"
+             @input="onUpdate">
+      <div class="invalid-feedback">
+        Value should be less than 10,000
       </div>
-    </fieldset>
+    </div>
   </div>
 </template>
 

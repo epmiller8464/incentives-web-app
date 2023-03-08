@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { generateExternalUUID } from '@/lib/utils'
 import { SESSION_KEY, SESSION_USER_ID_KEY } from '@/constants'
+import { surveyKey } from '@/lib/survey'
 
 export const useSessionStore = defineStore('session', {
   state: () => ({
@@ -26,7 +27,8 @@ export const useSessionStore = defineStore('session', {
     },
   },
   actions: {
-    startNewSession (externalUserId) {
+    startNewSession (
+      externalUserId, contractorId = 'dd4e55e4-bdd3-11ed-9a5f-3aebb006c675') {
       console.log(`startNewSession:start`)
       //TODO: inform user or current session
       const existingSession = localStorage.getItem(SESSION_KEY)
@@ -40,11 +42,29 @@ export const useSessionStore = defineStore('session', {
       this.session = {
         id: generateExternalUUID(),
         userId: externalUserId,
+        contractorId,
         startTime: new Date(),
         state: 'initiated',
       }
       localStorage.setItem(SESSION_KEY, JSON.stringify(this.currentSession))
       console.log('new session initiated.')
+    },
+    loadSession () {
+      const value = localStorage.getItem(SESSION_KEY)
+      if (!value) {
+        console.error('no active session')
+        return null
+      }
+      const existingSession = JSON.parse(value)
+      // currentSession
+      this.session = {
+        id: existingSession.id,
+        userId: existingSession.userId,
+        contractorId: existingSession.contractorId,
+        startTime: existingSession.startTime,
+        state: existingSession.state,
+      }
+      return this.currentSession
     },
   },
 })

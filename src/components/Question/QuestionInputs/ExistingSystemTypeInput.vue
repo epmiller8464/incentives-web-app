@@ -1,11 +1,11 @@
 <template>
-  <div id="existing-system" class="row">
+  <div id="existing-system">
     <fieldset class="row mb-3">
       <div class="col-md-6 mx-auto question-answer-inputs">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="electricCheck"
                  @change="onUpdate"
-                 v-model="checkedSystemTypes" value="central-ac">
+                 v-model="checkedSystemTypes" value="central_ac">
           <label class="form-check-label" for="electricCheck">
             Central AC
           </label>
@@ -23,7 +23,7 @@
           <input class="form-check-input" type="radio" name="gridRadios" id="esGridRadios1"
                  @change="onRadioUpdate"
                  v-model="heatPumpNothingOrOther"
-                 value="heat-pump">
+                 value="ashp">
           <label class="form-check-label" for="esGridRadios1">
             Heat Pump
           </label>
