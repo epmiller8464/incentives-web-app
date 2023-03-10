@@ -5,7 +5,9 @@ import router from '@/router'
 
 import './scss/styles.scss'
 
-import * as bootstrap from '~bootstrap'
+import '@popperjs/core'
+
+import * as bootstrap from 'bootstrap'
 
 const app = createApp(App)
 
