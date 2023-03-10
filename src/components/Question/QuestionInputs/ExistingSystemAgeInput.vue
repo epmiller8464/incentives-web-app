@@ -1,20 +1,18 @@
 <template>
-  <div id="system-age" class="row mb-3">
-    <div class="col-md-6 mx-auto">
-      <label for="customRange3" class="form-label"></label>
-      <input
-          id="customRange8"
-          type="number"
-          placeholder="Existing System Age" aria-label="Existing System Age"
-          min="1" max="40"
-          v-model="this.responseModel"
-          class="form-control"
-          :class="[this.isValid? '':'is-invalid']"
-          @input="onUpdate"
-      >
-      <div class="invalid-feedback">
-        Range should be 1 - 40
-      </div>
+  <div id="system-age" class="col-md-6 mx-auto">
+    <label for="customRange3" class="form-label"></label>
+    <input
+        id="customRange8"
+        type="number"
+        placeholder="Existing System Age" aria-label="Existing System Age"
+        min="1" max="40"
+        v-model="this.responseModel"
+        class="form-control"
+        :class="[this.isValid? '':'is-invalid']"
+        @input="onUpdate"
+    >
+    <div class="invalid-feedback">
+      Range should be 1 - 40
     </div>
   </div>
 </template>
@@ -29,7 +27,7 @@ export default {
   data () {
     return {
       isValid: true,
-      responseModel: this.inputModel || "",
+      responseModel: this.inputModel || '',
     }
   },
   mounted () {
@@ -48,7 +46,7 @@ export default {
       console.log('ExistingSystemAgeInput:onUpdate')
       this.responseModel = event.target.value
       this.isValid = event.target.value.length === 0 || this.validateInput(event.target.value)
-      console.log('isValid',this.isValid)
+      console.log('isValid', this.isValid)
       let val
       if (this.isValid) {
         val = this.responseModel

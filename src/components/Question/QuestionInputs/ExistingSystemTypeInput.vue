@@ -1,53 +1,54 @@
 <template>
   <div id="existing-system">
-    <fieldset class="row mb-3">
-      <div class="col-md-6 mx-auto question-answer-inputs">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="electricCheck"
-                 @change="onUpdate"
-                 v-model="checkedSystemTypes" value="central_ac">
-          <label class="form-check-label" for="electricCheck">
-            Central AC
-          </label>
-        </div>
-        <div class="form-check">
-          <input
-              class="form-check-input" type="checkbox" id="gasCheckChecked"
-              @change="onUpdate"
-              v-model="checkedSystemTypes" value="furnace">
-          <label class="form-check-label" for="gasCheckChecked">
-            Furnace
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="esGridRadios1"
-                 @change="onRadioUpdate"
-                 v-model="heatPumpNothingOrOther"
-                 value="ashp">
-          <label class="form-check-label" for="esGridRadios1">
-            Heat Pump
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="esGridRadios2"
-                 @change="onRadioUpdate"
-                 v-model="heatPumpNothingOrOther"
-                 value="nothing">
-          <label class="form-check-label" for="esGridRadios2">
-            Nothing
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3"
-                 @change="onRadioUpdate"
-                 v-model="heatPumpNothingOrOther"
-                 value="other">
-          <label class="form-check-label" for="gridRadios3">
-            Other
-          </label>
-        </div>
+    <fieldset class="col-md-6 mx-auto">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="electricCheck"
+               @change="onUpdate"
+               v-model="checkedSystemTypes" value="central_ac">
+        <label class="form-check-label" for="electricCheck">
+          Central AC
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+            class="form-check-input" type="checkbox" id="gasCheckChecked"
+            @change="onUpdate"
+            v-model="checkedSystemTypes" value="furnace">
+        <label class="form-check-label" for="gasCheckChecked">
+          Furnace
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gridRadios" id="esGridRadios1"
+               @change="onRadioUpdate"
+               v-model="heatPumpNothingOrOther"
+               value="ashp">
+        <label class="form-check-label" for="esGridRadios1">
+          Heat Pump
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gridRadios" id="esGridRadios2"
+               @change="onRadioUpdate"
+               v-model="heatPumpNothingOrOther"
+               value="nothing">
+        <label class="form-check-label" for="esGridRadios2">
+          Nothing
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3"
+               @change="onRadioUpdate"
+               v-model="heatPumpNothingOrOther"
+               value="other">
+        <label class="form-check-label" for="gridRadios3">
+          Other
+        </label>
       </div>
     </fieldset>
+<!--    <fieldset class="row mb-3">-->
+<!--     -->
+<!--    </fieldset>-->
 
   </div>
 </template>
