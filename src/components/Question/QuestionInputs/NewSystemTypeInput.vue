@@ -18,15 +18,15 @@
           Furnace
         </label>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
-               @change="onRadioUpdate"
-               v-model="heatPumpOrOther"
-               value="ashp">
-        <label class="form-check-label" for="gridRadios1">
-          Heat Pump
-        </label>
-      </div>
+<!--      <div class="form-check">-->
+<!--        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"-->
+<!--               @change="onRadioUpdate"-->
+<!--               v-model="heatPumpOrOther"-->
+<!--               value="ashp">-->
+<!--        <label class="form-check-label" for="gridRadios1">-->
+<!--          Heat Pump-->
+<!--        </label>-->
+<!--      </div>-->
       <div class="form-check">
         <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
                @change="onRadioUpdate"

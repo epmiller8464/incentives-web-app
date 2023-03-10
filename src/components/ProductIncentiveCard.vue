@@ -1,5 +1,5 @@
 <template>
-  <div class="card prod-card mx-4">
+  <div class="card">
 
     <div class="card-header text-center">
       <p class="card-title h5">{{ titleTxt }}</p>
@@ -22,18 +22,12 @@
           <i class="bi bi-caret-down-square text-dark txt-icon text-start"></i>
         </button>
       </p>
-      <div class="collapse" :id="`col_${this.collapseId}`">
+      <div v-if="savingSummariesList" class="collapse" :id="`col_${this.collapseId}`">
         <div class="card card-body">
-          <p class="text-center">
+          <p class="text-center" v-for="line in this.savingSummariesList">
             <em>
-              <strong>{{ annualSavingsTxt }}</strong>
+              <strong>{{ line }}</strong>
               <br>
-<!--              <em>available next year</em>-->
-            </em>
-          </p>
-          <p class="text-center">
-            <em>
-              <strong>{{ instantSavingsTxt }}</strong>
             </em>
           </p>
         </div>
@@ -51,10 +45,10 @@
         <i class="bi bi-tree text-success txt-icon text-start" v-else></i>
       </div>
       <div class="mt-3">
-        <p class="text-center"><strong>Sample Equipment</strong></p>
-        <ul class="ms-0">
+        <p class="text-start mb-0"><strong>Sample Equipment</strong></p>
+        <ul class="m-0">
           <li v-if="equipmentSummaries" v-for="({summary,tooltip},index) in equipmentSummaries">
-            <p class="mb-0">{{summary}}
+            <p class="m-0">{{summary}}
               <span class="custom-tooltip"></span>
               <i  class="bi bi-info-circle txt-icon text-start"
                  data-bs-toggle="tooltip" data-bs-placement="top"
@@ -90,6 +84,7 @@ export default {
     equipmentTooltip: { type: String },
     product: Object,
     equipmentSummaries: [Object],
+    savingSummaries: [String]
   },
   data () {
     return {
@@ -106,30 +101,19 @@ export default {
       energySavingsTxt: this.energySavings,
       equipmentSummaryTxt: this.equipmentSummary,
       equipmentTooltipTxt: this.equipmentTooltip,
+      savingSummariesList:this.savingSummaries
     }
   },
   computed: {
     collapseId () {
       return this.cid
     },
-
-    displayTrees () {
-      let trees = Array.from(4)
-    },
   },
   methods:{
-    // toolTipId (index) {
-    //   return `toolTip_${this.cid}`
-    // },
   },
   mounted () {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    // const tooltipTriggerList = document.getElementById(`${this.toolTipId}`)
-    // createPopper(tooltipTriggerList, )
-    // let tt = new Tooltip(tooltipTriggerList, { trigger: 'hover focus', placement: 'top' })
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl))
-    // const collapseElementList = document.querySelectorAll('.collapse')
-    // const collapseList = [...collapseElementList].map(collapseEl => new bootstrap.Collapse(collapseEl))
   },
 }
 </script>

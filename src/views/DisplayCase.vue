@@ -1,7 +1,8 @@
 <template>
   <div id="display-case" class="container">
-    <div class="row">
-      <div class="col-md-6 mx-auto" v-if="getProductIncentives"
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-1">
+      <div class="col-md col-md-6 col-lg-6 mx-auto my-2"
+           v-if="getProductIncentives"
            v-for="(product,index) of getProductIncentives">
 
         <ProductIncentiveCard
@@ -14,10 +15,29 @@
             :energy-savings="product.energySavingsTxt"
             :tree-count="product.treeCount"
             :equipment-summaries="product.equipmentSummaries"
+            :saving-summaries="product.savingSummaries"
         ></ProductIncentiveCard>
       </div>
-
     </div>
+    <!--    <div class="row">-->
+    <!--      <div class="col-md-6 mx-auto" v-if="getProductIncentives"-->
+    <!--           v-for="(product,index) of getProductIncentives">-->
+
+    <!--        <ProductIncentiveCard-->
+    <!--            :cid="index.toString()"-->
+    <!--            :title="product.title"-->
+    <!--            :subtitle="product.subtitle"-->
+    <!--            :cost="product.costSavingsTxt"-->
+    <!--            :instant-savings="product.instantSavingsTxt"-->
+    <!--            :annual-savings="product.annualSavingsTxt"-->
+    <!--            :energy-savings="product.energySavingsTxt"-->
+    <!--            :tree-count="product.treeCount"-->
+    <!--            :equipment-summaries="product.equipmentSummaries"-->
+    <!--            :saving-summaries="product.savingSummaries"-->
+    <!--        ></ProductIncentiveCard>-->
+    <!--      </div>-->
+
+    <!--    </div>-->
     <div class="row">
       <div class="col text-center">
         <router-link class="btn btn-link" :to="{name:'GetStarted'}">
@@ -43,6 +63,7 @@ const productTransform = function (result, { product, incentives }, index) {
     // console.log('ince', incentives[i])
     const { amount, entity_name } = incentives[i]
     totalSavings += Number(amount)
+
     if (entity_name.toUpperCase() === 'IRS')
       result.annualSavings += Number(amount)
     else
@@ -58,6 +79,25 @@ const productTransform = function (result, { product, incentives }, index) {
 
   return result
 }
+
+const formatIncentiveSummary = function (incentives) {
+
+  let results = []
+  console.log('formatIncentiveSummary', incentives)
+  const federal = incentives.find(i => i.entity_name === 'IRS')
+
+  if (federal)
+    results.push(`$${federal.amount} ${federal.display_text}`)
+  const electricity = incentives.find(i => i.energy_source === 'electricity')
+  if (electricity)
+    results.push(`$${electricity.amount} ${electricity.display_text}`)
+  const gas = incentives.find(i => i.energy_source === 'natural_gas')
+  if (gas)
+    results.push(`$${gas.amount} ${gas.display_text}`)
+
+  return results
+}
+
 export default {
   name: 'DisplayCase',
   props: {},
@@ -108,28 +148,28 @@ export default {
       this.sessionStore.loadSession()
       const session = this.sessionStore.currentSession
       const questionMap = this.surveyStore.questionAnswerMap
-      // console.log(session)
-      // console.log(questionMap)
+
       const productIncentives = findProductIncentives(session, questionMap)
 
       const basicMatch = _.groupBy(productIncentives, ({ product }) => product.display_title.toLowerCase() === 'basic')
-      // console.log(basicMatch)
+
       const efficientMatch = _.groupBy(productIncentives,
           ({ product }) => product.display_title.toLowerCase() === 'efficient')
       console.log(efficientMatch)
       const semiEfficientMatch = _.groupBy(productIncentives,
           ({ product }) => product.display_title.toLowerCase() === 'semi-efficient')
-      // console.log(semiEfficientMatch)
-      // const prodModel = { totalSavings: 0, equipmentSummaries: [], instantSavings: 0, annualSavings: 0 }
+
       let ps = efficientMatch.true.reduce(productTransform,
           { totalSavings: 0, equipmentSummaries: [], instantSavings: 0, annualSavings: 0 })
 
+      const efIncentives = _.flatten(efficientMatch.true.map((p) => p.incentives))
+      console.log(efIncentives)
       const efficientProduct = {
         title: 'Efficient',
         subtitle: 'Eligible for all available incentives',
         treeCount: 3,
         costSavingsTxt: `$${ps.totalSavings} savings`,
-        energySavingsTxt: '10% lower energy bill \n (vs. basic)',
+        energySavingsTxt: '~XX% lower energy bill \n (vs. basic)',
         instantSavingsTxt: `$${ps.instantSavings}: Austin Energy \n (instant)`,
         annualSavingsTxt: `$${ps.annualSavings}: Federal tax credit \n (next year)`,
         equipmentSummaries: efficientMatch.true.map(({ product }) => {
@@ -138,18 +178,21 @@ export default {
             tooltip: product.display_equipment_tooltip,
           }
         }),
+        savingSummaries: formatIncentiveSummary(efIncentives),
       }
-      // console.log(product)
+      console.log(efficientProduct)
       this.productIncentives.push(efficientProduct)
 
       let semi = semiEfficientMatch.true.reduce(productTransform,
           { totalSavings: 0, equipmentSummaries: [], instantSavings: 0, annualSavings: 0 })
+      const semiEfIncentives = _.flatten(semiEfficientMatch.true.map((p) => p.incentives))
+      // console.log(semiEfIncentives)
       const semiEfficientProduct = {
         title: 'Semi-Efficient',
         subtitle: 'Eligible for some of the available incentives',
         treeCount: 2,
         costSavingsTxt: `$${semi.totalSavings} savings`,
-        energySavingsTxt: '2% lower energy bill \n (vs. basic)',
+        energySavingsTxt: '~X% lower energy bill \n (vs. basic)',
         instantSavingsTxt: `$${semi.instantSavings}: Austin Energy \n (instant)`,
         annualSavingsTxt: `$${semi.annualSavings}: Federal tax credit \n (next year)`,
         equipmentSummaries: semiEfficientMatch.true.map(({ product }) => {
@@ -158,6 +201,7 @@ export default {
             tooltip: product.display_equipment_tooltip,
           }
         }),
+        savingSummaries: formatIncentiveSummary(semiEfIncentives),
       }
       this.productIncentives.push(semiEfficientProduct)
 
@@ -178,6 +222,7 @@ export default {
             tooltip: product.display_equipment_tooltip,
           }
         }),
+        savingSummaries: [""],
       }
       this.productIncentives.push(basicProduct)
 

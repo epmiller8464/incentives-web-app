@@ -9,20 +9,6 @@
       </div>
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-1">
-      <div class="col-md col-md-6 col-lg-6 mx-auto">
-        <div style="opacity: 0.3;">
-          <DisplayCard
-              title="Energy Efficient"
-              subtitle="Qualifies for all eligible rebates"
-              cost="$X,XXX + 4-10K"
-              cost-savings="$2,635 savings"
-              instant-savings="$635 instant saving from Austin Energy"
-              annual-savings="$2,000 Federal Tax Credit"
-              energy-savings="10% Lower bills"
-              tree-count="3"
-          ></DisplayCard>
-        </div>
-      </div>
     </div>
   </div>
 </template>
