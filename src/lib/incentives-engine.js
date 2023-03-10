@@ -2,115 +2,58 @@ import { ContractorProductsMap } from '@/constants/contractor-products'
 import { transformSurveyQuestions } from '@/constants/customer-inputs'
 import { INCENTIVES_DB } from '@/constants/incentives-db'
 
-const INCOME_ELIGIBLE_FLAGS = ['full', 'partial', 'none']
-const PRODUCT_TYPES = ['central_ac', 'furnace', 'ashp']
-const COMPRESSOR_TYPES = ['na', 'inverter', 'conventional']
-const ENTITY_TYPES = ['utility', 'federal', 'local', 'state']
+const loadProductsByContractorId = (customerInputs) => {
 
-const CustomerInput = {
-  sessionId: '',
-  surveyId: '',
-  customerId: '',
-  contractorId: '',
-  utility: {
-    electricityProvider: {
-      id: '0429dd34-bde6-11ed-9a5f-3aebb006c675',
-      name: 'Austin Energy',
-      type: 'electricity',
-    },
-    gasProvider: {
-      id: '0429dda2-bde6-11ed-9a5f-3aebb006c675',
-      name: 'Texas Gas',
-      type: 'natural_gas',
-    },
-  },
-  income: {
-    incomeLevel: '',
-    incomeLevelRange: '',
-    incomeEligibleFlag: '',
-  },
-  contactInfo: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-  },
-  address: {
-    address1: '',
-    address2: '',
-    city: '',
-    state: '',
-    postalCode: '',
-  },
-  newSystemTypes: [],
-  existingSystemTypes: [],
-  existingSystemAge: '',
-  homeSqFt: '',
-  customerPriorities: {
-    '1': null,
-    '2': null,
-    '3': null,
-    '4': null,
-    '5': null,
-    '6': null,
-  },
-}
+  const { contractorId, newSystemTypes } = customerInputs
+  const { contractor, products } = ContractorProductsMap.get(contractorId)
 
-const Entity = {
-  entityId: '',
-  entityName: '',
-  entityType: '',
-}
+  let filteredProducts = products.filter((p) => newSystemTypes.includes(p.product_type))
 
-const Entities = [
-  {
-    entityId: 'b7449b9c-bdd3-11ed-9a5f-3aebb006c675',
-    entityName: 'IRS',
-    entityType: 'federal',
-  },
-  {
-    entityId: 'b7449c46-bdd3-11ed-9a5f-3aebb006c675',
-    entityName: 'Austin Energy',
-    entityType: 'utility',
-  },
-  {
-    entityId: 'b7449c78-bdd3-11ed-9a5f-3aebb006c675',
-    entityName: 'Texas Gas',
-    entityType: 'utility',
-  },
-]
+  return { contractor, products: filteredProducts }
 
-const loadProductsByContractorId = (contractorId) => {
-  console.log(ContractorProductsMap)
-  return ContractorProductsMap.get(contractorId)
 }
 const findIncentives = (customerInputs, contractor, incentives) => {
 
   const _incentives = INCENTIVES_DB.filter((i) => {
     const isMatch =
-      (i.energy_source === 'electricity'
-        &&
-        i.entity_name === customerInputs.utility.electricityProvider.name
-        ||
-        i.energy_source === 'natural_gas' && i.entity_name ===
-        customerInputs.utility.gasProvider.name
-        ||
-        i.entity_name === 'IRS' && i.region === contractor.region
-      )
+      (i.energy_source === 'electricity' &&
+        i.entity_name === customerInputs.utility.electricityProvider.name)
+      ||
+      (i.energy_source === 'natural_gas' &&
+        i.entity_name === customerInputs.utility.gasProvider.name)
+      ||
+      (i.entity_name === 'IRS' && i.region === contractor.region)
+
     return isMatch
   })
   return _incentives
 }
 
-const productIncentiveCompare = (i, p, existingSystemAge) => {
-  return i.product_type === p.product_type &&
-    i.SEER2 <= p.SEER2 &&
-    i.EER2 <= p.EER2 &&
-    i.COP <= p.COP
-    // i.HSPF <= p.HSPF &&
-    // i.AFUE <= p.AFUE &&
+const productIncentiveCompare = (incentive, product, existingSystemAge) => {
 
-    // i.existing_system_age <= existingSystemAge
+  const typeMatch = incentive.product_type === product.product_type
+  // console.log('product_type',incentive.product_type,product.product_type, typeMatch)
+
+  const seer2Match = incentive.SEER2 <= product.SEER2
+  // console.log('seer2',incentive.SEER2,product.SEER2, seer2Match)
+
+  const eer2Match = incentive.EER2 <= product.EER2
+  // console.log('eer2',incentive.EER2,product.EER2, eer2Match)
+
+  const afueMatch = incentive.AFUE <= product.AFUE
+  // console.log('afue',incentive.AFUE,product.AFUE, afueMatch)
+
+  const systemAgeMatch = Number(incentive.existing_system_age) <=
+    Number(existingSystemAge)
+  // console.log('system_age',incentive.existing_system_age,existingSystemAge, systemAgeMatch)
+
+  const compressorTypeMatch = incentive.compressor_type ===
+    product.compressor_type
+  // console.log('compressor_type',incentive.compressor_type,product.compressor_type, compressorTypeMatch)
+  // console.log('compressor_type', compressorTypeMatch)
+
+  return (typeMatch && seer2Match && eer2Match && afueMatch &&
+    compressorTypeMatch && systemAgeMatch)
 
 }
 const matchProductIncentives = (products, incentives, customerInputs) => {
@@ -123,8 +66,8 @@ const matchProductIncentives = (products, incentives, customerInputs) => {
     }
     for (const incentive of incentives) {
       const isMatch = productIncentiveCompare(
-        product,
         incentive,
+        product,
         existingSystemAge)
       if (isMatch) {
         set.incentives.push(incentive)
@@ -135,23 +78,14 @@ const matchProductIncentives = (products, incentives, customerInputs) => {
   return matches
 }
 const findProductIncentives = (session, questionMap) => {
-  console.log(session)
+
   const customerInputs = transformSurveyQuestions(session, questionMap)
-  console.log(customerInputs)
-  // productMap
-  const { contractor, products } = loadProductsByContractorId(
-    customerInputs.contractorId)
-  console.log(contractor)
-  console.log('products', products)
+  const { contractor, products } = loadProductsByContractorId(customerInputs)
+  // console.log('products', products)
   const incentives = findIncentives(customerInputs, contractor, INCENTIVES_DB)
-  console.log('incentives', incentives)
+  // console.log('incentives', incentives)
 
   return matchProductIncentives(products, incentives, customerInputs)
 }
-
-// const findProducts = (customerInput) => {
-//   const sysTypes = [...customerInput.systemTypes]
-//
-// }
 
 export { findProductIncentives }
