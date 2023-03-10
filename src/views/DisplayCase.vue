@@ -1,8 +1,9 @@
 <template>
-  <div id="display-case" class="">
+  <div id="display-case" class="container">
     <div class="row">
-      <div class="col-md-6 col-sm-6 mx-auto" v-if="getProductIncentives"
+      <div class="col-md-6 mx-auto" v-if="getProductIncentives"
            v-for="(product,index) of getProductIncentives">
+
         <ProductIncentiveCard
             :cid="index.toString()"
             :title="product.title"
@@ -14,8 +15,10 @@
             :tree-count="product.treeCount"
             :equipment-summaries="product.equipmentSummaries"
         ></ProductIncentiveCard>
-
       </div>
+
+    </div>
+    <div class="row">
       <div class="col text-center">
         <router-link class="btn btn-link" :to="{name:'GetStarted'}">
           Reset

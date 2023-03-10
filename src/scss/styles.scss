@@ -32,13 +32,12 @@ body {
     min-width: 320px;
   }
   #display-case {
-    width: 100%;
     padding: 1rem 1rem;
   }
   .prod-card {
-    max-width: 275px;
+    max-width: 18rem;
     min-height: 415px;
-    margin-bottom: 1rem;
+    //margin: 1rem;
   }
 }
 
@@ -98,6 +97,10 @@ body {
     min-width: 992px;
     margin-top: 50px;
   }
+  .prod-card {
+    max-width: 18rem;
+    //min-height: 615px;
+  }
 }
 
 // X-Large devices (large desktops, 1200px and up)
@@ -112,8 +115,12 @@ body {
     min-width: 500px;
   }
   #display-case {
-    min-width: 1000px;
+    //min-width: 1000px;
     margin-top: 50px;
+  }
+  .prod-card {
+    max-width: 18rem;
+    //min-height: 615px;
   }
 }
 
@@ -131,5 +138,8 @@ body {
   #display-case {
     min-width: 1000px;
     margin-top: 50px;
+  }
+  .prod-card {
+    max-width: 18rem;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="card prod-card">
+  <div class="card prod-card mx-4">
 
     <div class="card-header text-center">
       <p class="card-title h5">{{ titleTxt }}</p>
