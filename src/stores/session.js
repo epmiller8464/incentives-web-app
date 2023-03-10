@@ -66,6 +66,15 @@ export const useSessionStore = defineStore('session', {
       }
       return this.currentSession
     },
+    clearSession () {
+      localStorage.removeItem(SESSION_KEY)
+      this.session = {
+        id: null,
+        userId: null,
+        startTime: null,
+        state: null,
+      }
+    },
   },
 })
 

@@ -50,7 +50,15 @@ export const useSurveyStore = defineStore('survey', {
         console.log('survey found. load survey state.')
       return this.currentSurvey
     },
-    resetSurvey () {},
+    resetSurvey () {
+      localStorage.removeItem(QUESTION_ANSWER_MAP)
+      this.sessionId = null
+      this.previousQuestionId = null
+      this.currentQuestionId = null
+      this.nextQuestionId = null
+      this.survey = null
+      this.qaMap = {}
+    },
     persistQuestionAnswer (questionId, answer) {
       // this.questionAnswerMap.set(questionId, answer)
       this.questionAnswerMap[questionId] = answer

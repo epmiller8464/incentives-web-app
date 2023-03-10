@@ -45,6 +45,8 @@ export default {
   methods: {
     onGetStarted (event) {
       console.log('get started click')
+      this.sessionStore.clearSession()
+      this.surveyStore.resetSurvey()
       const contractorId = 'dd4e55e4-bdd3-11ed-9a5f-3aebb006c675'
       //TODO: if a current session exists ask the user if they want to start a new one.
       this.sessionStore.startNewSession(generateExternalUUID(), contractorId)
