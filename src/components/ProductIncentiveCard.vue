@@ -9,7 +9,7 @@
         <p class="text-start"><em>{{ subtitleTxt }}</em></p>
       </div>
       <div class="mx-auto px-3" >
-        <img src="src/assets/images/elementor-placeholder-image.webp" class="img-thumbnail"  alt="alt">
+        <img src="../assets/images/elementor-placeholder-image.webp" class="img-thumbnail"  alt="alt">
       </div>
 
       <p class="text-center mt-4">
