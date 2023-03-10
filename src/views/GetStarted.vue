@@ -1,9 +1,16 @@
 <template>
 
-  <div id="cta" class="container">
-    <div style="opacity: 0.3;">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-1">
-        <div class="col-md col-md-6 col-lg-6 mx-auto">
+  <div id="cta" class="container my-5 py-5">
+    <div class="row text-center">
+      <h1>Learn what rebates & incentives you are eligible for.</h1>
+      <p class=" fst-italic my-4">"Up to $XXXX incentives & rebates available today"</p>
+      <div class="text-center">
+        <button @click="onGetStarted" class="btn btn-outline-primary text-center">Get Started</button>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-1">
+      <div class="col-md col-md-6 col-lg-6 mx-auto">
+        <div style="opacity: 0.3;">
           <DisplayCard
               title="Energy Efficient"
               subtitle="Qualifies for all eligible rebates"
@@ -14,34 +21,10 @@
               energy-savings="10% Lower bills"
               tree-count="3"
           ></DisplayCard>
-          <ul>
-            <li>
-              load contractor in in session
-            </li>
-            <li>
-              clean up responsiveness
-              zacs takeaways
-            </li>
-            <li>
-              use products and incentives zac provides to model alg output for display
-            </li>
-          </ul>
         </div>
       </div>
     </div>
-    <div class="text-center">
-      <h1>Learn what rebates & incentives you are eligible for.</h1>
-      <p class=" fst-italic my-4">"Up to $XXXX incentives & rebates available today"</p>
-      <div class="text-center">
-        <button @click="onGetStarted" class="btn btn-outline-primary text-center">Get Started</button>
-      </div>
-    </div>
   </div>
-  <!--  <div class="container-sm">100% wide until small breakpoint</div>-->
-  <!--  <div class="container-md">100% wide until medium breakpoint</div>-->
-  <!--  <div class="container-lg">100% wide until large breakpoint</div>-->
-  <!--  <div class="container-xl">100% wide until extra large breakpoint</div>-->
-  <!--  <div class="container-xxl">100% wide until extra extra large breakpoint</div>-->
 </template>
 
 <script>
