@@ -95,7 +95,7 @@ const formatIncentiveSummary = function (incentives) {
   if (electricity)
     results.push(`$${electricity.amount} ${electricity.display_text}`)
 
-  return results
+  return results.sort().reverse()
 }
 
 export default {

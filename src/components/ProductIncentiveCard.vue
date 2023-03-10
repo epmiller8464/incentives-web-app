@@ -4,9 +4,9 @@
     <div class="card-header text-center">
       <p class="card-title h5">{{ titleTxt }}</p>
     </div>
-    <div class="card-body">
-      <div style="min-height: 50px; font-size: 0.95em;">
-        <p class="text-start"><em>{{ subtitleTxt }}</em></p>
+    <div class="card-body mt-1">
+      <div style="min-height: 2.5rem; font-size: 0.95em;">
+        <p class="text-center"><em>{{ subtitleTxt }}</em></p>
       </div>
       <div class="mx-auto px-3" >
         <img src="../assets/images/elementor-placeholder-image.webp" class="img-thumbnail"  alt="alt">
