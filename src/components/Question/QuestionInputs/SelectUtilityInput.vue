@@ -1,38 +1,43 @@
 <template>
   <div id="select-utility" class="col-md-6 mx-auto">
-    <select id="energySelect" class="form-select form-select" aria-label="Choose your utility provider"
-            v-model="energyProvider"
-            @change="onUpdate">
-      <option value="" disabled>
-        Choose your energy provider
-      </option>
-      <option
-          v-for="opt in this.energyProviderOptions"
-          :value="opt"
-          data-selected="this.energyProvider.id === opt.id">
-        {{ opt.name }}
-      </option>
-    </select>
-    <select id="gasSelect" class="form-select" aria-label="Default select example"
-            v-model="gasProvider"
-            @change="onUpdate"
-    >
-      <option value="" disabled>
-        Choose your gas provider
-      </option>
-      <option
-          v-for="opt in this.gasProviderOptions"
-          :value="opt"
-          data-selected="this.gasProvider.id === opt.id">
-        {{ opt.name }}
-      </option>
-    </select>
+    <div class="mb-2">
+      <select id="energySelect" class="form-select form-select" aria-label="Choose your utility provider"
+              v-model="energyProvider"
+              @change="onUpdate">
+        <option value="" disabled>
+          Choose your energy provider
+        </option>
+        <option
+            v-for="opt in this.energyProviderOptions"
+            :value="opt"
+            data-selected="this.energyProvider.id === opt.id">
+          {{ opt.name }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <select id="gasSelect" class="form-select" aria-label="Default select example"
+              v-model="gasProvider"
+              @change="onUpdate"
+      >
+        <option value="" disabled>
+          Choose your gas provider
+        </option>
+        <option
+            v-for="opt in this.gasProviderOptions"
+            :value="opt"
+            data-selected="this.gasProvider.id === opt.id">
+          {{ opt.name }}
+        </option>
+      </select>
+    </div>
+
   </div>
 </template>
 
 <script>
 
-import {ELECTRICITY_PROVIDERS,GAS_PROVIDERS } from '@/constants/component-options'
+import { ELECTRICITY_PROVIDERS, GAS_PROVIDERS } from '@/constants/component-options'
 
 export default {
   name: 'SelectUtilityInput',

@@ -4,7 +4,7 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
   {
     id: 0,
     name: 'SystemType',
-    text: 'What type of system are you considering buying?!!!',
+    text: 'What type of system are you considering buying?',
     type: QuestionTypes.MULTIPLE_SELECT,
     info: '',
     options: [...SystemTypes],
@@ -18,7 +18,7 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
     name: 'UtilityProvider',
     text: 'Who provides your home with power?',
     type: QuestionTypes.MULTIPLE_SELECT,
-    info: 'This would be who you pay for electricity and natural gas / fuel (if you have it). Utilities commonly have incentives program programs. This information will allow the system to check your local utility.',
+    info: 'This would be who you pay for electricity and natural gas / fuel (if you have it). Utilities commonly have incentives programs. This information will allow the system to check your local utility.',
     options: [...Utilities],
     config: {},
     canBypass: false,

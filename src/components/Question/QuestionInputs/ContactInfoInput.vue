@@ -1,8 +1,8 @@
 <template>
   <div id="contact-info">
 
-    <fieldset class="row">
-      <div class="col-md-6">
+    <fieldset class="row ">
+      <div class="col-md-6 mb-2">
         <input type="text"
                placeholder="First name" aria-label="First name"
                class="form-control"
@@ -14,7 +14,7 @@
           Invalid first name.
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 mb-2">
         <input type="text"
                placeholder="Last name" aria-label="Last name"
                class="form-control"
@@ -28,7 +28,7 @@
       </div>
     </fieldset>
     <fieldset class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 mb-2">
         <input type="email"
                placeholder="Email" aria-label="Email"
                class="form-control"
@@ -40,7 +40,7 @@
           Invalid email.
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 mb-2">
         <input type="text"
                placeholder="Phone Number" aria-label="Phone Number"
                class="form-control"

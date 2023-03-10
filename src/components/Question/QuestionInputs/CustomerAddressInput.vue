@@ -14,29 +14,30 @@
       </vue-google-autocomplete>
     </div>
     <div class="col-12">
-      <label for="inputAddress1" class="form-label">Address 2</label>
-      <input type="text" class="form-control" id="inputAddress1" placeholder="123 Main Street"
-             v-model="address1"
-      >
-    </div>
-    <div class="col-12">
-      <label for="inputAddress2" class="form-label">Address 2</label>
+<!--      <label for="inputAddress2" class="form-label">Enter Apartment, studio, or floor number </label>-->
       <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"
              v-model="address2"
              @change="onAddress2"
       >
     </div>
-    <div class="col-md-6">
+    <div class="col-12 hide">
+      <label for="inputAddress1" class="form-label">Address 2</label>
+      <input type="text" class="form-control" id="inputAddress1" placeholder="123 Main Street"
+             v-model="address1"
+      >
+    </div>
+
+    <div class="col-md-6 hide">
       <label for="inputCity" class="form-label">City</label>
       <input type="text" class="form-control" id="inputCity"
              v-model="city">
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 hide">
       <label for="inputState" class="form-label">State</label>
       <input type="text" class="form-control" id="inputState"
              v-model="state">
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 hide">
       <label for="inputZip" class="form-label">Zip</label>
       <input type="text" class="form-control" id="inputZip" v-model="postalCode">
     </div>
@@ -124,5 +125,7 @@ export default {
 </script>
 
 <style scoped>
-
+.hide{
+  display: none;
+}
 </style>
