@@ -3,7 +3,7 @@
   <div id="cta" class="container my-5 py-5">
     <div class="row text-center">
       <h1>Learn what rebates & incentives you are eligible for.</h1>
-      <p class=" fst-italic my-4">"Up to $XXXX incentives & rebates available today"</p>
+      <p class=" fst-italic my-4">Up to $X,XXX incentives & rebates available today</p>
       <div class="text-center">
         <button @click="onGetStarted" class="btn btn-outline-primary text-center">Get Started</button>
       </div>
