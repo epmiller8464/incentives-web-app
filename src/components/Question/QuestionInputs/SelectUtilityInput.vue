@@ -58,7 +58,7 @@ export default {
     energyProviderOptions () {
       let options = [
         { id: 1, name: 'Austin Energy', type: 'electricity' },
-        { id: 2, name: 'Center Point', type: 'electric' },
+        // { id: 2, name: 'Center Point', type: 'electric' },
       ]
       return [...ELECTRICITY_PROVIDERS]
     },
