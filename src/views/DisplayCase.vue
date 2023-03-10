@@ -1,7 +1,8 @@
 <template>
   <div id="display-case" class="">
     <div class="row">
-      <div class="col-md-6" v-if="getProductIncentives" v-for="(product,index) of getProductIncentives">
+      <div class="col-md-6 col-sm-6 mx-auto" v-if="getProductIncentives"
+           v-for="(product,index) of getProductIncentives">
         <ProductIncentiveCard
             :cid="index.toString()"
             :title="product.title"
@@ -15,11 +16,12 @@
         ></ProductIncentiveCard>
 
       </div>
-      <div class="d-flex">
-        <router-link :to="{name:'GetStarted'}">Reset</router-link>
+      <div class="col text-center">
+        <router-link class="btn btn-link" :to="{name:'GetStarted'}">
+          Reset
+        </router-link>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -109,7 +111,8 @@ export default {
 
       const basicMatch = _.groupBy(productIncentives, ({ product }) => product.display_title.toLowerCase() === 'basic')
       // console.log(basicMatch)
-      const efficientMatch = _.groupBy(productIncentives, ({ product }) => product.display_title.toLowerCase() === 'efficient')
+      const efficientMatch = _.groupBy(productIncentives,
+          ({ product }) => product.display_title.toLowerCase() === 'efficient')
       console.log(efficientMatch)
       const semiEfficientMatch = _.groupBy(productIncentives,
           ({ product }) => product.display_title.toLowerCase() === 'semi-efficient')
