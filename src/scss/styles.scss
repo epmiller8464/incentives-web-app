@@ -31,6 +31,9 @@ body {
   .question-input {
     min-width: 320px;
   }
+  #display-case{
+    min-width: 100%;
+  }
 }
 
 // Small devices (landscape phones, 576px and up)
@@ -58,6 +61,11 @@ body {
   .nav-button {
     width: 125px;
   }
+  #display-case{
+    min-width: 992px;
+    margin-top: 50px;
+  }
+  .prod-card{}
 }
 
 // Large devices (desktops, 992px and up)
@@ -72,6 +80,10 @@ body {
   .question-input {
     min-width: 992px;
   }
+  #display-case{
+    min-width: 992px;
+    margin-top: 50px;
+  }
 }
 
 // X-Large devices (large desktops, 1200px and up)
@@ -85,6 +97,10 @@ body {
   .question-input {
     min-width: 500px;
   }
+  #display-case{
+    min-width: 1000px;
+    margin-top: 50px;
+  }
 }
 
 // XX-Large devices (larger desktops, 1400px and up)
@@ -97,5 +113,9 @@ body {
   }
   .question-input {
     min-width: 992px;
+  }
+  #display-case{
+    min-width: 1000px;
+    margin-top: 50px;
   }
 }

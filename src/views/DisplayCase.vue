@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div id="display-case" class="">
     <div class="row">
-      <div class="col" v-if="getProductIncentives" v-for="(product,index) of getProductIncentives">
+      <div class="col-md-6" v-if="getProductIncentives" v-for="(product,index) of getProductIncentives">
         <ProductIncentiveCard
             :cid="index.toString()"
             :title="product.title"

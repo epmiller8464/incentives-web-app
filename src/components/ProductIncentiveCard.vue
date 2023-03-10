@@ -1,5 +1,5 @@
 <template>
-  <div class="card" style="width: 275px;min-height: 615px;">
+  <div class="card prod-card">
 
     <div class="card-header text-center">
       <p class="card-title h5">{{ titleTxt }}</p>
