@@ -89,11 +89,11 @@ const formatIncentiveSummary = function (incentives) {
   if (federal)
     results.push(`$${federal.amount} ${federal.display_text}`)
   const electricity = incentives.find(i => i.energy_source === 'electricity')
-  if (electricity)
-    results.push(`$${electricity.amount} ${electricity.display_text}`)
   const gas = incentives.find(i => i.energy_source === 'natural_gas')
   if (gas)
     results.push(`$${gas.amount} ${gas.display_text}`)
+  if (electricity)
+    results.push(`$${electricity.amount} ${electricity.display_text}`)
 
   return results
 }

@@ -1,10 +1,14 @@
 <template>
-  <div id="cta" class="container">
-    <h1>Doing some math to find you the best incentives...</h1>
-    <div class="progress" role="progressbar" aria-label="Example 20px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 2px">
-      <div class="progress-bar" :style="{width:progress}"></div>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+        <h1>Doing some math to find you the best incentives...</h1>
+        <div class="progress" role="progressbar" aria-label="Example 20px high" aria-valuenow="25" aria-valuemin="0"
+             aria-valuemax="100" style="height: 2px">
+          <div class="progress-bar" :style="{width:progress}"></div>
+        </div>
+      </div>
     </div>
-<!--    <router-link :to="{name:'DisplayCase'}">Next</router-link>-->
   </div>
 </template>
 
@@ -45,7 +49,7 @@ export default {
         this.currentProgress += 5
         await sleep(200)
       }
-      this.$router.push({name:'DisplayCase'})
+      this.$router.push({ name: 'DisplayCase' })
     },
   },
   setup () {},

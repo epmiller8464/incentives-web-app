@@ -158,7 +158,7 @@ const INCENTIVES_DB = [
     'capacity': null,
     'compressor_type': null,
     'display_name': 'Texas Gas - Furnace',
-    'display_text': 'Texas Gas (instant)',
+    'display_text': 'Texas Gas (after purchase)',
     'AFUE': 0.92,
     'EER2': null,
     'COP': null,
