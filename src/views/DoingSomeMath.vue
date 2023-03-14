@@ -1,5 +1,5 @@
 <template>
-  <div class="container text-center">
+  <div id="error-container" class="container text-center">
     <div class="row">
       <div class="col-md-12 mx-auto">
         <h1>Doing some math to find you the best incentives...</h1>

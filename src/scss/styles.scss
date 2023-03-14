@@ -9,8 +9,10 @@ body {
 #cta {
   padding-top: 50rem;
 }
+
 #survey{
 }
+
 #question-container {
  padding-top: 25px;
 }
@@ -18,12 +20,16 @@ body {
 .question-input {
 }
 
+#error-container {
+
+}
+
 // X-Small devices (portrait phones, less than 576px)
 // No media query for `xs` since this is the default in Bootstrap
 @media (min-width: 320px) {
-  //.nav-button{
-  //  width: 50%;
-  //}
+  #error-container {
+    min-width: 320px;
+  }
   p {
     font-size: 0.9rem;
   }
@@ -46,6 +52,9 @@ body {
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
+  #error-container {
+    min-width: 576px;
+  }
   #question-container {
     min-width: 576px;
   }
@@ -64,6 +73,9 @@ body {
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+  #error-container {
+    min-width: 768px;
+  }
   #question-container {
     min-width: 769px;
   }
@@ -89,6 +101,9 @@ body {
   #cta {
     min-width: 992px;
   }
+  #error-container {
+    min-width: 1024px;
+  }
   #question-container {
     min-width: 992px;
   }
@@ -111,6 +126,9 @@ body {
   #cta {
     min-width: 1200px;
   }
+  #error-container {
+    min-width: 1200px;
+  }
   #question-container {
     min-width: 1200px;
   }
@@ -131,6 +149,9 @@ body {
 @media (min-width: 1400px) {
   #cta {
     min-width: 1400px;
+  }
+  #error-container {
+    min-width: 1700px;
   }
   #question-container {
     min-width: 1400px;

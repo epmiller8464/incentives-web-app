@@ -3,21 +3,7 @@
     This is an early, illustrative demo. Intent is to get initial reactions. <em>Lots more to come.</em>
     <button type="button" class="btn-close alert-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-
-      <strong class="me-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-      Hello, world! This is a toast message.
-    </div>
-  </div>
-<!--  <div class="alert alert-dark" role="alert">-->
-<!--    A simple dark alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.-->
-<!--  </div>-->
-  <div id="cta" class="container py-5">
+  <div id="error-container" class="container py-5">
     <div class="row text-center">
       <h1>Learn what rebates & incentives you are eligible for.</h1>
       <p class=" fst-italic my-4">Up to $X,XXX incentives & rebates available today</p>
