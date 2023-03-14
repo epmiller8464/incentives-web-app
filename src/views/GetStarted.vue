@@ -4,9 +4,23 @@
     <button type="button" class="btn-close alert-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   <div id="error-container" class="container py-5">
-    <div class="row text-center">
-      <h1>Learn what rebates & incentives you are eligible for.</h1>
-      <p class=" fst-italic my-4">Up to $X,XXX incentives & rebates available today</p>
+    <div class="col-md-6 mx-auto">
+      <h1 class="text-center">Learn what rebates & incentives you are eligible for.</h1>
+      <p>
+        Homeowners can get <strong>$4,000+</strong> from the government by buying an efficient heating & cooling system.
+      </p>
+      <ul>
+        <li>
+          <strong>Local:</strong> Local utilities have a variety of programs (worth over $1,000) to encourage homeowners
+          to buy
+          energy-efficient equipment.
+        </li>
+        <li>
+          <strong>Federal:</strong> The Inflation Reduction Act allocates billions every year to homeowners to buy
+          certain equipment.
+          Homeowners can qualify for up to $3,200 of tax credits per year.
+        </li>
+      </ul>
       <div class="text-center">
         <button @click="onGetStarted" class="btn btn-outline-primary text-center">Get Started</button>
       </div>
