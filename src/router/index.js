@@ -18,17 +18,17 @@ const routes = [
     component: GetStarted,
   },
   {
-    path: '/survey/:index(\\[0-8])+',
+    path: '/survey/:index(\\d)',
     name: 'Survey',
     component: Survey,
   },
   {
-    path: '/survey/results/',
+    path: '/results/',
     name: 'DoingSomeMath',
     component: DoingSomeMath,
   },
   {
-    path: '/survey/results/product-incentives',
+    path: '/results/product-incentives',
     name: 'DisplayCase',
     component: DisplayCase,
   },
@@ -44,7 +44,6 @@ const router = createRouter({
   routes: [...routes],
   linkActiveClass: 'active',
 })
-
 
 router.isReady().then(() => {
   console.log('route ready')

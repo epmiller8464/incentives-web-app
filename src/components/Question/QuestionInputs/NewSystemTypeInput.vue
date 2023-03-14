@@ -1,32 +1,40 @@
 <template>
   <div id="system-type" class="col-md-6 question-input mx-auto">
     <fieldset class="">
+<!--      <div class="form-check">-->
+<!--        <input class="form-check-input" type="checkbox" id="flexCheckDefault"-->
+<!--               @change="onUpdate"-->
+<!--               v-model="checkedSystemTypes" value="central_ac">-->
+<!--        <label class="form-check-label" for="flexCheckDefault">-->
+<!--          Central AC-->
+<!--        </label>-->
+<!--      </div>-->
+<!--      <div class="form-check">-->
+<!--        <input-->
+<!--            class="form-check-input" type="checkbox" id="flexCheckChecked"-->
+<!--            @change="onUpdate"-->
+<!--            v-model="checkedSystemTypes" value="furnace">-->
+<!--        <label class="form-check-label" for="flexCheckChecked">-->
+<!--          Furnace-->
+<!--        </label>-->
+<!--      </div>-->
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="flexCheckDefault"
                @change="onUpdate"
-               v-model="checkedSystemTypes" value="central_ac">
+               v-model="checkedSystemTypes" value="cooling">
         <label class="form-check-label" for="flexCheckDefault">
-          Central AC
+          Cooling system (e.g, air conditioner, heat pump)
         </label>
       </div>
       <div class="form-check">
         <input
             class="form-check-input" type="checkbox" id="flexCheckChecked"
             @change="onUpdate"
-            v-model="checkedSystemTypes" value="furnace">
+            v-model="checkedSystemTypes" value="heating">
         <label class="form-check-label" for="flexCheckChecked">
-          Furnace
+          Heating (e.g., furnace, boiler, heat pump)
         </label>
       </div>
-<!--      <div class="form-check">-->
-<!--        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"-->
-<!--               @change="onRadioUpdate"-->
-<!--               v-model="heatPumpOrOther"-->
-<!--               value="ashp">-->
-<!--        <label class="form-check-label" for="gridRadios1">-->
-<!--          Heat Pump-->
-<!--        </label>-->
-<!--      </div>-->
       <div class="form-check">
         <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
                @change="onRadioUpdate"
