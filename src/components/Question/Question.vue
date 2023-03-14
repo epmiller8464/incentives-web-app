@@ -1,10 +1,11 @@
 <template>
-  <div id="question-container">
+  <div id="error-container">
+    <div class="col-md col-md-6 col-lg-6 mx-auto">
+      <h2 class="display-6 text-center fw-bold">{{ questionText }}</h2>
+      <p class="fst-italic text-center">{{ questionInfo }}</p>
+    </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-1">
-      <div class="col-md col-md-6 col-lg-6 mx-auto">
-        <h2 class="display-6 text-center fw-bold">{{ questionText }}</h2>
-        <p class="fst-italic text-center">{{ questionInfo }}</p>
-      </div>
+
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2">
       <div class="question-input mx-auto">

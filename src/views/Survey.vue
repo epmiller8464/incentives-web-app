@@ -1,13 +1,13 @@
 <template>
-  <div id="survey" v-if="this.currentQuestion" v-bind="this.currentQuestion">
-      <Question
-          :question-id='this.currentQuestion.id'
-          :question-info='this.currentQuestion.info'
-          :question-text='this.currentQuestion.text'
-          :question-type='this.currentQuestion.type'>
-        <slot>
-        </slot>
-      </Question>
+  <div id="error-container" v-if="this.currentQuestion" v-bind="this.currentQuestion">
+    <Question
+        :question-id='this.currentQuestion.id'
+        :question-info='this.currentQuestion.info'
+        :question-text='this.currentQuestion.text'
+        :question-type='this.currentQuestion.type'>
+      <slot>
+      </slot>
+    </Question>
   </div>
 </template>
 
@@ -37,7 +37,6 @@ export default {
     currentQuestionId () {
       return Number(this.$route.params.index)
     },
-
     ...mapStores(useSessionStore, useSurveyStore),
   },
   methods: {
@@ -45,21 +44,43 @@ export default {
       return INCENTIVE_SURVEY_QUESTIONS.sort(q => q.id)
     },
     loadQuestionByIndex () {
-      console.log('loadQuestionByIndex')
+      // console.log('loadQuestionByIndex')
       const qid = this.currentQuestionId
       this.question = this.questionsMap.get(qid)
-      // console.log(qid)
-      // console.log(this.question)
       return this.question
-      // this.question = this.questions[qid]
     },
+  },
+
+  beforeRouteEnter (to, from, next) {
+    console.log('beforeRouteEnter')
+    console.log(to, from, next)
+
+    // const { index } = to.params
+    console.log(INCENTIVE_SURVEY_QUESTIONS)
+    console.log('this',this)
+    // const question = this.loadQuestionByIndex()
+    // if (!question) {
+
+    // } else {
+    next()
+    // }
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log('beforeRouteUpdate')
+
+    // reload data when query params or site ID update
+    next()
+    // if (to.params.id !== from.params.id || !_.isEqual(to.query, from.query)) {
+    //   this.loadAllData()
+    //   this.maybeOpenMeterModal()
+    // }
   },
   mounted () {
     this.loadQuestionByIndex()
   },
-  updated () {console.log('survey:updated')},
-  beforeUnmount () {console.log('survey:beforeUnmount')},
-  unmount () {console.log('survey:unmount')},
+  // updated () {console.log('survey:updated')},
+  // beforeUnmount () {console.log('survey:beforeUnmount')},
+  // unmount () {console.log('survey:unmount')},
   setup (props, { emit }) {
     // 1. setup new survey
     // 2. persist new survey
