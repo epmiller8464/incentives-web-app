@@ -2,29 +2,38 @@
   <div id="existing-system">
     <fieldset class="col-md-6 mx-auto">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="electricCheck"
+        <input class="form-check-input" type="checkbox" id="electricChecked"
                @change="onUpdate"
                v-model="checkedSystemTypes" value="central_ac">
-        <label class="form-check-label" for="electricCheck">
+        <label class="form-check-label" for="electricChecked">
           Central AC
         </label>
       </div>
       <div class="form-check">
         <input
-            class="form-check-input" type="checkbox" id="gasCheckChecked"
+            class="form-check-input" type="checkbox" id="heatPumpChecked"
+            @change="onUpdate"
+            v-model="checkedSystemTypes" value="ashp">
+        <label class="form-check-label" for="heatPumpChecked">
+          Heat Pump
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+            class="form-check-input" type="checkbox" id="furnaceChecked"
             @change="onUpdate"
             v-model="checkedSystemTypes" value="furnace">
-        <label class="form-check-label" for="gasCheckChecked">
+        <label class="form-check-label" for="furnaceChecked">
           Furnace
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="gridRadios" id="esGridRadios1"
-               @change="onRadioUpdate"
-               v-model="heatPumpNothingOrOther"
-               value="ashp">
-        <label class="form-check-label" for="esGridRadios1">
-          Heat Pump
+        <input
+            class="form-check-input" type="checkbox" id="boilerChecked"
+            @change="onUpdate"
+            v-model="checkedSystemTypes" value="boiler">
+        <label class="form-check-label" for="boilerChecked">
+          Boiler
         </label>
       </div>
       <div class="form-check">
@@ -46,10 +55,6 @@
         </label>
       </div>
     </fieldset>
-<!--    <fieldset class="row mb-3">-->
-<!--     -->
-<!--    </fieldset>-->
-
   </div>
 </template>
 

@@ -190,10 +190,11 @@ export default {
   methods: {
     onPreviousClick () {
       const qid = Number(this.$route.params.index)
-      if (qid === 0)
+      if (qid === 0) {
         this.$router.push({ name: 'GetStarted' })
-      else
+      } else {
         this.$router.push({ name: 'Survey', params: { index: (qid - 1) } })
+      }
 
     },
     onNextClick () {

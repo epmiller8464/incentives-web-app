@@ -50,26 +50,33 @@ export default {
       return this.question
     },
   },
-
   beforeRouteEnter (to, from, next) {
     console.log('beforeRouteEnter')
     console.log(to, from, next)
+    const validRoutes = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
-    // const { index } = to.params
-    console.log(INCENTIVE_SURVEY_QUESTIONS)
-    console.log('this',this)
-    // const question = this.loadQuestionByIndex()
-    // if (!question) {
+    const index = Number(to.params.index)
 
-    // } else {
-    next()
-    // }
+    if (validRoutes.includes(index)) {
+      next()
+    } else {
+      next({ name: 'not-found' })
+    }
   },
   beforeRouteUpdate (to, from, next) {
     console.log('beforeRouteUpdate')
+    console.log(to, from, next)
+    const validRoutes = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
+    const index = Number(to.params.index)
+
+    if (validRoutes.includes(index)) {
+      next()
+    } else {
+      console.warn('invalid question id')
+      next({ name: 'not-found' })
+    }
     // reload data when query params or site ID update
-    next()
     // if (to.params.id !== from.params.id || !_.isEqual(to.query, from.query)) {
     //   this.loadAllData()
     //   this.maybeOpenMeterModal()
