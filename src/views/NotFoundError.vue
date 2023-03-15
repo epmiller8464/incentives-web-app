@@ -18,15 +18,11 @@
       </div>
     </div>
   </div>
-
 </template>
 <script>
 
-// import NotFoundError from '@/components/NotFoundError.vue'
-
 export default {
   name: 'NotFoundError',
-  // components: { NotFoundError },
   data () {
     return {}
   },

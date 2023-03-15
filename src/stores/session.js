@@ -10,6 +10,8 @@ export const useSessionStore = defineStore('session', {
       userId: null,
       startTime: null,
       state: null,
+      contractorId: 'dd4e55e4-bdd3-11ed-9a5f-3aebb006c675',
+      contractorName: 'McCullough',
     },
   }),
   getters: {
@@ -25,10 +27,15 @@ export const useSessionStore = defineStore('session', {
     currentSession (state) {
       return state.session
     },
+    contractorId (state) {
+      return state.session.contractorId
+    },
+    contractorName (state) {
+      return state.session.contractorName
+    },
   },
   actions: {
-    startNewSession (
-      externalUserId, contractorId = 'dd4e55e4-bdd3-11ed-9a5f-3aebb006c675') {
+    startNewSession (externalUserId) {
       console.log(`startNewSession:start`)
       //TODO: inform user or current session
       const existingSession = localStorage.getItem(SESSION_KEY)
@@ -42,7 +49,7 @@ export const useSessionStore = defineStore('session', {
       this.session = {
         id: generateExternalUUID(),
         userId: externalUserId,
-        contractorId,
+        contractorId: this.contractorId,
         startTime: new Date(),
         state: 'initiated',
       }
@@ -73,6 +80,7 @@ export const useSessionStore = defineStore('session', {
         userId: null,
         startTime: null,
         state: null,
+        contractorId: null,
       }
     },
   },

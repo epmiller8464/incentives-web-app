@@ -1,23 +1,6 @@
 <template>
   <div id="system-type" class="col-md-6 question-input mx-auto">
     <fieldset class="">
-<!--      <div class="form-check">-->
-<!--        <input class="form-check-input" type="checkbox" id="flexCheckDefault"-->
-<!--               @change="onUpdate"-->
-<!--               v-model="checkedSystemTypes" value="central_ac">-->
-<!--        <label class="form-check-label" for="flexCheckDefault">-->
-<!--          Central AC-->
-<!--        </label>-->
-<!--      </div>-->
-<!--      <div class="form-check">-->
-<!--        <input-->
-<!--            class="form-check-input" type="checkbox" id="flexCheckChecked"-->
-<!--            @change="onUpdate"-->
-<!--            v-model="checkedSystemTypes" value="furnace">-->
-<!--        <label class="form-check-label" for="flexCheckChecked">-->
-<!--          Furnace-->
-<!--        </label>-->
-<!--      </div>-->
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="flexCheckDefault"
                @change="onUpdate"
@@ -47,24 +30,25 @@
           <input type="text"
                  id="otherInputText"
                  class="form-control"
-                 :class="{'invisible':!toggleOtherInput}"
-                 placeholder="" aria-label=""
+                 :class="[{'invisible':!toggleOtherInput},this.otherTextValid? '':'is-invalid']"
+                 placeholder="System description" aria-label=""
                  :value="otherText"
-                 @input="onOtherTextInput"
-          >
+                 @input="onOtherTextInput">
+          <div class="invalid-feedback">
+            10 characters please.
+          </div>
           <div :class="{'invisible':!toggleOtherInput}">
             <em>Please contact your contractor for more information on what you qualify for.</em>
           </div>
         </div>
       </div>
     </fieldset>
-
-    <div class="col-sm col-md col-lg col-md-4 col-lg mx-auto">
-    </div>
   </div>
 </template>
 
 <script>
+import * as bootstrap from 'bootstrap'
+
 export default {
   name: 'NewSystemTypeInput',
   props: {
@@ -75,6 +59,7 @@ export default {
       checkedSystemTypes: this.inputModel.checkedSystemTypes || [],
       heatPumpOrOther: this.inputModel.heatPumpOrOther || '',
       otherText: this.inputModel.otherText,
+
       responseModel: { ...this.inputModel },
     }
   },
@@ -82,16 +67,19 @@ export default {
     toggleOtherInput () {
       return this.heatPumpOrOther === 'other'
     },
+    otherTextValid () {
+      return this.otherText.length >= 5
+    },
   },
   mounted () {
     console.log('NewSystemTypeInput:onMount', this.inputModel)
+
   },
   unmounted () {
     this.$emit('update:resetInputModel')
   },
   methods: {
     onUpdate (event) {
-      console.log(event.target.value)
       this.responseModel.checkedSystemTypes = this.checkedSystemTypes
       this.responseModel.heatPumpOrOther = this.heatPumpOrOther = ''
       this.$emit('update:modelUpdate', this.responseModel)
@@ -103,10 +91,24 @@ export default {
     },
     onOtherTextInput (event) {
       this.responseModel.otherText = this.otherText = event.target.value
+
       this.$emit('update:modelUpdate', this.responseModel)
+      this.$emit('update:valid-inputs', false)
+      if (this.otherTextValid) {
+        console.log('valid')
+        this.$emit('update:valid-inputs', true)
+      }
+    },
+    onKeyUp (event) {
+      console.log(event)
     },
   },
-  emits: ['update:modelUpdate', 'update:resetInputModel'],
+  emits: [
+    'update:modelUpdate',
+    'update:resetInputModel',
+    'error:question-failure',
+    'update:valid-inputs',
+  ],
 }
 </script>
 

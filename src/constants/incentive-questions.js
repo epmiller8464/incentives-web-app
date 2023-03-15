@@ -4,7 +4,7 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
   {
     id: 0,
     name: 'SystemType',
-    text: 'What type of system are you considering buying?',
+    text: 'What type of system are you considering buying/replacing?',
     type: QuestionTypes.MULTIPLE_SELECT,
     info: '',
     options: [...SystemTypes],
@@ -15,6 +15,18 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
   },
   {
     id: 1,
+    name: 'HomeType',
+    text: 'What sort of home do you live in?',
+    type: QuestionTypes.MULTIPLE_SELECT,
+    info: '',
+    options: [...SystemTypes],
+    config: {},
+    canBypass: false,
+    isComplete: false,
+    answer: {},
+  },
+  {
+    id: 3,
     name: 'UtilityProvider',
     text: 'Who provides your home with power?',
     type: QuestionTypes.MULTIPLE_SELECT,
@@ -153,6 +165,10 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
     isComplete: false,
     answer: {},
   },
+
+]
+
+const removed = [
   {
     id: 7,
     name: 'CustomerHomeSqFt',
@@ -202,4 +218,5 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
     isComplete: false,
     answer: {},
   },
+
 ]
