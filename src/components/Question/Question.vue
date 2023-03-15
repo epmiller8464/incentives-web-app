@@ -144,12 +144,13 @@ export default {
     return {
       systemTypeModel: {
         checkedSystemTypes: [],
-        heatPumpOrOther: '',
+        other: '',
       },
       utilityModel: {
         energyProvider: {},
         gasProvider: {},
       },
+      homeTypeModel: '',
       existingSystemTypeModel: {
         checkedSystemTypes: [],
         heatPumpNothingOrOther: '',
@@ -172,6 +173,7 @@ export default {
         phoneNumber: '',
       },
       hasValidInputs: false,
+      errorRoute: null,
       startTime () {},
       endTime () {},
     }
@@ -192,8 +194,6 @@ export default {
     //TODO: prevent or warn about page reload
     this.loadAnswer()
   },
-  beforeUnmount () {console.log('question:beforeUnmount')},
-  unmount () {console.log('question:unmount')},
   methods: {
     onPreviousClick () {
       const qid = Number(this.$route.params.index)
@@ -205,11 +205,17 @@ export default {
 
     },
     onNextClick () {
-      //TODO: handle the end of questions logic to display case
+
       if ((Number(this.$route.params.index) + 1) > 8) {
         this.$router.push({ name: 'DoingSomeMath' })
       } else {
-        this.$router.push({ name: 'Survey', params: { index: (Number(this.$route.params.index) + 1) } })
+        if (this.errorRoute === null) {
+          this.$router.push({ name: 'Survey', params: { index: (Number(this.$route.params.index) + 1) } })
+        } else {
+          const route = { ...this.errorRoute }
+          this.errorRoute = null
+          this.$router.push(route)
+        }
       }
       this.hasValidInputs = false
     },
@@ -225,7 +231,9 @@ export default {
       this.hasValidInputs = event
     },
     onQuestionError (event) {
-      this.$router.push({ name: 'SurveyError' })
+
+      console.log('onQuestionError', event)
+      this.errorRoute = event
     },
     loadAnswer () {
       if (this.surveyStore) {

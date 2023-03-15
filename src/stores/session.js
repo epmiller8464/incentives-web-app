@@ -11,7 +11,7 @@ export const useSessionStore = defineStore('session', {
       startTime: null,
       state: null,
       contractorId: 'dd4e55e4-bdd3-11ed-9a5f-3aebb006c675',
-      contractorName: 'McCullough',
+      contractorName: 'McCulloughs',
     },
   }),
   getters: {

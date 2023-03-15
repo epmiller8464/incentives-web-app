@@ -21,7 +21,7 @@
       <div class="form-check">
         <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
                @change="onRadioUpdate"
-               v-model="heatPumpOrOther"
+               v-model="other"
                value="other">
         <label class="form-check-label" for="gridRadios2">
           Other
@@ -34,7 +34,7 @@
                  placeholder="System description" aria-label=""
                  :value="otherText"
                  @input="onOtherTextInput">
-          <div class="invalid-feedback">
+          <div class="invalid-feedback" :class="{'invisible':!toggleOtherInput}">
             10 characters please.
           </div>
           <div :class="{'invisible':!toggleOtherInput}">
@@ -57,47 +57,66 @@ export default {
   data () {
     return {
       checkedSystemTypes: this.inputModel.checkedSystemTypes || [],
-      heatPumpOrOther: this.inputModel.heatPumpOrOther || '',
-      otherText: this.inputModel.otherText,
+      other: this.inputModel.other || '',
+      otherText: this.inputModel.otherText || '',
 
       responseModel: { ...this.inputModel },
     }
   },
   computed: {
     toggleOtherInput () {
-      return this.heatPumpOrOther === 'other'
+      return this.other === 'other'
     },
     otherTextValid () {
-      return this.otherText.length >= 5
+      return this.toggleOtherInput && this.otherText.length && this.otherText.length >= 5
+    },
+    hasValidSystemTypes () {},
+    haHeatPumpOrOther () {
+
     },
   },
   mounted () {
     console.log('NewSystemTypeInput:onMount', this.inputModel)
-
+    this.validateInputModel()
   },
   unmounted () {
     this.$emit('update:resetInputModel')
   },
   methods: {
+    validateInputModel () {
+      if (this.responseModel.checkedSystemTypes.length > 0) {
+        this.$emit('update:valid-inputs', true)
+        return
+      }
+      if (this.responseModel.other === 'other' && this.otherTextValid) {
+        this.$emit('update:valid-inputs', true)
+        this.$emit('error:question-failure', { name: 'SurveyError' })
+        return
+      }
+      this.$emit('update:valid-inputs', false)
+    },
     onUpdate (event) {
       this.responseModel.checkedSystemTypes = this.checkedSystemTypes
-      this.responseModel.heatPumpOrOther = this.heatPumpOrOther = ''
+      this.responseModel.other = this.other = ''
+      this.responseModel.otherText = this.otherText = ''
       this.$emit('update:modelUpdate', this.responseModel)
+      this.validateInputModel()
     },
     onRadioUpdate (event) {
-      this.responseModel.heatPumpOrOther = this.heatPumpOrOther
+      this.responseModel.other = this.other
       this.responseModel.checkedSystemTypes = this.checkedSystemTypes = []
       this.$emit('update:modelUpdate', this.responseModel)
+      this.validateInputModel()
     },
     onOtherTextInput (event) {
       this.responseModel.otherText = this.otherText = event.target.value
-
       this.$emit('update:modelUpdate', this.responseModel)
       this.$emit('update:valid-inputs', false)
-      if (this.otherTextValid) {
-        console.log('valid')
-        this.$emit('update:valid-inputs', true)
-      }
+      this.validateInputModel()
+      // if (this.otherTextValid) {
+      //   this.$emit('update:valid-inputs', true)
+      //   this.$emit('error:question-failure', { name: 'SurveyError' })
+      // }
     },
     onKeyUp (event) {
       console.log(event)
