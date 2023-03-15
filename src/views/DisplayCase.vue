@@ -19,25 +19,6 @@
         ></ProductIncentiveCard>
       </div>
     </div>
-    <!--    <div class="row">-->
-    <!--      <div class="col-md-6 mx-auto" v-if="getProductIncentives"-->
-    <!--           v-for="(product,index) of getProductIncentives">-->
-
-    <!--        <ProductIncentiveCard-->
-    <!--            :cid="index.toString()"-->
-    <!--            :title="product.title"-->
-    <!--            :subtitle="product.subtitle"-->
-    <!--            :cost="product.costSavingsTxt"-->
-    <!--            :instant-savings="product.instantSavingsTxt"-->
-    <!--            :annual-savings="product.annualSavingsTxt"-->
-    <!--            :energy-savings="product.energySavingsTxt"-->
-    <!--            :tree-count="product.treeCount"-->
-    <!--            :equipment-summaries="product.equipmentSummaries"-->
-    <!--            :saving-summaries="product.savingSummaries"-->
-    <!--        ></ProductIncentiveCard>-->
-    <!--      </div>-->
-
-    <!--    </div>-->
     <div class="row">
       <div class="col text-center">
         <router-link class="btn btn-link" :to="{name:'GetStarted'}">
@@ -45,10 +26,53 @@
         </router-link>
       </div>
     </div>
+    <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Please enter an email address to see what rebates you qualify for.
+            </h1>
+          </div>
+          <div class="modal-body">
+            <fieldset class="row">
+              <div class="col-md-12 mx-auto">
+                <input type="email"
+                       placeholder="Email" aria-label="Email"
+                       class="form-control"
+                       :class="[this.emailIsValid? '':'is-invalid']"
+                       v-model="email"
+                       @input="onEmailChange"
+                >
+                <div class="invalid-feedback">
+                  Invalid email.
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="modal-footer">
+            <button
+                type="button" class="btn btn-outline-primary"
+                @click="onGoBack">
+              Go Back
+            </button>
+            <button
+                type="button" class="btn btn-outline-primary"
+                :disabled="!isValidEmail"
+                @click="onProceed">
+              Proceed
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
 </template>
 
 <script>
+import * as bootstrap from 'bootstrap'
 import ProductIncentiveCard from '@/components/ProductIncentiveCard.vue'
 import { mapStores } from 'pinia'
 import { useSessionStore } from '@/stores/session'
@@ -104,10 +128,16 @@ export default {
   components: { ProductIncentiveCard },
   data () {
     return {
+      emailIsValid: true,
+      email: '',
       productIncentives: [],
+      myModal: null,
     }
   },
   computed: {
+    isValidEmail () {
+      return this.email.length && this.emailIsValid
+    },
     getProductIncentives () {
       return this.productIncentives
     },
@@ -222,19 +252,50 @@ export default {
             tooltip: product.display_equipment_tooltip,
           }
         }),
-        savingSummaries: [""],
+        savingSummaries: [''],
       }
       this.productIncentives.push(basicProduct)
 
     },
+    validateEmail (text) {
+      const regex = /^[^\s@]+@[^\s@]+$/g
+      return regex.test(text)
+    },
+    onEmailChange (event) {
+      this.emailIsValid = this.validateEmail(event.target.value)
+      if (this.emailIsValid) {
+        this.email = event.target.value
+      }
+      // this.$emit('update:modelUpdate', this.responseModel)
+    },
+    onGoBack (event) {
+      console.log('onProceed')
+      console.log(event)
+      this.myModal.hide()
+      this.$router.push({ name: 'GetStarted', replace: true })
+    },
+    onProceed (event) {
+      console.log('onProceed')
+      console.log(event)
+      this.myModal.hide()
+    },
   },
   mounted () {
     try {
-      this.loadProductIncentives()
+
+      this.myModal = new bootstrap.Modal('#modal')
+      this.myModal.show()
+      // myModal.hide()
+
     } catch (e) {
       console.error(e)
     }
 
+  },
+  unmount () {
+    this.myModal.hide()
+    // const myModal = new bootstrap.Modal('#modal')
+    // myModal.hide()
   },
 }
 </script>

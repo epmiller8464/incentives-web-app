@@ -14,7 +14,11 @@
           <NewSystemType
               v-model:input-model="systemTypeModel"
               @update:reset-input-model="onResetInputModel"
-              @update:model-update="onInputModelUpdate"></NewSystemType>
+              @update:model-update="onInputModelUpdate"
+              @error:question-failure="onQuestionError"
+              @update:valid-inputs="onValidInputs"
+          >
+          </NewSystemType>
         </slot>
         <!--1. UtilityProvider -->
         <slot v-else-if="this.questionId === 1">
@@ -86,7 +90,10 @@
       <button @click="onPreviousClick" type="button" class="btn btn-outline-danger nav-button">
         Previous
       </button>
-      <button @click="onNextClick" type="button" class="btn btn-outline-primary nav-button">
+      <button
+          type="button" class="btn btn-outline-primary nav-button"
+          @click="onNextClick"
+          :disabled="!hasValidInputs">
         Next
       </button>
     </div>
@@ -137,12 +144,13 @@ export default {
     return {
       systemTypeModel: {
         checkedSystemTypes: [],
-        heatPumpOrOther: '',
+        other: '',
       },
       utilityModel: {
         energyProvider: {},
         gasProvider: {},
       },
+      homeTypeModel: '',
       existingSystemTypeModel: {
         checkedSystemTypes: [],
         heatPumpNothingOrOther: '',
@@ -164,6 +172,8 @@ export default {
         email: '',
         phoneNumber: '',
       },
+      hasValidInputs: false,
+      errorRoute: null,
       startTime () {},
       endTime () {},
     }
@@ -175,7 +185,6 @@ export default {
     console.log('question component beforeMount')
     this.loadAnswer()
   },
-
   mounted () {
     console.log('question component mounted')
     this.loadAnswer()
@@ -185,8 +194,6 @@ export default {
     //TODO: prevent or warn about page reload
     this.loadAnswer()
   },
-  beforeUnmount () {console.log('question:beforeUnmount')},
-  unmount () {console.log('question:unmount')},
   methods: {
     onPreviousClick () {
       const qid = Number(this.$route.params.index)
@@ -198,12 +205,19 @@ export default {
 
     },
     onNextClick () {
-      //TODO: handle the end of questions logic to display case
+
       if ((Number(this.$route.params.index) + 1) > 8) {
         this.$router.push({ name: 'DoingSomeMath' })
       } else {
-        this.$router.push({ name: 'Survey', params: { index: (Number(this.$route.params.index) + 1) } })
+        if (this.errorRoute === null) {
+          this.$router.push({ name: 'Survey', params: { index: (Number(this.$route.params.index) + 1) } })
+        } else {
+          const route = { ...this.errorRoute }
+          this.errorRoute = null
+          this.$router.push(route)
+        }
       }
+      this.hasValidInputs = false
     },
     onInputModelUpdate (event) {
       console.log('onInputModelUpdate')
@@ -211,9 +225,15 @@ export default {
       console.log(this.questionId, event)
       this.surveyStore.persistQuestionAnswer(this.questionId, event)
     },
-    onResetInputModel (event) {
-      console.log('onResetInputModel')
-      // this.inputModel = { ...inputSchemaMap[this.questionId] }
+    onResetInputModel (event) {},
+    onValidInputs (event) {
+      console.log(event)
+      this.hasValidInputs = event
+    },
+    onQuestionError (event) {
+
+      console.log('onQuestionError', event)
+      this.errorRoute = event
     },
     loadAnswer () {
       if (this.surveyStore) {
@@ -227,7 +247,8 @@ export default {
               this.systemTypeModel = qaState
               break
             case 1:
-              this.utilityModel = qaState
+              throw new Error('not implemented')
+              // this.utilityModel = qaState
               break
             case 2:
               this.existingSystemTypeModel = qaState
@@ -258,11 +279,6 @@ export default {
         }
       }
     },
-  },
-  setup (props, { emit }) {
-    console.log(`question Setup`)
-    // console.log(props)
-
   },
 }
 </script>

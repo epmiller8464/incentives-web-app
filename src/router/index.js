@@ -4,6 +4,7 @@ import Survey from '@/views/Survey.vue'
 import DoingSomeMath from '@/views/DoingSomeMath.vue'
 import DisplayCase from '@/views/DisplayCase.vue'
 import NotFoundError from '@/views/NotFoundError.vue'
+import SurveyError from '@/views/SurveyError.vue'
 /*React Pages*/
 
 const routes = [
@@ -31,6 +32,11 @@ const routes = [
     path: '/results/product-incentives',
     name: 'DisplayCase',
     component: DisplayCase,
+  },
+  {
+    path: '/survey/error',
+    name: 'SurveyError',
+    component: SurveyError,
   },
   {
     path: '/:pathMatch(.*)*',
