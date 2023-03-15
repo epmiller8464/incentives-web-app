@@ -64,7 +64,11 @@ export default {
   props: {
     inputModel: Object,
   },
-  emits: ['update:modelUpdate', 'update:resetInputModel'],
+  emits: [
+    'update:modelUpdate',
+    'update:resetInputModel',
+    'update:valid-inputs',
+  ],
   data () {
     return {
       checkedSystemTypes: this.inputModel.checkedSystemTypes || [],

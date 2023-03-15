@@ -17,12 +17,11 @@ import { mapStores } from 'pinia'
 import { useSessionStore } from '@/stores/session'
 import { useSurveyStore } from '@/stores/survey'
 import Question from '@/components/Question/Question.vue'
-import { ContactInfo } from '@/components/Question/QuestionInputs'
 import { INCENTIVE_SURVEY_QUESTIONS } from '@/constants/incentive-questions'
 
 export default {
   name: 'Survey',
-  components: { ContactInfo, Question },
+  components: { Question },
   data () {
     return {
       surveyStarted: false,

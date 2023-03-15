@@ -44,7 +44,11 @@ export default {
   props: {
     inputModel: Object,
   },
-  emits: ['update:modelUpdate', 'update:resetInputModel'],
+  emits: [
+    'update:modelUpdate',
+    'update:resetInputModel',
+    'update:valid-inputs',
+  ],
   data () {
     return {
       defaultEnergyOption: { id: -1, name: 'Choose your energy provider' },

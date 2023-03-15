@@ -23,7 +23,11 @@ export default {
   props: {
     inputModel: String,
   },
-  emits: ['update:modelUpdate', 'update:resetInputModel'],
+  emits: [
+    'update:modelUpdate',
+    'update:resetInputModel',
+    'update:valid-inputs',
+  ],
   data () {
     return {
       isValid: true,

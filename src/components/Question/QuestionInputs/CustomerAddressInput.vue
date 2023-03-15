@@ -14,7 +14,7 @@
       </vue-google-autocomplete>
     </div>
     <div class="col-12">
-<!--      <label for="inputAddress2" class="form-label">Enter Apartment, studio, or floor number </label>-->
+      <!--      <label for="inputAddress2" class="form-label">Enter Apartment, studio, or floor number </label>-->
       <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"
              v-model="address2"
              @change="onAddress2"
@@ -53,7 +53,11 @@ export default {
   props: {
     inputModel: Object,
   },
-  emits: ['update:modelUpdate', 'update:resetInputModel'],
+  emits: [
+    'update:modelUpdate',
+    'update:resetInputModel',
+    'update:valid-inputs',
+  ],
   data: function () {
     return {
       address: '',
@@ -125,7 +129,7 @@ export default {
 </script>
 
 <style scoped>
-.hide{
+.hide {
   display: none;
 }
 </style>

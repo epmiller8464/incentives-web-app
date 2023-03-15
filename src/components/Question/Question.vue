@@ -20,70 +20,87 @@
           >
           </NewSystemType>
         </slot>
-        <!--1. UtilityProvider -->
-        <slot v-else-if="this.questionId === 1">
+        <slot v-if="this.questionId === 1">
+          <HomeType
+              v-model:input-model="homeTypeModel"
+              @update:reset-input-model="onResetInputModel"
+              @update:model-update="onInputModelUpdate"
+              @error:question-failure="onQuestionError"
+              @update:valid-inputs="onValidInputs"
+          >
+
+          </HomeType>
+        </slot>
+        <!-- UtilityProvider -->
+        <slot v-else-if="this.questionId === 2">
           <SelectUtility
               v-model:input-model="utilityModel"
               @update:reset-input-model="onResetInputModel"
               @update:model-update="onInputModelUpdate"
+              @update:valid-inputs="onValidInputs"
           ></SelectUtility>
         </slot>
-        <!--2. ExistingSystem -->
-        <slot v-else-if="this.questionId === 2">
+        <!-- ExistingSystem -->
+        <slot v-else-if="this.questionId === 3">
           <ExistingSystemType
               v-model:input-model="existingSystemTypeModel"
               @update:reset-input-model="onResetInputModel"
               @update:model-update="onInputModelUpdate"
+              @update:valid-inputs="onValidInputs"
           ></ExistingSystemType>
         </slot>
         <!--3. SystemAge -->
-        <slot v-else-if="this.questionId === 3">
+        <slot v-else-if="this.questionId === 4">
           <ExistingSystemAge
               v-model:input-model="sysAgeModel"
               @update:reset-input-model="onResetInputModel"
               @update:model-update="onInputModelUpdate"
+              @update:valid-inputs="onValidInputs"
           ></ExistingSystemAge>
         </slot>
-        <slot v-else-if="this.questionId === 4">
+        <slot v-else-if="this.questionId === 5">
           <!--4. CustomerIncome -->
           <CustomerIncome
               v-model:input-model="incomeModel"
               @update:reset-input-model="onResetInputModel"
               @update:model-update="onInputModelUpdate"
+              @update:valid-inputs="onValidInputs"
           ></CustomerIncome>
         </slot>
-        <slot v-else-if="this.questionId === 5">
+        <slot v-else-if="this.questionId === 6">
           <!--5. CustomerPriority -->
           <CustomerPriority
               v-model:input-model="prioritiesModel"
               @update:reset-input-model="onResetInputModel"
               @update:model-update="onInputModelUpdate"
+              @update:valid-inputs="onValidInputs"
           ></CustomerPriority>
         </slot>
-        <slot v-else-if="this.questionId === 6">
+        <slot v-else-if="this.questionId === 7">
           <!--6. CustomerAddress -->
           <CustomerAddress
               v-model:input-model="addressModel"
               @update:reset-input-model="onResetInputModel"
               @update:model-update="onInputModelUpdate"
+              @update:valid-inputs="onValidInputs"
           ></CustomerAddress>
         </slot>
-        <slot v-else-if="this.questionId === 7">
-          <!--7. CustomerHomeSqFt -->
-          <CustomerHomeSqFt
-              v-model:input-model="homeSizeModel"
-              @update:reset-input-model="onResetInputModel"
-              @update:model-update="onInputModelUpdate"
-          ></CustomerHomeSqFt>
-        </slot>
-        <slot v-else>
-          <!--8. CustomerContactInfo -->
-          <ContactInfo
-              v-model:input-model="contactInfoModel"
-              @update:reset-input-model="onResetInputModel"
-              @update:model-update="onInputModelUpdate"
-          ></ContactInfo>
-        </slot>
+<!--        <slot v-else-if="this.questionId === 7">-->
+<!--          &lt;!&ndash;7. CustomerHomeSqFt &ndash;&gt;-->
+<!--          <CustomerHomeSqFt-->
+<!--              v-model:input-model="homeSizeModel"-->
+<!--              @update:reset-input-model="onResetInputModel"-->
+<!--              @update:model-update="onInputModelUpdate"-->
+<!--          ></CustomerHomeSqFt>-->
+<!--        </slot>-->
+<!--        <slot v-else>-->
+<!--          &lt;!&ndash;8. CustomerContactInfo &ndash;&gt;-->
+<!--          <ContactInfo-->
+<!--              v-model:input-model="contactInfoModel"-->
+<!--              @update:reset-input-model="onResetInputModel"-->
+<!--              @update:model-update="onInputModelUpdate"-->
+<!--          ></ContactInfo>-->
+<!--        </slot>-->
       </div>
     </div>
     <div class="d-grid gap-3 d-md-flex justify-content-md-center mt-3">
@@ -108,14 +125,13 @@ import { useSurveyStore } from '@/stores/survey'
 
 import {
   CustomerAddress,
-  ContactInfo,
-  CustomerHomeSqFt,
   CustomerIncome,
   CustomerPriority,
   SelectUtility,
   ExistingSystemAge,
   ExistingSystemType,
   NewSystemType,
+  HomeType,
 } from '@/components/Question/QuestionInputs'
 import ExistingSystemInput from '@/components/Question/QuestionInputs/ExistingSystemTypeInput.vue'
 
@@ -130,9 +146,8 @@ export default {
   },
   components: {
     ExistingSystemInput,
+    HomeType,
     CustomerAddress,
-    ContactInfo,
-    CustomerHomeSqFt,
     CustomerIncome,
     CustomerPriority,
     SelectUtility,
@@ -247,8 +262,7 @@ export default {
               this.systemTypeModel = qaState
               break
             case 1:
-              throw new Error('not implemented')
-              // this.utilityModel = qaState
+              this.homeTypeModel = qaState
               break
             case 2:
               this.existingSystemTypeModel = qaState
