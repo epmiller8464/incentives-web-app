@@ -1,6 +1,6 @@
 <template>
-  <div id="existing-system">
-    <fieldset class="col-md-6 mx-auto">
+  <div id="existing-system" class="col-md-6 question-input mx-auto">
+    <fieldset>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="electricChecked"
                @change="onUpdate"

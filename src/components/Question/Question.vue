@@ -222,7 +222,7 @@ export default {
     },
     onNextClick () {
 
-      if ((Number(this.$route.params.index) + 1) > 8) {
+      if ((Number(this.$route.params.index) + 1) > 7) {
         this.$router.push({ name: 'DoingSomeMath' })
       } else {
         if (this.errorRoute === null) {

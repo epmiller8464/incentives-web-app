@@ -52,7 +52,7 @@ export default {
   beforeRouteEnter (to, from, next) {
     console.log('beforeRouteEnter')
     console.log(to, from, next)
-    const validRoutes = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    const validRoutes = [0, 1, 2, 3, 4, 5, 6, 7]
 
     const index = Number(to.params.index)
 

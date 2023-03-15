@@ -7,7 +7,7 @@
           ref="address"
           id="addressAutoComplete"
           classname="form-control mb-3"
-          placeholder="Please type your address"
+          :placeholder="address1"
           v-on:placechanged="getAddressData"
           country="us"
       >
@@ -81,12 +81,9 @@ export default {
   },
   mounted () {
     console.log('CustomerAddressInput:onMount', this.inputModel)
+    this.validateInputModel()
     // Here we make focus on the user input
     this.$refs.address.focus()
-  },
-  unmounted () {
-    console.log('CustomerAddressInput:unmounted')
-    this.$emit('update:resetInputModel')
   },
   methods: {
     /**
@@ -111,14 +108,30 @@ export default {
       this.responseModel.state = this.state = state
       this.responseModel.country = this.country = country
       this.responseModel.postalCode = this.postalCode = postalCode
-      this.address = ''
+      // this.address = ''
       this.$emit('update:modelUpdate', this.responseModel)
+      this.validateInputModel()
+    },
+    validateInputModel () {
+
+      const iv = this.address1 !== '' &&
+          // this.inputModel.address2 !== '' &&
+          this.city !== '' &&
+          this.state !== '' &&
+          this.country !== '' &&
+          this.postalCode !== ''
+
+      if (iv) {
+        this.$emit('update:valid-inputs', true)
+      } else {
+        this.$emit('update:valid-inputs', false)
+      }
     },
     onAddress2 (event) {
-      // console.log('onAddress2', event.target.value)
       this.address2 = event.target.value
       this.responseModel.address2 = this.address2
       this.$emit('update:modelUpdate', this.responseModel)
+      this.validateInputModel()
     },
     onUpdate (event) {
       console.log('CustomerAddressInput:onUpdate')
