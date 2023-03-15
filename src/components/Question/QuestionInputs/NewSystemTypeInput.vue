@@ -59,7 +59,6 @@ export default {
       checkedSystemTypes: this.inputModel.checkedSystemTypes || [],
       other: this.inputModel.other || '',
       otherText: this.inputModel.otherText || '',
-
       responseModel: { ...this.inputModel },
     }
   },

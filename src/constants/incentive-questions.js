@@ -26,7 +26,7 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
     answer: {},
   },
   {
-    id: 3,
+    id: 2,
     name: 'UtilityProvider',
     text: 'Who provides your home with power?',
     type: QuestionTypes.MULTIPLE_SELECT,
@@ -38,7 +38,7 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
     answer: {},
   },
   {
-    id: 2,
+    id: 3,
     name: 'ExistingSystem',
     text: 'What do you have today?',
     type: QuestionTypes.MULTIPLE_SELECT,
@@ -50,7 +50,7 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
     answer: {},
   },
   {
-    id: 3,
+    id: 4,
     name: 'SystemAge',
     text: 'How many years old is your existing system?',
     type: QuestionTypes.RANGE,
@@ -62,7 +62,7 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
     answer: {},
   },
   {
-    id: 4,
+    id: 5,
     name: 'CustomerIncome',
     text: 'What do you estimate your taxable income (after deductions) to be this year?',
     type: QuestionTypes.SINGLE_SELECT,
@@ -86,7 +86,7 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
     answer: {},
   },
   {
-    id: 5,
+    id: 6,
     name: 'CustomerPriority',
     text: 'What are the relative prioritization of these factors?',
     type: QuestionTypes.RANKING,
@@ -129,7 +129,7 @@ export const INCENTIVE_SURVEY_QUESTIONS = [
     answer: {},
   },
   {
-    id: 6,
+    id: 7,
     name: 'CustomerAddress',
     text: 'What is your home’s address?',
     type: QuestionTypes.CUSTOM,

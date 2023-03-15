@@ -82,23 +82,33 @@ export default {
   },
   mounted () {
     console.log('ExistingSystemInput:onMount', this.inputModel)
+    this.validateInputModel()
   },
   unmounted () {
     console.log('ExistingSystemInput:unmounted')
     this.$emit('update:resetInputModel')
   },
   methods: {
+    validateInputModel () {
+      if (this.checkedSystemTypes.length > 0 || this.heatPumpNothingOrOther) {
+        this.$emit('update:valid-inputs', true)
+      } else {
+        this.$emit('update:valid-inputs', false)
+      }
+    },
     onUpdate (event) {
       console.log('ExistingSystemInput:onUpdate')
       console.log(event.target.value)
       this.responseModel.checkedSystemTypes = this.checkedSystemTypes
       this.responseModel.heatPumpNothingOrOther = this.heatPumpNothingOrOther = ''
       this.$emit('update:modelUpdate', this.responseModel)
+      this.validateInputModel()
     },
     onRadioUpdate (event) {
       this.responseModel.heatPumpNothingOrOther = this.heatPumpNothingOrOther
       this.responseModel.checkedSystemTypes = this.checkedSystemTypes = []
       this.$emit('update:modelUpdate', this.responseModel)
+      this.validateInputModel()
     },
   },
 }

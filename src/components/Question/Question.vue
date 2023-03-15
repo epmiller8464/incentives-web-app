@@ -164,6 +164,7 @@ export default {
       utilityModel: {
         energyProvider: {},
         gasProvider: {},
+        tankedGasText:''
       },
       homeTypeModel: '',
       existingSystemTypeModel: {
@@ -255,7 +256,6 @@ export default {
         const qaState = this.surveyStore.questionAnswerMap[this.questionId]
         console.log('questionState', qaState)
         if (qaState) {
-          // console.log('got through')
 
           switch (this.questionId) {
             case 0:
@@ -265,25 +265,22 @@ export default {
               this.homeTypeModel = qaState
               break
             case 2:
-              this.existingSystemTypeModel = qaState
+              this.utilityModel = qaState
               break
             case 3:
-              this.sysAgeModel = qaState
+              this.existingSystemTypeModel = qaState
               break
             case 4:
-              this.incomeModel = qaState
+              this.sysAgeModel = qaState
               break
             case 5:
-              this.prioritiesModel = qaState
+              this.incomeModel = qaState
               break
             case 6:
-              this.addressModel = qaState
+              this.prioritiesModel = qaState
               break
             case 7:
-              this.homeSizeModel = qaState
-              break
-            case 8:
-              this.contactInfoModel = qaState
+              this.addressModel = qaState
               break
             default:
               console.log('default switch option')

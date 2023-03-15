@@ -56,18 +56,20 @@ export default {
   },
   computed: {},
   mounted () {
-    console.log('NewSystemTypeInput:onMount', this.inputModel)
+    console.log('HomeTypeInput:onMount', this.inputModel)
+    this.validateInputModel()
   },
   methods: {
     validateInputModel () {
-      this.$emit('update:valid-inputs', true)
       switch (this.responseModel) {
         case 'single-family':
+          this.$emit('update:valid-inputs', true)
           this.$emit('error:question-failure', null)
           break
         case 'single-family-rented':
         case 'multi-family':
         case 'apartment':
+          this.$emit('update:valid-inputs', true)
           this.$emit('error:question-failure', { name: 'SurveyError' })
           break
       }

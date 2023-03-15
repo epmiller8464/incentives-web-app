@@ -16,8 +16,9 @@ const GAS_PROVIDERS = [
     type: 'natural_gas',
   }, {
     id: '67405114-bde6-11ed-9a5f-3aebb006c675',
-    name: 'Tanked gas / fuel oil',
+    name: 'Tanked propane / oil fuel',
     type: 'tanked_gas',
+    show_free_form: true,
   }]
 
 const INCOME_LEVEL_OPTIONS = [

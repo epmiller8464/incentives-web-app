@@ -1,6 +1,6 @@
 <template>
   <div id="select-utility" class="col-md-6 mx-auto">
-    <div class="mb-2">
+    <div class="my-2">
       <select id="energySelect" class="form-select form-select" aria-label="Choose your utility provider"
               v-model="energyProvider"
               @change="onUpdate">
@@ -15,7 +15,7 @@
         </option>
       </select>
     </div>
-    <div>
+    <div class="my-2">
       <select id="gasSelect" class="form-select" aria-label="Default select example"
               v-model="gasProvider"
               @change="onUpdate"
@@ -29,7 +29,19 @@
             data-selected="this.gasProvider.id === opt.id">
           {{ opt.name }}
         </option>
+
       </select>
+      <div class="my-2">
+        <input
+            type="text"
+            id="tankedGasText"
+            class="form-control"
+            placeholder="Providers name" aria-label="Providers name"
+            :class="[{'invisible':!toggleOtherInput}]"
+            :value="tankedGasText"
+            @input="onTankedGasTextInput"
+        >
+      </div>
     </div>
 
   </div>
@@ -55,37 +67,44 @@ export default {
       defaultGasOption: { id: -1, name: 'Choose your gas provider' },
       energyProvider: this.inputModel.energyProvider.name ? this.inputModel.energyProvider : '',
       gasProvider: this.inputModel.gasProvider.name ? this.inputModel.gasProvider : '',
+      tankedGasText: this.inputModel.tankedGasText ? this.inputModel.tankedGasText : '',
       responseModel: { ...this.inputModel },
     }
   },
   computed: {
     energyProviderOptions () {
-      let options = [
-        { id: 1, name: 'Austin Energy', type: 'electricity' },
-        // { id: 2, name: 'Center Point', type: 'electric' },
-      ]
       return [...ELECTRICITY_PROVIDERS]
     },
     gasProviderOptions () {
       return [...GAS_PROVIDERS]
-      // return [
-      //   { id: 1, name: 'Texas Gas', type: 'natural_gas' },
-      //   { id: 2, name: 'Gas', type: 'gas' },
-      // ]
+    },
+    toggleOtherInput () {
+      return this.gasProvider && this.gasProvider.type === 'tanked_gas'
     },
   },
   mounted () {
     console.log('SelectUtilityInput:onMount', this.inputModel)
-  },
-  unmounted () {
-    this.$emit('update:resetInputModel')
+    this.validateInputModel()
   },
   methods: {
+    validateInputModel () {
+      if (this.responseModel.energyProvider || this.responseModel.gasProvider) {
+        this.$emit('update:valid-inputs', true)
+      } else {
+        this.$emit('update:valid-inputs', false)
+      }
+    },
     onUpdate (event) {
       console.log('onUpdate', event.target.value)
       this.responseModel.energyProvider = this.energyProvider
       this.responseModel.gasProvider = this.gasProvider
       this.$emit('update:modelUpdate', this.responseModel)
+      this.$emit('update:valid-inputs', true)
+    },
+    onTankedGasTextInput (event) {
+      this.responseModel.tankedGasText = this.tankedGasText = event.target.value
+      this.$emit('update:modelUpdate', this.responseModel)
+      this.$emit('update:valid-inputs', true)
     },
   },
 }
