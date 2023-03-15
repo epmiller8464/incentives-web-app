@@ -54,46 +54,24 @@ export default {
     },
     incomeOptions () {
       return [...INCOME_LEVEL_OPTIONS]
-      // return [
-      //   {
-      //     option: '$0 (or less)',
-      //     value: 0,
-      //     income_eligibility_flag: 'none',
-      //   },
-      //   //TODO: capture the income level as free form for this question
-      //   {
-      //     option: '$0 - $30,000',
-      //     value: 1,
-      //     rebate_eligible: false,
-      //     show_free_form: true,
-      //     income_eligibility_flag: 'partial',
-      //   },
-      //   {
-      //     option: '$30,000 - $80,000',
-      //     value: 2,
-      //     income_eligibility_flag: 'full',
-      //   },
-      //   {
-      //     option: '$80,000 - $150,000',
-      //     value: 3,
-      //     income_eligibility_flag: 'full',
-      //   },
-      //   {
-      //     option: '$150,000+',
-      //     value: 4,
-      //     income_eligibility_flag: 'full',
-      //   },
-      // ]
     },
   },
   mounted () {
     console.log('CustomerIncomeInput:onMount', this.inputModel)
+    this.validateInputModel()
   },
   unmounted () {
-    console.log('CustomerIncomeInput:unmounted')
     this.$emit('update:resetInputModel')
   },
   methods: {
+    validateInputModel () {
+      if (this.selectedIncome) {
+        //TODO: add logic around income
+        this.$emit('update:valid-inputs', true)
+      } else {
+        this.$emit('update:valid-inputs', false)
+      }
+    },
     optionId ({ incomeLevel }) {
       return `incomeOption${incomeLevel}`
     },
@@ -104,11 +82,13 @@ export default {
           ? ''
           : this.responseModel.otherIncomeValue
       this.$emit('update:modelUpdate', this.responseModel)
+      this.validateInputModel()
     },
     onOtherIncomeInput (event) {
       console.log('CustomerIncomeInput:onUpdate')
       this.responseModel.otherIncomeValue = this.otherIncomeValue = event.target.value
       this.$emit('update:modelUpdate', this.responseModel)
+      this.validateInputModel()
     },
   },
 }

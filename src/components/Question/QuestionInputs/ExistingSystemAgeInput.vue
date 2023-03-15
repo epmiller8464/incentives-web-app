@@ -36,12 +36,20 @@ export default {
   },
   mounted () {
     console.log('ExistingSystemAgeInput:onMount', this.inputModel)
+    this.validateInputModel()
   },
   unmounted () {
     console.log('ExistingSystemAgeInput:unmounted')
     this.$emit('update:resetInputModel')
   },
   methods: {
+    validateInputModel () {
+      if (this.validateInput(this.responseModel)) {
+        this.$emit('update:valid-inputs', true)
+      } else {
+        this.$emit('update:valid-inputs', false)
+      }
+    },
     validateInput (value) {
       const n = Number(value)
       return n > 0 && n <= 40
@@ -58,6 +66,7 @@ export default {
         val = ''
       }
       this.$emit('update:modelUpdate', val)
+      this.validateInputModel()
     },
   },
 }

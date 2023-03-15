@@ -3,7 +3,7 @@
     <div class="col-md-6 mx-auto question-answer-inputs">
       <h3>Priority</h3>
       <draggable
-          class="list-group"
+          class="list-group priority-list"
           v-model="list2"
           group="priority"
           itemKey="name"
@@ -23,7 +23,7 @@
     <div class="col-md-6 mx-auto question-answer-inputs">
       <h3>Options</h3>
       <draggable
-          class="list-group"
+          class="list-group raw-list"
           :list="list1"
           group="priority"
           @change="onRightChange"
@@ -48,12 +48,12 @@ import _ from 'lodash'
 
 export default {
   name: 'CustomerPriorityInput',
-  order: 6,
+  order: 7,
   components: { draggable },
   props: {
     inputModel: Object,
   },
-  emits: ['update:modelUpdate', 'update:resetInputModel'],
+  emits: ['update:modelUpdate', 'update:resetInputModel', 'update:valid-inputs'],
   data () {
     return {
       rawList: [
@@ -65,7 +65,7 @@ export default {
         {
           id: 2,
           type: 'energy',
-          name: 'Reduce monthly utility bills',
+          name: 'Reduce monthly energy/utility bills',
         },
         {
           id: 3,
@@ -75,22 +75,27 @@ export default {
         {
           id: 4,
           type: 'comfort',
-          name: 'Improve comfort inside my house',
+          name: 'Improve home\'s comfort',
         },
         {
           id: 5,
           type: 'Quietness',
-          name: 'Quietness',
+          name: 'Less noisy system',
         },
         {
           id: 6,
           type: 'Speed',
-          name: 'Speed of replacement',
+          name: 'Quicker replacement',
+        },
+        {
+          id: 7,
+          type: 'air-quality',
+          name: 'Improve indoor air quality',
         },
       ],
       list1: [],
-      list2: this.inputModel.priorityList || [{}, {}, {}, {}, {}, {}],
-      list3: [{}, {}, {}, {}, {}, {}],
+      list2: this.inputModel.priorityList || [{}, {}, {}, {}, {}, {}, {}],
+      list3: [{}, {}, {}, {}, {}, {}, {}],
       responseModel: { priorityList: [], originalList: [] },
     }
   },
@@ -107,25 +112,31 @@ export default {
   },
   mounted () {
     console.log('CustomerPriorityInput:onMount', this.inputModel)
+    this.validateInputModel()
     this.shuffleList()
-
   },
   unmounted () {
     console.log('CustomerPriorityInput:unmounted')
     this.$emit('update:resetInputModel')
   },
   methods: {
+    validateInputModel () {
+      console.log(this.responseModel.priorityList.length)
+      const priorities = this.list2.filter((i) => Object.hasOwn(i, 'id'))
+      // console.log(priorities.length)
+      if (priorities.length > 0) {
+        this.$emit('update:valid-inputs', true)
+      } else {
+        this.$emit('update:valid-inputs', false)
+      }
+    },
     shuffleList () {
-      // shuffleArray(this.rawList)
       this.list1 = this.rawList.map((item, index) => { return { ...item, id: index + 1 }})
       this.list1 = _.differenceWith(this.rawList, this.list2, _.isEqual)
       shuffleArray(this.list1)
       const diff = this.rawList.length - this.list1.length
-      console.log(diff)
-      console.log()
       const f = Array.of(diff)
       const s = _.repeat('*', diff).split('')
-      // console.log()
       this.list1.push(..._.fill(s, { type: 'temp' }))
     },
     onLeftChange (event) {
@@ -135,7 +146,6 @@ export default {
 
       if (isRemove) {
         this.list2.push({ type: 'temp' })
-        console.log(_.findIndex(this.list2, (i) => {return i.type === 'temp'}))
       }
       if (isAdd) {
         const i = _.findIndex(this.list2, (i) => {
@@ -146,6 +156,7 @@ export default {
       this.responseModel.priorityList = this.list2
       this.responseModel.originalList = this.list1
       this.$emit('update:modelUpdate', this.responseModel)
+      this.validateInputModel()
     },
     onRightChange: function (event) {
       console.log('onRightChange', event)
@@ -153,17 +164,18 @@ export default {
       const isRemove = Object.keys(event).includes('removed')
 
       if (isRemove) {
-        this.list1.push({ type: 'temp' })
+        if (this.list1.length === 0)
+          this.list1.push({ type: 'temp' })
         console.log(_.findIndex(this.list1, (i) => {return i.type === 'temp'}))
       }
       if (isAdd) {
         const i = _.findIndex(this.list1, (i) => {return i.type === 'temp'})
         _.pullAt(this.list1, [i])
       }
-      // // console.log(this.list2)
       this.responseModel.priorityList = this.list2
       this.responseModel.originalList = this.list1
       this.$emit('update:modelUpdate', this.responseModel)
+      this.validateInputModel()
     },
     onUpdate (event) {
       // console.log('CustomerPriorityInput:onUpdate')
@@ -201,5 +213,21 @@ export default {
 
 .list-group-item i {
   cursor: pointer;
+}
+
+.priority-list {
+  border: #e8e8e8 dotted 1px !important;
+}
+
+.priority-list > .list-group-item {
+  border: #e8e8e8 dotted 1px !important;
+}
+
+.raw-list {
+  border: #000000 solid 1px !important;
+}
+
+.raw-list > .list-group-item {
+  /*border: #000000 solid  !important;*/
 }
 </style>
